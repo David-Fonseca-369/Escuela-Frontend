@@ -1,0 +1,51 @@
+mat-toolbar {
+  position: sticky;
+  position: -webkit-sticky;
+  top: 0;
+  /* para que se coloque encima de otros elementos */
+  z-index: 1000;
+  /* background-color: #83bbcc; */
+  background-color: #cdbfa4;
+  color: #243438;
+}
+.opciones-invitado {
+  display: flex;
+}
+
+.logo-text {
+  font-weight: bold;
+}
+
+.opciones-menu {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .opciones-invitado {
+    display: none;
+  }
+  .logo-text {
+    display: none;
+  }
+
+  .opciones-menu {
+    display: block;
+  }
+}
+
+.image {
+  max-width: 5rem;
+  margin-right: 0.5rem;
+}
+
+.space {
+  flex: 1 1 auto;
+}
+
+.image-options span {
+  margin-right: 1rem;
+}
+.image-options img {
+  margin: 0 1rem;
+  width: 3rem;
+}

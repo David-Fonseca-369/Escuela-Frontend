@@ -1,0 +1,49 @@
+.card-objetivos {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  transition: 0.3s;
+  width: 90%;
+  border-radius: 10px;
+  margin-right: auto;
+  margin-left: auto;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+  background-color: #d1d4d5;
+}
+
+.informacion {
+  /* display: flex; */
+  padding: 10px 30px 10px 20px;
+  text-align: center;
+}
+
+.image {
+  width: 30rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  overflow: hidden;
+  position: relative;
+
+  filter: drop-shadow(1px 2px 3px black);
+}
+
+.button {
+  margin-top: 1rem;
+  text-align: center;
+}
+.button a {
+  background-color: #527580;
+  color: white;
+}
+
+.title-card {
+  color: #374e54;
+  text-align: start;
+  margin: 2rem 1rem;
+}
+
+@media screen and (max-width: 600px) {
+  .image {
+    width: 10rem;
+  }
+}

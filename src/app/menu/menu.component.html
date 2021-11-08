@@ -1,0 +1,63 @@
+<mat-toolbar>
+  <span>
+    <a mat-button routerLink="" class="logo-text">
+      <img src="./assets/images/logo_prepa.png" alt="Logo CBT" class="image" />
+      <span>CBT No.3 San Felipe del Progreso</span>
+    </a>
+  </span>
+  <!-- Opcion resoponsiva -->
+  <a mat-button class="opciones-menu" [matMenuTriggerFor]="options">
+    <mat-icon>dehaze</mat-icon>
+
+    <mat-menu #options="matMenu">
+      <div class="image-options">
+        <a mat-button routerLink="">
+          <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
+          <span>Inicio</span>
+        </a>
+      </div>
+
+      <hr />
+      <button mat-menu-item routerLink="invitado">Invitado</button>
+      <button mat-menu-item routerLink="convocatorias">Convocatorias</button>
+      <button mat-menu-item routerLink="resenia">Reseña</button>
+      <button mat-menu-item>Planta Docente</button>
+      <button mat-menu-item routerLink="carrera-tecnica">
+        Carrera Técnica
+      </button>
+      <button mat-menu-item routerLink="contacto">Contacto</button>
+    </mat-menu>
+  </a>
+  <div class="opciones-invitado">
+    <div>
+      <a mat-button routerLink="invitado">Invitado</a>
+    </div>
+
+    <div>
+      <a mat-button routerLink="convocatorias">Convocatorias</a>
+    </div>
+
+    <div>
+      <a mat-button routerLink="resenia">Reseña</a>
+    </div>
+
+    <div>
+      <a mat-button>Planta Docente</a>
+    </div>
+    <div>
+      <a mat-button routerLink="carrera-tecnica">Carrera Técnica</a>
+    </div>
+    <div>
+      <a mat-button routerLink="contacto">Contacto</a>
+    </div>
+  </div>
+
+  <div class="space"></div>
+
+  <div>
+    <a mat-button>
+      Iniciar Sesión
+      <mat-icon>login</mat-icon>
+    </a>
+  </div>
+</mat-toolbar>

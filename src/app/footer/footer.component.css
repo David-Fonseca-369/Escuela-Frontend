@@ -1,0 +1,42 @@
+.footer {
+  position: fixed;
+  left: 0;
+  bottom: 0;
+  width: 100%;
+  height: 60px;
+  /* background-color: #83bbcc; */
+  background-color: #cdbfa4;
+  color: #243438;
+  text-align: center;
+  z-index: 1000;
+}
+
+.footer p {
+  margin-top: 1rem;
+  font-size: small;
+}
+
+.icons {
+  margin-top: -0.5rem;
+  display: flex;
+  justify-content: center;
+}
+
+.icons a {
+  margin-right: 1rem;
+}
+
+.icons img {
+  width: 20px;
+}
+
+@media screen and (max-width: 600px) {
+  .footer p {
+    text-align: center;
+    font-size: 7px;
+  }
+
+  .icons a img {
+    width: 10px;
+  }
+}

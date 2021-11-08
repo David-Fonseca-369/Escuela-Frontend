@@ -1,1 +1,19 @@
 /* You can add global styles to this file, and also import other style files */
+
+/* html, body { height: 100%; }  Afecta el toolbar */
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+.title {
+  text-align: center;
+  color: #374e54;
+  margin-bottom: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .title {
+    font-size: 10px;
+  }
+}
