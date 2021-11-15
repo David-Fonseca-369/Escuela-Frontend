@@ -1,0 +1,52 @@
+<div>
+  <div class="title">
+    <h1>Periodos</h1>
+    <div class="nuevo">
+      <button mat-button routerLink="/periodos/crear">Nuevo</button>
+    </div>
+    <div>
+      <table
+        #table
+        mat-table
+        [dataSource]="periodos"
+        class="mat-elevation-z8 tabla-periodos"
+      >
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let periodo" align="start">
+            {{ periodo.nombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaInicio">
+          <th mat-header-cell *matHeaderCellDef>Inicio</th>
+          <td mat-cell *matCellDef="let periodo" align="start">
+            {{ periodo.fechaInicio | date: "dd/MM/yy" }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="fechaFin">
+          <th mat-header-cell *matHeaderCellDef>Termino</th>
+          <td mat-cell *matCellDef="let periodo" align="start">
+            {{ periodo.fechaFin | date: "dd/MM/yy" }}
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="columnasAMostrar; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+      </table>
+      <mat-paginator
+        class="mat-elevation-z8"
+        [pageSizeOptions]="[5, 10, 15, 20, 50]"
+        showFirstLastButtons
+        [length]="cantidadTotalRegistros"
+        [pageSize]="cantidadRegistrosAMostrar"
+        (page)="actualizarPaginacion($event)"
+      >
+      </mat-paginator>
+    </div>
+  </div>
+</div>

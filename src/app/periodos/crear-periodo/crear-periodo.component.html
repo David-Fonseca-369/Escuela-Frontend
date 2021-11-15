@@ -1,0 +1,63 @@
+<div class="title">
+  <h1>Nuevo periodo</h1>
+</div>
+
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="guardar()" [formGroup]="form">
+  <div class="formulario">
+    <div class="nombre">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre del Grupo*</mat-label>
+        <input
+          formControlName="nombre"
+          placeholder="Ingresa el nombre del grupo"
+          matInput
+        />
+        <mat-error>Debe agregar un nombre.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="fechas">
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Inicio*</mat-label>
+        <!-- se asocia con #picker -->
+        <input
+          formControlName="fechaInicio"
+          matInput
+          [matDatepicker]="pickerInicio"
+        />
+        <mat-error>Debe indicar una fecha de inicio.</mat-error>
+        <!-- se asocia con #picker -->
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerInicio"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerInicio></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Fecha Fin*</mat-label>
+        <!-- se asocia con #picker -->
+        <input
+          formControlName="fechaFin"
+          matInput
+          [matDatepicker]="pickerFin"
+        />
+        <mat-error>Debe indicar una fecha de termino.</mat-error>
+        <!-- se asocia con #picker -->
+        <mat-datepicker-toggle
+          matSuffix
+          [for]="pickerFin"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #pickerFin></mat-datepicker>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+
+      <a mat-stroked-button routerLink="/periodos">Cancelar</a>
+    </div>
+  </div>
+</form>

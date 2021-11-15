@@ -1,0 +1,23 @@
+.nombre mat-form-field {
+  width: 35%;
+}
+
+.fechas {
+  display: flex;
+  justify-content: space-between;
+  width: 35%;
+}
+
+.fechas mat-form-field {
+  width: 45%;
+}
+
+.formulario button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+}
+
+.formulario button[disabled] {
+  background: #c4cfd3;
+}

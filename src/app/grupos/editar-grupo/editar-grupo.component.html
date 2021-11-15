@@ -1,0 +1,12 @@
+<div class="title">
+  <h1>Editar Grupo</h1>
+</div>
+
+<app-formulario-grupo
+  *ngIf="modelo"
+  [modelo]="modelo"
+  (onSubmit)="guardarCambios($event)"
+>
+</app-formulario-grupo>
+
+<mat-spinner *ngIf="!modelo"></mat-spinner>

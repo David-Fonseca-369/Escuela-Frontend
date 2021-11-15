@@ -1,0 +1,19 @@
+.tabla-periodos {
+  width: 50%;
+}
+
+mat-paginator {
+  width: 50%;
+}
+
+.nuevo {
+  display: flex;
+  justify-content: start;
+  margin: 2rem 0;
+}
+
+.nuevo button {
+  width: 10rem;
+  background: #4f707b;
+  color: white;
+}

@@ -46,4 +46,8 @@
   .image {
     width: 10rem;
   }
+
+  .title-card {
+    font-size: small;
+  }
 }
