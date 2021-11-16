@@ -1,0 +1,91 @@
+<div class="title">
+  <h1>Editar Docente</h1>
+</div>
+
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="guardar()" [formGroup]="form">
+  <div class="formulario">
+    <div class="input">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre*</mat-label>
+        <input
+          formControlName="nombre"
+          placeholder="Ingrese el nombre del Docente"
+          matInput
+        />
+        <mat-icon matSuffix>face</mat-icon>
+        <mat-error>Debe agregar un nombre.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Paterno*</mat-label>
+        <input
+          formControlName="apellidoPaterno"
+          placeholder="Ingrese un Apellido"
+          matInput
+        />
+        <mat-icon matSuffix>feed</mat-icon>
+        <mat-error>Debe agregar un Apellido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Materno*</mat-label>
+        <input
+          formControlName="apellidoMaterno"
+          placeholder="Ingrese un Apellido"
+          matInput
+        />
+        <mat-icon matSuffix>feed</mat-icon>
+        <mat-error>Debe agregar un Apellido.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="input">
+      <mat-form-field appearance="outline">
+        <mat-label>Correo*</mat-label>
+        <input
+          formControlName="correo"
+          placeholder="Ingrese un correo"
+          matInput
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error>Debe agregar un Correo valido.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="check">
+      <mat-checkbox
+        color="primary"
+        [(ngModel)]="checked"
+        formControlName="checkbox"
+        >Nueva Contraseña</mat-checkbox
+      >
+    </div>
+
+    <div class="password" *ngIf="checked">
+      <mat-form-field appearance="outline">
+        <mat-label>Nueva Contraseña</mat-label>
+        <input
+          formControlName="password"
+          placeholder="Ingrese una nueva contraseña"
+          matInput
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error>La contraseña debe tener mínimo 8 caracteres.</mat-error>
+      </mat-form-field>
+      <p>
+        *Se deja el campo de la contraseña vacío, la contraseña no se
+        modificará.
+      </p>
+    </div>
+
+    <div>
+      <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+
+      <a mat-stroked-button routerLink="/docentes">Cancelar</a>
+    </div>
+  </div>
+</form>

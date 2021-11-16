@@ -39,6 +39,14 @@ import { MostrarErroresComponent } from './helpers/mostrar-errores/mostrar-error
 import { EditarGrupoComponent } from './grupos/editar-grupo/editar-grupo.component';
 import { IndicePeriodosComponent } from './periodos/indice-periodos/indice-periodos.component';
 import { CrearPeriodoComponent } from './periodos/crear-periodo/crear-periodo.component';
+import { IndiceMateriasComponent } from './materias/indice-materias/indice-materias.component';
+import { FormularioMateriaComponent } from './materias/formulario-materia/formulario-materia.component';
+import { CrearMateriaComponent } from './materias/crear-materia/crear-materia.component';
+import { EditarMateriaComponent } from './materias/editar-materia/editar-materia.component';
+import { IndiceDocentesComponent } from './usuarios/indice-docentes/indice-docentes.component';
+import { FormularioUsuarioComponent } from './usuarios/formulario-usuario/formulario-usuario.component';
+import { CrearDocenteComponent } from './usuarios/crear-docente/crear-docente.component';
+import { EditarDocenteComponent } from './usuarios/editar-docente/editar-docente.component';
 
 @NgModule({
   declarations: [
@@ -61,6 +69,14 @@ import { CrearPeriodoComponent } from './periodos/crear-periodo/crear-periodo.co
     EditarGrupoComponent,
     IndicePeriodosComponent,
     CrearPeriodoComponent,
+    IndiceMateriasComponent,
+    FormularioMateriaComponent,
+    CrearMateriaComponent,
+    EditarMateriaComponent,
+    IndiceDocentesComponent,
+    FormularioUsuarioComponent,
+    CrearDocenteComponent,
+    EditarDocenteComponent,
   ],
   imports: [
     BrowserModule,

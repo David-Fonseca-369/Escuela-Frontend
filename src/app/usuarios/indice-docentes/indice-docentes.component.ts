@@ -3,24 +3,24 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MensajeExistoso } from 'src/app/helpers/helpers';
 import Swal from 'sweetalert2';
-import { GruposService } from '../grupos.service';
-import { grupoDTO } from './grupo';
+import { usuarioDTO } from '../usuario';
+import { UsuariosService } from '../usuarios.service';
 
 @Component({
-  selector: 'app-indice-grupos',
-  templateUrl: './indice-grupos.component.html',
-  styleUrls: ['./indice-grupos.component.css'],
+  selector: 'app-indice-docentes',
+  templateUrl: './indice-docentes.component.html',
+  styleUrls: ['./indice-docentes.component.css'],
 })
-export class IndiceGruposComponent implements OnInit {
-  constructor(private gruposService: GruposService) {}
-
-  columnasAMostrar = ['opciones', 'nombre', 'estado'];
-  grupos: grupoDTO[];
+export class IndiceDocentesComponent implements OnInit {
+  usuarios: usuarioDTO[];
+  columnasAMostrar = ['opciones', 'nombre', 'correo', 'estado'];
 
   //Paginación
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
+
+  constructor(private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
@@ -29,19 +29,18 @@ export class IndiceGruposComponent implements OnInit {
     );
   }
 
-  //Todos paginacion
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
-    this.gruposService
-      .obtenerPaginado(pagina, cantidadElementosAMostrar)
+    this.usuariosService
+      .obtenerPaginadoDocentes(pagina, cantidadElementosAMostrar)
       .subscribe(
-        (respuesta: HttpResponse<grupoDTO[]>) => {
-          this.grupos = respuesta.body;
+        (respuesta: HttpResponse<usuarioDTO[]>) => {
+          this.usuarios = respuesta.body;
 
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
         },
-        (error) => console.log(error)
+        (error) => console.error(error)
       );
   }
 
@@ -50,19 +49,9 @@ export class IndiceGruposComponent implements OnInit {
     this.cantidadRegistrosAMostrar = datos.pageSize;
   }
 
-  //Todos consulta normal
-  obTenerTodos() {
-    this.gruposService.obtenerTodos().subscribe(
-      (grupos) => {
-        this.grupos = grupos;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  activar(grupo: grupoDTO) {
+  activar(usuario: usuarioDTO) {
     Swal.fire({
-      title: `Activar ${grupo.nombre}`,
+      title: `Activar ha ${usuario.nombre}`,
       text: '¿Seguro que deseas activarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -72,9 +61,9 @@ export class IndiceGruposComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.gruposService.activar(grupo.idGrupo).subscribe(
+        this.usuariosService.activar(usuario.idUsuario).subscribe(
           () => {
-            MensajeExistoso(`¡${grupo.nombre} activado!`);
+            MensajeExistoso(`¡Docente Activado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar
@@ -86,9 +75,9 @@ export class IndiceGruposComponent implements OnInit {
     });
   }
 
-  desactivar(grupo: grupoDTO) {
+  desactivar(usuario: usuarioDTO) {
     Swal.fire({
-      title: `Desactivar ${grupo.nombre}`,
+      title: `Desactivar ha ${usuario.nombre}`,
       text: '¿Seguro que deseas desactivarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -98,9 +87,9 @@ export class IndiceGruposComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.gruposService.desactivar(grupo.idGrupo).subscribe(
+        this.usuariosService.desactivar(usuario.idUsuario).subscribe(
           () => {
-            MensajeExistoso(`¡${grupo.nombre} desactivado!`);
+            MensajeExistoso(`Docente Desactivado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar

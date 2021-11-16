@@ -1,0 +1,12 @@
+<div class="title">
+  <h1>Editar Materia</h1>
+</div>
+
+<app-formulario-materia
+  *ngIf="modelo"
+  [modelo]="modelo"
+  (onSubmit)="guardarCambios($event)"
+>
+</app-formulario-materia>
+
+<mat-spinner *ngIf="!modelo"></mat-spinner>

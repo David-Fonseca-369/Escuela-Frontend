@@ -3,19 +3,19 @@ import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MensajeExistoso } from 'src/app/helpers/helpers';
 import Swal from 'sweetalert2';
-import { GruposService } from '../grupos.service';
-import { grupoDTO } from './grupo';
+import { materiaDTO } from '../materia';
+import { MateriasService } from '../materias.service';
 
 @Component({
-  selector: 'app-indice-grupos',
-  templateUrl: './indice-grupos.component.html',
-  styleUrls: ['./indice-grupos.component.css'],
+  selector: 'app-indice-materias',
+  templateUrl: './indice-materias.component.html',
+  styleUrls: ['./indice-materias.component.css'],
 })
-export class IndiceGruposComponent implements OnInit {
-  constructor(private gruposService: GruposService) {}
+export class IndiceMateriasComponent implements OnInit {
+  constructor(private materiasService: MateriasService) {}
 
-  columnasAMostrar = ['opciones', 'nombre', 'estado'];
-  grupos: grupoDTO[];
+  materias: materiaDTO[];
+  columnasAMostrar = ['opciones', 'nombre', 'grupo', 'estado'];
 
   //Paginación
   cantidadTotalRegistros;
@@ -29,19 +29,18 @@ export class IndiceGruposComponent implements OnInit {
     );
   }
 
-  //Todos paginacion
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
-    this.gruposService
+    this.materiasService
       .obtenerPaginado(pagina, cantidadElementosAMostrar)
       .subscribe(
-        (respuesta: HttpResponse<grupoDTO[]>) => {
-          this.grupos = respuesta.body;
+        (respuesta: HttpResponse<materiaDTO[]>) => {
+          this.materias = respuesta.body;
 
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
         },
-        (error) => console.log(error)
+        (error) => console.error(error)
       );
   }
 
@@ -50,19 +49,9 @@ export class IndiceGruposComponent implements OnInit {
     this.cantidadRegistrosAMostrar = datos.pageSize;
   }
 
-  //Todos consulta normal
-  obTenerTodos() {
-    this.gruposService.obtenerTodos().subscribe(
-      (grupos) => {
-        this.grupos = grupos;
-      },
-      (error) => console.log(error)
-    );
-  }
-
-  activar(grupo: grupoDTO) {
+  activar(materia: materiaDTO) {
     Swal.fire({
-      title: `Activar ${grupo.nombre}`,
+      title: `Activar ${materia.nombre}`,
       text: '¿Seguro que deseas activarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -72,13 +61,13 @@ export class IndiceGruposComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.gruposService.activar(grupo.idGrupo).subscribe(
+        this.materiasService.activar(materia.idMateria).subscribe(
           () => {
-            MensajeExistoso(`¡${grupo.nombre} activado!`);
+            MensajeExistoso(`¡${materia.nombre} activado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar
-            );
+            ); //ver si hay paginación
           },
           (error) => console.log(error)
         );
@@ -86,9 +75,9 @@ export class IndiceGruposComponent implements OnInit {
     });
   }
 
-  desactivar(grupo: grupoDTO) {
+  desactivar(materia: materiaDTO) {
     Swal.fire({
-      title: `Desactivar ${grupo.nombre}`,
+      title: `Desactivar ${materia.nombre}`,
       text: '¿Seguro que deseas desactivarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -98,9 +87,9 @@ export class IndiceGruposComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.gruposService.desactivar(grupo.idGrupo).subscribe(
+        this.materiasService.desactivar(materia.idMateria).subscribe(
           () => {
-            MensajeExistoso(`¡${grupo.nombre} desactivado!`);
+            MensajeExistoso(`¡${materia.nombre} desactivado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar

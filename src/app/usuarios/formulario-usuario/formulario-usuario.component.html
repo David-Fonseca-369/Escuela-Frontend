@@ -1,0 +1,72 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="guardar()" [formGroup]="form">
+  <div class="formulario">
+    <div class="nombre">
+      <mat-form-field appearance="outline">
+        <mat-label>Nombre*</mat-label>
+        <input
+          formControlName="nombre"
+          placeholder="Ingrese un Nombre"
+          matInput
+        />
+        <mat-icon matSuffix>face</mat-icon>
+        <mat-error>Debe agregar un nombre.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Paterno*</mat-label>
+        <input
+          formControlName="apellidoPaterno"
+          placeholder="Ingrese un Apellido"
+          matInput
+        />
+        <mat-icon matSuffix>feed</mat-icon>
+        <mat-error>Debe agregar un Apellido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Apellido Materno*</mat-label>
+        <input
+          formControlName="apellidoMaterno"
+          placeholder="Ingrese un Apellido"
+          matInput
+        />
+        <mat-icon matSuffix>feed</mat-icon>
+        <mat-error>Debe agregar un Apellido.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="inputs">
+      <mat-form-field appearance="outline">
+        <mat-label>Correo*</mat-label>
+        <input
+          formControlName="correo"
+          placeholder="Ingrese un correo"
+          matInput
+        />
+        <mat-icon matSuffix>email</mat-icon>
+        <mat-error>Debe agregar un Correo valido.</mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password*</mat-label>
+        <input
+          formControlName="password"
+          placeholder="Ingrese un password"
+          matInput
+        />
+        <mat-icon matSuffix>lock</mat-icon>
+        <mat-error>Debe agregar un Password.</mat-error>
+      </mat-form-field>
+    </div>
+
+    <div>
+      <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+
+      <a mat-stroked-button routerLink="/docentes">Cancelar</a>
+    </div>
+  </div>
+</form>

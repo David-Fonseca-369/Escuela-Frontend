@@ -1,0 +1,33 @@
+.formulario {
+  text-align: start;
+}
+
+.formulario button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+.formulario button[disabled] {
+  background: #c4cfd3;
+}
+
+.input mat-form-field {
+  width: 40%;
+}
+
+.inputs {
+  width: 40%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.inputs mat-form-field {
+  width: 49%;
+}
+
+.password mat-form-field {
+  margin-top: 1rem;
+  width: 20%;
+}

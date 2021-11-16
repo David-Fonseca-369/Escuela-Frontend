@@ -1,0 +1,32 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="guardar()" [formGroup]="form">
+  <div class="formulario">
+    <mat-form-field appearance="outline">
+      <mat-label>Nombre*</mat-label>
+      <input
+        formControlName="nombre"
+        placeholder="Ingrese el nombre de la materia"
+        matInput
+      />
+      <mat-icon matSuffix>category</mat-icon>
+      <mat-error>Debe agregar un nombre.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Grupo*</mat-label>
+      <mat-select [(ngModel)]="selectedGrupoId" formControlName="idGrupo">
+        <mat-option *ngFor="let grupo of grupos" [value]="grupo.idGrupo">
+          {{ grupo.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Debe seleccionar un grupo.</mat-error>
+    </mat-form-field>
+
+    <div>
+      <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+
+      <a mat-stroked-button routerLink="/materias">Cancelar</a>
+    </div>
+  </div>
+</form>
