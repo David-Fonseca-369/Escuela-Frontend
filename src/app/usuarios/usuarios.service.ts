@@ -29,6 +29,26 @@ export class UsuariosService {
     });
   }
 
+  public obtenerPaginadoAdministradores(
+    pagina: number,
+    cantidadRegistrosAMostrar: number
+  ) {
+    let params = new HttpParams();
+    params = params.append('pagina', pagina.toString());
+    params = params.append(
+      'recordsPorPagina',
+      cantidadRegistrosAMostrar.toString()
+    );
+
+    return this.http.get<usuarioDTO[]>(
+      this.apiURL + '/AdministradoresPaginacion',
+      {
+        observe: 'response',
+        params,
+      }
+    );
+  }
+
   public obtenerDocentes() {
     return this.http.get<usuarioDTO[]>(`${this.apiURL}/Docentes`);
   }
@@ -39,6 +59,10 @@ export class UsuariosService {
 
   public crearDocente(usuario: usuarioCreacionDTO) {
     return this.http.post(this.apiURL + '/crearDocente', usuario);
+  }
+
+  public crearAdministrador(usuario: usuarioCreacionDTO) {
+    return this.http.post(this.apiURL + '/crearAdministrador', usuario);
   }
 
   public editar(id: number, usuario: usuarioCreacionDTO) {

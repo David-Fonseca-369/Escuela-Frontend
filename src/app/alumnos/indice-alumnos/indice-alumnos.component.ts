@@ -2,25 +2,34 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { MensajeExistoso } from 'src/app/helpers/helpers';
+import { usuarioDTO } from 'src/app/usuarios/usuario';
 import Swal from 'sweetalert2';
-import { usuarioDTO } from '../usuario';
-import { UsuariosService } from '../usuarios.service';
+import { alumnoDTO } from '../alumno';
+import { AlumnosService } from '../alumnos.service';
 
 @Component({
-  selector: 'app-indice-docentes',
-  templateUrl: './indice-docentes.component.html',
-  styleUrls: ['./indice-docentes.component.css'],
+  selector: 'app-indice-alumnos',
+  templateUrl: './indice-alumnos.component.html',
+  styleUrls: ['./indice-alumnos.component.css'],
 })
-export class IndiceDocentesComponent implements OnInit {
-  usuarios: usuarioDTO[];
-  columnasAMostrar = ['opciones', 'nombre', 'correo', 'estado'];
+export class IndiceAlumnosComponent implements OnInit {
+  constructor(private alumnosService: AlumnosService) {}
+
+  columnasAMostrar = [
+    'opciones',
+    'nombre',
+    'grupo',
+    'matricula',
+    'curp',
+    'correo',
+    'estado',
+  ];
+  alumnos: alumnoDTO[];
 
   //Paginación
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
-
-  constructor(private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
@@ -30,17 +39,17 @@ export class IndiceDocentesComponent implements OnInit {
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
-    this.usuariosService
-      .obtenerPaginadoDocentes(pagina, cantidadElementosAMostrar)
+    this.alumnosService
+      .obtenerPaginado(pagina, cantidadElementosAMostrar)
       .subscribe(
-        (respuesta: HttpResponse<usuarioDTO[]>) => {
-          this.usuarios = respuesta.body;
+        (respuesta: HttpResponse<alumnoDTO[]>) => {
+          this.alumnos = respuesta.body;
 
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
         },
-        (error) => console.error(error)
+        (error) => console.log(error)
       );
   }
 
@@ -48,10 +57,9 @@ export class IndiceDocentesComponent implements OnInit {
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
   }
-
-  activar(usuario: usuarioDTO) {
+  activar(alumno: alumnoDTO) {
     Swal.fire({
-      title: `Activar a ${usuario.nombre}`,
+      title: `Activar a ${alumno.nombre}`,
       text: '¿Seguro que deseas activarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -61,13 +69,13 @@ export class IndiceDocentesComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuariosService.activar(usuario.idUsuario).subscribe(
+        this.alumnosService.activar(alumno.idAlumno).subscribe(
           () => {
-            MensajeExistoso(`¡Docente Activado!`);
+            MensajeExistoso(`¡Alumno activado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar
-            );
+            ); //ver si hay paginación
           },
           (error) => console.log(error)
         );
@@ -75,9 +83,9 @@ export class IndiceDocentesComponent implements OnInit {
     });
   }
 
-  desactivar(usuario: usuarioDTO) {
+  desactivar(alumno: alumnoDTO) {
     Swal.fire({
-      title: `Desactivar a ${usuario.nombre}`,
+      title: `Desactivar a ${alumno.nombre}`,
       text: '¿Seguro que deseas desactivarlo?',
       icon: 'warning',
       showCancelButton: true,
@@ -87,9 +95,9 @@ export class IndiceDocentesComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.usuariosService.desactivar(usuario.idUsuario).subscribe(
+        this.alumnosService.desactivar(alumno.idAlumno).subscribe(
           () => {
-            MensajeExistoso(`Docente Desactivado!`);
+            MensajeExistoso(`¡Alumno desactivado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar

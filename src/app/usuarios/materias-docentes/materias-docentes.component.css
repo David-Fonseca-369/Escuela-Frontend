@@ -1,0 +1,29 @@
+mat-form-field {
+  width: 20%;
+}
+.contenedor-materias {
+  display: flex;
+  justify-content: space-between;
+}
+
+.asignadas {
+  width: 45%;
+}
+
+.disponibles {
+  width: 45%;
+}
+
+table {
+  width: 90%;
+  border-collapse: collapse;
+}
+
+tr {
+  border-bottom: 1px solid gray;
+}
+
+mat-paginator {
+  display: flex;
+  justify-content: start;
+}

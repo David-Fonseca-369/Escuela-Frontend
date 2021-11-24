@@ -1,5 +1,5 @@
 <div class="title">
-  <h1>Editar Docente</h1>
+  <h1>Editar Administrador</h1>
 </div>
 
 <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
@@ -11,7 +11,7 @@
         <mat-label>Nombre*</mat-label>
         <input
           formControlName="nombre"
-          placeholder="Ingrese el nombre del Docente"
+          placeholder="Ingrese el nombre del Administrador"
           matInput
         />
         <mat-icon matSuffix>face</mat-icon>
@@ -77,7 +77,7 @@
         <mat-error>La contraseña debe tener mínimo 8 caracteres.</mat-error>
       </mat-form-field>
       <p>
-        *Si deja el campo de la contraseña vacío, la contraseña no se
+        *Se deja el campo de la contraseña vacío, la contraseña no se
         modificará.
       </p>
     </div>
@@ -85,7 +85,7 @@
     <div>
       <button mat-flat-button [disabled]="form.invalid">Guardar</button>
 
-      <a mat-stroked-button routerLink="/docentes">Cancelar</a>
+      <a mat-stroked-button routerLink="/administradores">Cancelar</a>
     </div>
   </div>
 </form>

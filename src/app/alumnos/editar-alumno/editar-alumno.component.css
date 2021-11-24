@@ -1,0 +1,60 @@
+.form {
+  width: 90rem;
+}
+
+.nombres {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nombre {
+  width: 30%;
+}
+
+.campo {
+  width: 20%;
+}
+
+.datos {
+  display: flex;
+  justify-content: space-between;
+}
+
+.datos mat-form-field {
+  width: 30%;
+}
+
+.datos2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.datos2 mat-form-field {
+  width: 22%;
+}
+
+.tutor {
+  display: flex;
+  justify-content: space-between;
+}
+
+.nombre-tutor {
+  width: 60%;
+}
+.numero-tutor {
+  width: 30%;
+}
+
+.direccion mat-form-field {
+  width: 100%;
+}
+
+.form button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+}
+
+.form button[disabled] {
+  background: #c4cfd3;
+}

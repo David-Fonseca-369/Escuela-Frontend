@@ -1,6 +1,6 @@
 <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
 
-<form (submit)="guardar()" [formGroup]="form">
+<form [formGroup]="form">
   <div class="formulario">
     <div class="nombre">
       <mat-form-field appearance="outline">
@@ -59,14 +59,16 @@
           matInput
         />
         <mat-icon matSuffix>lock</mat-icon>
-        <mat-error>Debe agregar un Password.</mat-error>
+        <mat-error>La contraseña debe contener mínimo 8 caracteres.</mat-error>
       </mat-form-field>
     </div>
 
     <div>
-      <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+      <button mat-flat-button [disabled]="form.invalid" (click)="guardar()">
+        Guardar
+      </button>
 
-      <a mat-stroked-button routerLink="/docentes">Cancelar</a>
+      <a mat-stroked-button (click)="cancelar()">Cancelar</a>
     </div>
   </div>
 </form>

@@ -7,11 +7,11 @@ import { usuarioDTO } from '../usuario';
 import { UsuariosService } from '../usuarios.service';
 
 @Component({
-  selector: 'app-indice-docentes',
-  templateUrl: './indice-docentes.component.html',
-  styleUrls: ['./indice-docentes.component.css'],
+  selector: 'app-indice-administradores',
+  templateUrl: './indice-administradores.component.html',
+  styleUrls: ['./indice-administradores.component.css'],
 })
-export class IndiceDocentesComponent implements OnInit {
+export class IndiceAdministradoresComponent implements OnInit {
   usuarios: usuarioDTO[];
   columnasAMostrar = ['opciones', 'nombre', 'correo', 'estado'];
 
@@ -31,7 +31,7 @@ export class IndiceDocentesComponent implements OnInit {
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
     this.usuariosService
-      .obtenerPaginadoDocentes(pagina, cantidadElementosAMostrar)
+      .obtenerPaginadoAdministradores(pagina, cantidadElementosAMostrar)
       .subscribe(
         (respuesta: HttpResponse<usuarioDTO[]>) => {
           this.usuarios = respuesta.body;
@@ -43,7 +43,6 @@ export class IndiceDocentesComponent implements OnInit {
         (error) => console.error(error)
       );
   }
-
   actualizarPaginacion(datos: PageEvent) {
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
@@ -63,7 +62,7 @@ export class IndiceDocentesComponent implements OnInit {
       if (result.isConfirmed) {
         this.usuariosService.activar(usuario.idUsuario).subscribe(
           () => {
-            MensajeExistoso(`¡Docente Activado!`);
+            MensajeExistoso(`¡Administrador Activado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar
@@ -89,7 +88,7 @@ export class IndiceDocentesComponent implements OnInit {
       if (result.isConfirmed) {
         this.usuariosService.desactivar(usuario.idUsuario).subscribe(
           () => {
-            MensajeExistoso(`Docente Desactivado!`);
+            MensajeExistoso(`Administrador Desactivado!`);
             this.cargarRegistrosPaginacion(
               this.paginaActual,
               this.cantidadRegistrosAMostrar

@@ -28,42 +28,98 @@
       <button mat-menu-item routerLink="contacto">Contacto</button>
     </mat-menu>
   </a>
-  <div class="opciones-invitado">
-    <div>
-      <a mat-button routerLink="invitado">Invitado</a>
-    </div>
 
-    <div>
-      <a mat-button routerLink="convocatorias">Convocatorias</a>
-    </div>
+  <app-autorizado noAutorizado>
+    <div class="opciones-invitado">
+      <div>
+        <a mat-button routerLink="invitado">Invitado</a>
+      </div>
 
-    <div>
-      <a mat-button routerLink="resenia">Reseña</a>
-    </div>
+      <div>
+        <a mat-button routerLink="convocatorias">Convocatorias</a>
+      </div>
 
-    <div>
-      <a mat-button routerLink="planta-docente">Planta Docente</a>
-    </div>
-    <div>
-      <a mat-button routerLink="carrera-tecnica">Carrera Técnica</a>
-    </div>
-    <div>
-      <a mat-button routerLink="contacto">Contacto</a>
-    </div>
-  </div>
+      <div>
+        <a mat-button routerLink="resenia">Reseña</a>
+      </div>
 
-  <div class="opciones-administrador">
-    <a mat-button routerLink="grupos">Grupos</a>
-    <a mat-button routerLink="materias">Materias</a>
-    <a mat-button routerLink="docentes">Usuarios</a>
-    <a mat-button routerLink="periodos">Periodos</a>
-  </div>
+      <div>
+        <a mat-button routerLink="planta-docente">Planta Docente</a>
+      </div>
+      <div>
+        <a mat-button routerLink="carrera-tecnica">Carrera Técnica</a>
+      </div>
+      <div>
+        <a mat-button routerLink="contacto">Contacto</a>
+      </div>
+    </div>
+  </app-autorizado>
+
+  <app-autorizado [rol]="'Administrador'">
+    <ng-container autorizado>
+      <div class="opciones-administrador">
+        <a mat-button routerLink="grupos">Grupos</a>
+        <a mat-button routerLink="materias">Materias</a>
+        <a mat-button [matMenuTriggerFor]="usuarios">Usuarios</a>
+        <mat-menu #usuarios="matMenu">
+          <button mat-menu-item routerLink="alumnos">Alumnos</button>
+          <button mat-menu-item [matMenuTriggerFor]="docentes">Docentes</button>
+          <mat-menu #docentes="matMenu">
+            <button mat-menu-item routerLink="docentes">Ver Docentes</button>
+            <button mat-menu-item routerLink="materiasDocentes">
+              Materias de Docentes
+            </button>
+          </mat-menu>
+          <button mat-menu-item routerLink="administradores">
+            Admnistradores
+          </button>
+        </mat-menu>
+
+        <a mat-button routerLink="periodos">Periodos</a>
+      </div>
+    </ng-container>
+  </app-autorizado>
+
+  <app-autorizado [rol]="'Docente'">
+    <ng-container autorizado>
+      <div>
+        <a mat-button>Alumnos</a>
+        <a mat-button>Materias</a>
+      </div>
+    </ng-container>
+  </app-autorizado>
+
   <div class="space"></div>
 
-  <div>
-    <a mat-button>
-      Iniciar Sesión
-      <mat-icon>login</mat-icon>
-    </a>
-  </div>
+  <app-autorizado>
+    <ng-container autorizado>
+      <a mat-button [matMenuTriggerFor]="opciones">
+        <span>Hola, {{ seguridadService.obtenerCampoJWT("nombre") }} </span
+        ><mat-icon>account_circle</mat-icon>
+      </a>
+
+      <mat-menu #opciones="matMenu">
+        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item (click)="seguridadService.logout()">
+          Cerrar Sesión
+        </button>
+      </mat-menu>
+    </ng-container>
+    <ng-container noAutorizado>
+      <div>
+        <a mat-button [matMenuTriggerFor]="logins">
+          Iniciar Sesión
+          <mat-icon>login</mat-icon>
+        </a>
+
+        <mat-menu #logins="matMenu">
+          <button mat-menu-item routerLink="login-alumno">Alumno</button>
+          <button mat-menu-item routerLink="login-usuario">Docente</button>
+          <button mat-menu-item routerLink="login-usuario">
+            Administrador
+          </button>
+        </mat-menu>
+      </div>
+    </ng-container>
+  </app-autorizado>
 </mat-toolbar>

@@ -1,0 +1,181 @@
+<div class="title">
+  <h1>Crear Alumno</h1>
+</div>
+
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<form (submit)="guardar()" [formGroup]="form" class="form">
+  <div class="nombres">
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Grupo*</mat-label>
+      <mat-select [(ngModel)]="selectedGrupoId" formControlName="idGrupo">
+        <mat-option *ngFor="let grupo of grupos" [value]="grupo.idGrupo">
+          {{ grupo.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Debe seleccionar un grupo.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="nombre">
+      <mat-label>Nombre*</mat-label>
+      <input
+        formControlName="nombre"
+        placeholder="Ingrese el nombre de la materia"
+        matInput
+      />
+      <mat-icon matSuffix>face</mat-icon>
+      <mat-error>Debe agregar un nombre.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Apellido Paterno*</mat-label>
+      <input
+        formControlName="apellidoPaterno"
+        placeholder="Apellido Paterno"
+        matInput
+      />
+      <mat-icon matSuffix>feed</mat-icon>
+      <mat-error>Debe agregar un Apellido.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Apellido Materno*</mat-label>
+      <input
+        formControlName="apellidoMaterno"
+        placeholder="Apellido Materno"
+        matInput
+      />
+      <mat-icon matSuffix>feed</mat-icon>
+      <mat-error>Debe agregar un Apellido.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="datos">
+    <mat-form-field appearance="outline">
+      <mat-label>CURP*</mat-label>
+      <input formControlName="curp" placeholder="Ingrese la CURP" matInput />
+      <mat-icon matSuffix>abc</mat-icon>
+      <mat-error>La CURP debe contener 18 caracteres.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Matricula*</mat-label>
+      <input
+        formControlName="matricula"
+        placeholder="Ingrese la matricula"
+        matInput
+      />
+      <mat-icon matSuffix>pin</mat-icon>
+      <mat-error>Debe agregar una Matricula.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Correo*</mat-label>
+      <input
+        formControlName="correo"
+        placeholder="Ingrese el Correo"
+        matInput
+        type="email"
+      />
+      <mat-icon matSuffix>email</mat-icon>
+      <mat-error>Debe agregar un Correo.</mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="datos2">
+    <mat-form-field appearance="outline">
+      <mat-label>Teléfono*</mat-label>
+      <input
+        formControlName="telefono"
+        placeholder="Ingrese el Teléfono"
+        matInput
+        type="number"
+      />
+      <mat-icon matSuffix>phone</mat-icon>
+      <mat-error>Debe agregar un Teléfono.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Nacimiento*</mat-label>
+      <!-- se asocia con #picker -->
+      <input
+        formControlName="fechaNacimiento"
+        matInput
+        [matDatepicker]="pickerNacimiento"
+      />
+      <mat-error>Debe indicar una Fecha de Nacimiento.</mat-error>
+      <!-- se asocia con #picker -->
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerNacimiento"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerNacimiento></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Género*</mat-label>
+      <mat-select formControlName="genero">
+        <mat-option *ngFor="let genero of generos" [value]="genero.nombre">
+          {{ genero.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Debe seleccionar un grupo.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Nueva Contraseña</mat-label>
+      <input
+        formControlName="password"
+        placeholder="Ingrese una contraseña"
+        matInput
+        type="password"
+      />
+      <mat-icon matSuffix>lock</mat-icon>
+      <mat-error
+        >Debe ingresar una Contraseña de mínimo 8 caracteres.</mat-error
+      >
+    </mat-form-field>
+  </div>
+  <div class="tutor">
+    <mat-form-field appearance="outline" class="nombre-tutor">
+      <mat-label>Nombre Tutor</mat-label>
+      <input
+        formControlName="nombreTutor"
+        placeholder="Ingrese el nombre del tutor"
+        matInput
+      />
+      <mat-icon matSuffix>person</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="numero-tutor">
+      <mat-label>Número Tutor</mat-label>
+      <input
+        formControlName="numeroTutor"
+        placeholder="Ingrese el número del tutor"
+        matInput
+        type="number"
+      />
+      <mat-icon matSuffix>phone</mat-icon>
+    </mat-form-field>
+  </div>
+  <div class="direccion">
+    <mat-form-field appearance="outline">
+      <mat-label>Dirección*</mat-label>
+      <textarea
+        formControlName="direccion"
+        placeholder="Ingrese la Dirección"
+        matInput
+      ></textarea>
+      <mat-error>Debe agregar una Dirección.</mat-error>
+    </mat-form-field>
+  </div>
+  <p>
+    *Si deja el campo de la contraseña vacío, la contraseña no se modificará.
+  </p>
+
+  <div>
+    <button mat-flat-button [disabled]="form.invalid">Guardar</button>
+
+    <a mat-stroked-button routerLink="/alumnos">Cancelar</a>
+  </div>
+</form>

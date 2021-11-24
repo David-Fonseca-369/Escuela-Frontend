@@ -1,0 +1,96 @@
+<div class="title">
+  <h1>Materias de Docentes</h1>
+</div>
+
+<div>
+  <mat-label>Seleccionar Docente</mat-label>
+  <div>
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Docente*</mat-label>
+      <mat-select
+        [(ngModel)]="selectedDocenteId"
+        (selectionChange)="cargarAsignadas()"
+      >
+        <mat-option
+          *ngFor="let docente of docentes"
+          [value]="docente.idUsuario"
+        >
+          {{
+            docente.nombre +
+              " " +
+              docente.apellidoPaterno +
+              " " +
+              docente.apellidoMaterno
+          }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Debe seleccionar un grupo.</mat-error>
+    </mat-form-field>
+  </div>
+</div>
+
+<div class="contenedor-materias" *ngIf="selectedDocenteId > 0">
+  <div class="asignadas">
+    <h2>Asignadas</h2>
+    <table>
+      <tr class="border_bottom">
+        <th align="start">Nombre</th>
+        <th align="start">Grupo</th>
+        <th align="start">Opciones</th>
+      </tr>
+
+      <tr *ngFor="let materia of materiasAsignadas; let index = index">
+        <td>{{ materia.nombre }}</td>
+        <td>{{ materia.nombreGrupo }}</td>
+        <td>
+          <a mat-icon-button (click)="quitarMateria(materia.idMateria)">
+            <mat-icon>delete</mat-icon>
+          </a>
+        </td>
+      </tr>
+    </table>
+    <p style="color: red" *ngIf="materiasAsignadas?.length === 0">
+      Por el momento no hay materias asignadas.
+    </p>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
+      showFirstLastButtons
+      [length]="cantidadTotalRegistrosAsignadas"
+      [pageSize]="cantidadRegistrosAMostrarAsignadas"
+      (page)="actualizarPaginacionAsignadas($event)"
+    >
+    </mat-paginator>
+  </div>
+
+  <div class="disponibles">
+    <h2>Disponibles</h2>
+    <table>
+      <tr class="border_bottom">
+        <th align="start">Nombre</th>
+        <th align="start">Grupo</th>
+        <th align="start">Opciones</th>
+      </tr>
+
+      <tr *ngFor="let materia of materiasDisponibles; let index = index">
+        <td>{{ materia.nombre }}</td>
+        <td>{{ materia.nombreGrupo }}</td>
+        <td>
+          <a mat-icon-button (click)="agregarMateria(materia.idMateria)">
+            <mat-icon>add_circle</mat-icon>
+          </a>
+        </td>
+      </tr>
+    </table>
+    <p style="color: red" *ngIf="materiasDisponibles?.length === 0">
+      Por el momento no hay materias disponibles.
+    </p>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
+      showFirstLastButtons
+      [length]="cantidadTotalRegistrosDisponibles"
+      [pageSize]="cantidadRegistrosAMostrarDisponibles"
+      (page)="actualizarPaginacionDisponibles($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

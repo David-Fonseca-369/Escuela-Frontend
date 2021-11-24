@@ -47,6 +47,16 @@ import { IndiceDocentesComponent } from './usuarios/indice-docentes/indice-docen
 import { FormularioUsuarioComponent } from './usuarios/formulario-usuario/formulario-usuario.component';
 import { CrearDocenteComponent } from './usuarios/crear-docente/crear-docente.component';
 import { EditarDocenteComponent } from './usuarios/editar-docente/editar-docente.component';
+import { IndiceAdministradoresComponent } from './usuarios/indice-administradores/indice-administradores.component';
+import { EditarAdministradorComponent } from './usuarios/editar-administrador/editar-administrador.component';
+import { CrearAdministradorComponent } from './usuarios/crear-administrador/crear-administrador.component';
+import { IndiceAlumnosComponent } from './alumnos/indice-alumnos/indice-alumnos.component';
+import { CrearAlumnoComponent } from './alumnos/crear-alumno/crear-alumno.component';
+import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.component';
+import { MateriasDocentesComponent } from './usuarios/materias-docentes/materias-docentes.component';
+import { LoginAlumnoComponent } from './login/login-alumno/login-alumno.component';
+import { LoginUsuarioComponent } from './login/login-usuario/login-usuario.component';
+import { AutorizadoComponent } from './login/autorizado/autorizado.component';
 
 @NgModule({
   declarations: [
@@ -77,6 +87,16 @@ import { EditarDocenteComponent } from './usuarios/editar-docente/editar-docente
     FormularioUsuarioComponent,
     CrearDocenteComponent,
     EditarDocenteComponent,
+    IndiceAdministradoresComponent,
+    EditarAdministradorComponent,
+    CrearAdministradorComponent,
+    IndiceAlumnosComponent,
+    CrearAlumnoComponent,
+    EditarAlumnoComponent,
+    MateriasDocentesComponent,
+    LoginAlumnoComponent,
+    LoginUsuarioComponent,
+    AutorizadoComponent,
   ],
   imports: [
     BrowserModule,
