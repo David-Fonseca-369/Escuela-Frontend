@@ -1,10 +1,25 @@
 <mat-toolbar>
-  <span>
+  <span *ngIf="seguridadService.obtenerRol() === ''">
     <a mat-button routerLink="" class="logo-text">
       <img src="./assets/images/logo_prepa.png" alt="Logo CBT" class="image" />
       <span>CBT No.3 San Felipe del Progreso</span>
     </a>
   </span>
+
+  <span *ngIf="seguridadService.obtenerRol() === 'Administrador'">
+    <a mat-button routerLink="/landingPage-administrador" class="logo-text">
+      <img src="./assets/images/logo_prepa.png" alt="Logo CBT" class="image" />
+      <span>CBT No.3 San Felipe del Progreso</span>
+    </a>
+  </span>
+
+  <span *ngIf="seguridadService.obtenerRol() === 'Docente'">
+    <a mat-button routerLink="/landingPage-docente" class="logo-text">
+      <img src="./assets/images/logo_prepa.png" alt="Logo CBT" class="image" />
+      <span>CBT No.3 San Felipe del Progreso</span>
+    </a>
+  </span>
+
   <!-- Opcion resoponsiva -->
   <a mat-button class="opciones-menu" [matMenuTriggerFor]="options">
     <mat-icon>dehaze</mat-icon>
@@ -29,30 +44,32 @@
     </mat-menu>
   </a>
 
-  <app-autorizado noAutorizado>
-    <div class="opciones-invitado">
-      <div>
-        <a mat-button routerLink="invitado">Invitado</a>
-      </div>
+  <app-autorizado>
+    <ng-container noAutorizado>
+      <div class="opciones-invitado">
+        <div>
+          <a mat-button routerLink="invitado">Invitado</a>
+        </div>
 
-      <div>
-        <a mat-button routerLink="convocatorias">Convocatorias</a>
-      </div>
+        <div>
+          <a mat-button routerLink="convocatorias">Convocatorias</a>
+        </div>
 
-      <div>
-        <a mat-button routerLink="resenia">Reseña</a>
-      </div>
+        <div>
+          <a mat-button routerLink="resenia">Reseña</a>
+        </div>
 
-      <div>
-        <a mat-button routerLink="planta-docente">Planta Docente</a>
+        <div>
+          <a mat-button routerLink="planta-docente">Planta Docente</a>
+        </div>
+        <div>
+          <a mat-button routerLink="carrera-tecnica">Carrera Técnica</a>
+        </div>
+        <div>
+          <a mat-button routerLink="contacto">Contacto</a>
+        </div>
       </div>
-      <div>
-        <a mat-button routerLink="carrera-tecnica">Carrera Técnica</a>
-      </div>
-      <div>
-        <a mat-button routerLink="contacto">Contacto</a>
-      </div>
-    </div>
+    </ng-container>
   </app-autorizado>
 
   <app-autorizado [rol]="'Administrador'">
@@ -83,8 +100,17 @@
   <app-autorizado [rol]="'Docente'">
     <ng-container autorizado>
       <div>
-        <a mat-button>Alumnos</a>
         <a mat-button>Materias</a>
+        <a mat-button [matMenuTriggerFor]="asistencia">Asistencia</a>
+        <mat-menu #asistencia="matMenu">
+          <button mat-menu-item>Registrar Asistencia</button>
+          <button mat-menu-item>Ver Asistencias</button>
+        </mat-menu>
+        <a mat-button [matMenuTriggerFor]="calificaciones">Calificaciones</a>
+        <mat-menu #calificaciones="matMenu">
+          <button mat-menu-item>Registrar Calificaciones</button>
+          <button mat-menu-item>Reporte de Calificaciones</button>
+        </mat-menu>
       </div>
     </ng-container>
   </app-autorizado>
@@ -94,7 +120,7 @@
   <app-autorizado>
     <ng-container autorizado>
       <a mat-button [matMenuTriggerFor]="opciones">
-        <span>Hola, {{ seguridadService.obtenerCampoJWT("nombre") }} </span
+        <span>{{ seguridadService.obtenerCampoJWT("nombre") }} </span
         ><mat-icon>account_circle</mat-icon>
       </a>
 

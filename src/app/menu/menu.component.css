@@ -9,7 +9,7 @@ mat-toolbar {
   color: #243438;
 }
 .opciones-invitado {
-  display: none;
+  display: flex;
 }
 
 .opciones-administrador {

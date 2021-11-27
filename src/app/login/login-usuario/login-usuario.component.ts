@@ -48,7 +48,14 @@ export class LoginUsuarioComponent implements OnInit {
     this.seguridadSerive.login(this.form.value).subscribe(
       (response) => {
         this.seguridadSerive.guardarToken(response);
-        this.router.navigate(['/']);
+
+        if (this.seguridadSerive.obtenerRol() === 'Administrador') {
+          this.router.navigate(['/landingPage-administrador']);
+        }
+
+        if (this.seguridadSerive.obtenerRol() === 'Docente') {
+          this.router.navigate(['/landingPage-docente']);
+        }
       },
       (errores) => (this.errores = parsearErroresAPI(errores))
     );

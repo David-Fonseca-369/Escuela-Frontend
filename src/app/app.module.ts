@@ -57,6 +57,8 @@ import { MateriasDocentesComponent } from './usuarios/materias-docentes/materias
 import { LoginAlumnoComponent } from './login/login-alumno/login-alumno.component';
 import { LoginUsuarioComponent } from './login/login-usuario/login-usuario.component';
 import { AutorizadoComponent } from './login/autorizado/autorizado.component';
+import { LandingPageAdministradorComponent } from './usuarios/landing-page-administrador/landing-page-administrador.component';
+import { LandingPageDocenteComponent } from './usuarios/landing-page-docente/landing-page-docente.component';
 
 @NgModule({
   declarations: [
@@ -97,6 +99,8 @@ import { AutorizadoComponent } from './login/autorizado/autorizado.component';
     LoginAlumnoComponent,
     LoginUsuarioComponent,
     AutorizadoComponent,
+    LandingPageAdministradorComponent,
+    LandingPageDocenteComponent,
   ],
   imports: [
     BrowserModule,

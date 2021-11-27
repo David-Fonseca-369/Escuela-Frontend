@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import { loginUsuarioDTO, respuestaAutenticacion } from './seguridad';
@@ -8,7 +9,7 @@ import { loginUsuarioDTO, respuestaAutenticacion } from './seguridad';
   providedIn: 'root',
 })
 export class SeguridadService {
-  constructor(private httpClient: HttpClient) {}
+  constructor(private httpClient: HttpClient, private router: Router) {}
 
   apiURL = environment.apiURL + 'login';
 
@@ -53,6 +54,7 @@ export class SeguridadService {
   logout() {
     localStorage.removeItem(this.llaveToken);
     localStorage.removeItem(this.llaveExpiracion);
+    this.router.navigate(['']);
   }
 
   public estaLogueado(): boolean {
