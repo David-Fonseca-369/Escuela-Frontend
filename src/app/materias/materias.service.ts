@@ -67,6 +67,12 @@ export class MateriasService {
     );
   }
 
+  public materiasAsignadasTodas(idDocente: number) {
+    return this.http.get<materiaDTO[]>(
+      `${this.apiURL}/asignadasTodas/${idDocente}`
+    );
+  }
+
   public obtenerPorId(id: number): Observable<materiaDTO> {
     return this.http.get<materiaDTO>(`${this.apiURL}/${id}`);
   }

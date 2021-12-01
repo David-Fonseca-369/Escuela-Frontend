@@ -100,10 +100,12 @@
   <app-autorizado [rol]="'Docente'">
     <ng-container autorizado>
       <div>
-        <a mat-button>Materias</a>
+        <a mat-button routerLink="/materias-docente">Materias</a>
         <a mat-button [matMenuTriggerFor]="asistencia">Asistencia</a>
         <mat-menu #asistencia="matMenu">
-          <button mat-menu-item>Registrar Asistencia</button>
+          <button mat-menu-item routerLink="/asistencias/crear">
+            Registrar Asistencia
+          </button>
           <button mat-menu-item>Ver Asistencias</button>
         </mat-menu>
         <a mat-button [matMenuTriggerFor]="calificaciones">Calificaciones</a>
@@ -120,7 +122,14 @@
   <app-autorizado>
     <ng-container autorizado>
       <a mat-button [matMenuTriggerFor]="opciones">
-        <span>{{ seguridadService.obtenerCampoJWT("nombre") }} </span
+        <span
+          >{{
+            seguridadService.obtenerCampoJWT("nombre") +
+              " " +
+              seguridadService.obtenerCampoJWT("apellidoPaterno") +
+              " " +
+              seguridadService.obtenerCampoJWT("apellidoMaterno")
+          }} </span
         ><mat-icon>account_circle</mat-icon>
       </a>
 

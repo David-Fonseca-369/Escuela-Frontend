@@ -1,0 +1,25 @@
+.detallesAsistencia button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+}
+
+.detallesAsistencia button[disabled] {
+  background: #c4cfd3;
+}
+
+.tabla-alumnos {
+  width: 70%;
+}
+
+mat-radio-button {
+  margin-right: 1rem;
+}
+
+.detallesAsistencia button {
+  margin: 2rem 1rem;
+}
+
+.detallesAsistencia mat-form-field {
+  margin-top: 1rem;
+}

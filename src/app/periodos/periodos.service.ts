@@ -34,6 +34,10 @@ export class PeriodosService {
     return this.http.get<periodoDTO[]>(`${this.apiURL}/todos`);
   }
 
+  public obtenerPeriodoActual() {
+    return this.http.get<periodoDTO>(`${this.apiURL}/periodoActual`);
+  }
+
   public crear(periodo: periodoCreacionDTO) {
     return this.http.post(`${this.apiURL}/crear`, periodo);
   }

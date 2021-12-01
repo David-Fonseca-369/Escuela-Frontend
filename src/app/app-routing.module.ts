@@ -2,7 +2,9 @@ import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { CrearAlumnoComponent } from './alumnos/crear-alumno/crear-alumno.component';
 import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.component';
+import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
 import { IndiceAlumnosComponent } from './alumnos/indice-alumnos/indice-alumnos.component';
+import { AsistenciaCrearComponent } from './asistencias/asistencia-crear/asistencia-crear.component';
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ConvocatoriasComponent } from './convocatorias/convocatorias.component';
@@ -16,6 +18,7 @@ import { LoginAlumnoComponent } from './login/login-alumno/login-alumno.componen
 import { LoginUsuarioComponent } from './login/login-usuario/login-usuario.component';
 import { CrearMateriaComponent } from './materias/crear-materia/crear-materia.component';
 import { EditarMateriaComponent } from './materias/editar-materia/editar-materia.component';
+import { IndiceMateriasDocenteComponent } from './materias/indice-materias-docente/indice-materias-docente.component';
 import { IndiceMateriasComponent } from './materias/indice-materias/indice-materias.component';
 import { CrearPeriodoComponent } from './periodos/crear-periodo/crear-periodo.component';
 import { IndicePeriodosComponent } from './periodos/indice-periodos/indice-periodos.component';
@@ -155,6 +158,11 @@ const routes: Routes = [
     component: EditarAlumnoComponent,
     canActivate: [EsAdminGuard],
   },
+
+  //Menu docente
+  { path: 'materias-docente', component: IndiceMateriasDocenteComponent },
+  { path: 'alumnos-materia/:id', component: IndiceAlumnosDocenteComponent },
+  { path: 'asistencias/crear', component: AsistenciaCrearComponent },
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

@@ -1,0 +1,62 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div>
+  <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+  <form [formGroup]="form">
+    <div class="title formulario">
+      <h1>Asistencia</h1>
+      <div class="cabecera">
+        <mat-form-field appearance="outline">
+          <mat-label>Materia*</mat-label>
+          <mat-select
+            formControlName="materia"
+            (selectionChange)="limpiarDatos()"
+          >
+            <mat-option *ngFor="let materia of materias" [value]="materia">
+              {{ materia.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar una materia.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Periodo Actual</mat-label>
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="periodo"
+            value="{{ periodo.nombre }}"
+          />
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="!periodo"
+            value="No hay ningún periodo activo."
+          />
+          <mat-icon matSuffix>query_builder</mat-icon>
+        </mat-form-field>
+
+        <div style="margin-top: 1rem">
+          <button
+            (click)="obtenerAlumnosAsistencia()"
+            mat-flat-button
+            [disabled]="form.invalid || !periodo"
+          >
+            Mostrar lista
+          </button>
+        </div>
+      </div>
+      <ng-container *ngIf="!periodo">
+        <p style="color: red">
+          Por el momento no hay ningún periodo activo, por favor comunicarse con
+          un administrador.
+        </p>
+      </ng-container>
+    </div>
+  </form>
+  <app-lista-alumnos
+    [alumnosAsistencia]="alumnosAsistencia"
+    [asistenciaCabecera]="asistenciaCabecera"
+    *ngIf="alumnosAsistencia"
+  ></app-lista-alumnos>
+</div>

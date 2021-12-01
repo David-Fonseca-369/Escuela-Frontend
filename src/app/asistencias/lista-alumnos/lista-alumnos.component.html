@@ -1,0 +1,92 @@
+<div class="detallesAsistencia">
+  <form [formGroup]="form">
+    <hr />
+    <mat-form-field appearance="outline">
+      <mat-label>Fecha de Asistencia*</mat-label>
+      <!-- se asocia con #picker -->
+      <input matInput [matDatepicker]="pickerInicio" formControlName="fecha" />
+      <mat-error>Debe indicar una fecha.</mat-error>
+      <!-- se asocia con #picker -->
+      <mat-datepicker-toggle
+        matSuffix
+        [for]="pickerInicio"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #pickerInicio></mat-datepicker>
+    </mat-form-field>
+
+    <div>
+      <table
+        #table
+        mat-table
+        [dataSource]="alumnosAsistencia"
+        class="mat-elevation-z8 tabla-alumnos"
+      >
+        <ng-container matColumnDef="nombre">
+          <th mat-header-cell *matHeaderCellDef>Nombre</th>
+          <td mat-cell *matCellDef="let alumno" align="start">
+            {{ alumno.nombre }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="matricula">
+          <th mat-header-cell *matHeaderCellDef>Matricula</th>
+          <td mat-cell *matCellDef="let alumno" align="start">
+            {{ alumno.matricula }}
+          </td>
+        </ng-container>
+
+        <ng-container matColumnDef="estado">
+          <th mat-header-cell *matHeaderCellDef>Estado</th>
+          <td mat-cell *matCellDef="let alumno" align="start">
+            <mat-radio-group>
+              <mat-radio-button
+                (click)="alumno.asistencia = 1"
+                value="1"
+                color="primary"
+                >Asistencia</mat-radio-button
+              >
+
+              <mat-radio-button
+                (click)="alumno.asistencia = 2"
+                value="2"
+                color="primary"
+                >Retardo</mat-radio-button
+              >
+
+              <mat-radio-button
+                (click)="alumno.asistencia = 3"
+                value="3"
+                color="primary"
+                >Falta</mat-radio-button
+              >
+            </mat-radio-group>
+          </td>
+        </ng-container>
+
+        <tr
+          mat-header-row
+          *matHeaderRowDef="columnasAMostrar; sticky: true"
+        ></tr>
+        <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8" style="color: red">
+            Por el momento no hay alumnos asignados a esta materia.
+          </td>
+        </tr>
+      </table>
+
+      <p>*Si no selecciona una opción, por defecto quedará como falta.</p>
+      <div class="buttons-asistencia">
+        <button
+          mat-flat-button
+          [disabled]="form.invalid || alumnosAsistencia.length == 0"
+          (click)="guardarAsistencias()"
+        >
+          Guardar Asistencia
+        </button>
+
+        <a mat-stroked-button routerLink="/landingPage-docente">Cancelar</a>
+      </div>
+    </div>
+  </form>
+</div>

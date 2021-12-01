@@ -17,6 +17,7 @@
             <a
               mat-icon-button
               routerLink="/administradores/editar/{{ usuario.idUsuario }}"
+              matTooltip="Editar"
             >
               <mat-icon>edit</mat-icon>
             </a>
@@ -24,6 +25,7 @@
               mat-icon-button
               *ngIf="usuario.estado"
               (click)="desactivar(usuario)"
+              matTooltip="Desactivar"
             >
               <mat-icon>block</mat-icon>
             </a>
@@ -31,6 +33,7 @@
               mat-icon-button
               *ngIf="!usuario.estado"
               (click)="activar(usuario)"
+              matTooltip="Activar"
             >
               <mat-icon>check</mat-icon>
             </a>

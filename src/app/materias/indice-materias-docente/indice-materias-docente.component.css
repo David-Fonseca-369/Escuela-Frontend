@@ -1,0 +1,19 @@
+.tabla-materias {
+  width: 40%;
+}
+
+mat-paginator {
+  width: 40%;
+}
+
+.nuevo {
+  display: flex;
+  justify-content: start;
+  margin: 2rem 0;
+}
+
+.nuevo button {
+  width: 10rem;
+  background: #4f707b;
+  color: white;
+}

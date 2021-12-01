@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { alumnoCreacionDTO, alumnoDTO } from './alumno';
+import { alumnoAsistenciaDTO, alumnoCreacionDTO, alumnoDTO } from './alumno';
 
 @Injectable({
   providedIn: 'root',
@@ -28,8 +28,35 @@ export class AlumnosService {
     });
   }
 
+  public grupoPaginacion(
+    pagina: number,
+    cantidadRegistrosAMostrar: number,
+    idGrupo: number
+  ): Observable<any> {
+    let params = new HttpParams();
+    params = params.append('pagina', pagina.toString());
+    params = params.append(
+      'recordsPorPagina',
+      cantidadRegistrosAMostrar.toString()
+    );
+
+    return this.http.get<alumnoDTO[]>(
+      this.apiURL + '/GrupoPaginacion/' + idGrupo,
+      {
+        observe: 'response',
+        params,
+      }
+    );
+  }
+
   public obtenerTodos() {
     return this.http.get<alumnoDTO[]>(`${this.apiURL}/todos`);
+  }
+
+  public obtenerAlumnosAsistencia(idGrupo: number) {
+    return this.http.get<alumnoAsistenciaDTO[]>(
+      `${this.apiURL}/Asistencia/${idGrupo}`
+    );
   }
 
   public obtenerPorId(id: number): Observable<alumnoDTO> {

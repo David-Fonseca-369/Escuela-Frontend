@@ -33,3 +33,9 @@ export interface alumnoCreacionDTO {
   numeroTutor: string;
   password: string;
 }
+
+export interface alumnoAsistenciaDTO {
+  nombre: string;
+  matricula: string;
+  asistencia: number;
+}

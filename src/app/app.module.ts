@@ -59,6 +59,11 @@ import { LoginUsuarioComponent } from './login/login-usuario/login-usuario.compo
 import { AutorizadoComponent } from './login/autorizado/autorizado.component';
 import { LandingPageAdministradorComponent } from './usuarios/landing-page-administrador/landing-page-administrador.component';
 import { LandingPageDocenteComponent } from './usuarios/landing-page-docente/landing-page-docente.component';
+import { IndiceMateriasDocenteComponent } from './materias/indice-materias-docente/indice-materias-docente.component';
+import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
+import { AsistenciaCrearComponent } from './asistencias/asistencia-crear/asistencia-crear.component';
+import { ListaAlumnosComponent } from './asistencias/lista-alumnos/lista-alumnos.component';
+import { SpinnerComponent } from './helpers/spinner/spinner.component';
 
 @NgModule({
   declarations: [
@@ -101,6 +106,11 @@ import { LandingPageDocenteComponent } from './usuarios/landing-page-docente/lan
     AutorizadoComponent,
     LandingPageAdministradorComponent,
     LandingPageDocenteComponent,
+    IndiceMateriasDocenteComponent,
+    IndiceAlumnosDocenteComponent,
+    AsistenciaCrearComponent,
+    ListaAlumnosComponent,
+    SpinnerComponent,
   ],
   imports: [
     BrowserModule,

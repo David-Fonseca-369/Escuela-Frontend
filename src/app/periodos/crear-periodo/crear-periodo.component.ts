@@ -39,7 +39,7 @@ export class CrearPeriodoComponent implements OnInit {
     ) {
       Swal.fire({
         title: `Guardar nuevo periodo`,
-        text: '¿Realmente desea guardar el periodo? verifique los datos, pues más tarde no se podrán editar o eliminar.',
+        text: '¿Realmente desea guardar el periodo? verifique los datos, pues más tarde no se podrán editar o eliminar. Y se reiniciaran asistencias y calificaciones para los docentes, ya que por defecto tendrán el nuevo periodo.',
         icon: 'warning',
         showCancelButton: true,
         confirmButtonColor: '#28A745',
@@ -55,7 +55,10 @@ export class CrearPeriodoComponent implements OnInit {
               );
               this.router.navigate(['/periodos']);
             },
-            (error) => (this.errores = parsearErroresAPI(error))
+            (error) => {
+              console.log('error ' + error);
+              this.errores = parsearErroresAPI(error);
+            }
           );
         }
       });
