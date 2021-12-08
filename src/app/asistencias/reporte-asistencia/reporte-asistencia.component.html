@@ -1,0 +1,132 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+<div>
+  <form [formGroup]="form">
+    <div class="title container">
+      <div>
+        <h1>Reporte Asistencias</h1>
+      </div>
+
+      <div class="filters">
+        <mat-form-field appearance="outline">
+          <mat-label>Materia*</mat-label>
+          <mat-select
+            formControlName="materia"
+            (selectionChange)="limpiarDatos()"
+          >
+            <mat-option *ngFor="let materia of materias" [value]="materia">
+              {{ materia.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar una materia.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Periodo Actual</mat-label>
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="periodo"
+            value="{{ periodo.nombre }}"
+          />
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="!periodo"
+            value="No hay ningún periodo activo."
+          />
+          <mat-icon matSuffix>query_builder</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ingresa el rango de fechas</mat-label>
+          <mat-date-range-input [formGroup]="range" [rangePicker]="picker">
+            <input matStartDate formControlName="desde" placeholder="Desde" />
+            <input matEndDate formControlName="hasta" placeholder="Hasta" />
+          </mat-date-range-input>
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="picker"
+          ></mat-datepicker-toggle>
+          <mat-date-range-picker #picker></mat-date-range-picker>
+
+          <mat-error
+            *ngIf="range.controls.desde.hasError('matStartDateInvalid')"
+            >Fecha 'Desde' invalida.</mat-error
+          >
+          <mat-error *ngIf="range.controls.hasta.hasError('matEndDateInvalid')"
+            >Fecha 'Hasta' invalida.</mat-error
+          >
+        </mat-form-field>
+
+        <div>
+          <button
+            mat-flat-button
+            [disabled]="form.invalid || range.invalid || !periodo"
+            (click)="obtenerAsistencias()"
+          >
+            Consultar
+          </button>
+        </div>
+      </div>
+    </div>
+    <div class="tabla-asistencias" *ngIf="asistenciasTabla">
+      <table border="1">
+        <tr>
+          <th align="center">Nombre</th>
+          <th align="center">Matricula</th>
+          <th *ngFor="let fecha of asistenciasTabla.fechas; let index = index">
+            {{ index + 1 }}
+          </th>
+          <th>Resumen</th>
+        </tr>
+        <tr *ngFor="let alumno of asistenciasTabla.asistencias">
+          <td align="center">{{ alumno.nombre }}</td>
+          <td align="center">{{ alumno.matricula }}</td>
+          <td *ngFor="let asistencia of alumno.asistencias" align="center">
+            <p
+              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+              *ngIf="asistencia.asistencia === 1"
+            >
+              <mat-icon>check</mat-icon>
+            </p>
+            <p
+              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+              *ngIf="asistencia.asistencia === 2"
+            >
+              <mat-icon>schedule</mat-icon>
+            </p>
+            <p
+              *ngIf="asistencia.asistencia === 3"
+              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+            >
+              <mat-icon>close</mat-icon>
+            </p>
+          </td>
+
+          <td align="center">
+            A = {{ alumno.asistenciasTotal }}, R = {{ alumno.retardosTotal }}, F
+            = {{ alumno.faltasTotal }}
+          </td>
+        </tr>
+      </table>
+
+      <div class="referencias">
+        <div class="icon">
+          <mat-icon>check</mat-icon>
+          <p>Asistencia</p>
+        </div>
+
+        <div class="icon">
+          <mat-icon>schedule</mat-icon>
+          <p>Retardo</p>
+        </div>
+        <div class="icon">
+          <mat-icon>close</mat-icon>
+          <p>Falta</p>
+        </div>
+      </div>
+    </div>
+  </form>
+</div>

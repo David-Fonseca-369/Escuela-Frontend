@@ -21,6 +21,12 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 //Sweet alert 2
 import { SweetAlert2Module } from '@sweetalert2/ngx-sweetalert2';
 
+//Markdown
+import { MarkdownModule } from 'ngx-markdown';
+
+//modulo dropzone
+import { NgxDropzoneModule } from 'ngx-dropzone';
+
 import { MenuComponent } from './menu/menu.component';
 import { InvitadoComponent } from './invitado/invitado.component';
 import { ConvocatoriasComponent } from './convocatorias/convocatorias.component';
@@ -64,6 +70,13 @@ import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/
 import { AsistenciaCrearComponent } from './asistencias/asistencia-crear/asistencia-crear.component';
 import { ListaAlumnosComponent } from './asistencias/lista-alumnos/lista-alumnos.component';
 import { SpinnerComponent } from './helpers/spinner/spinner.component';
+import { ReporteAsistenciaComponent } from './asistencias/reporte-asistencia/reporte-asistencia.component';
+import { CalificacionCrearComponent } from './calificaciones/calificacion-crear/calificacion-crear.component';
+import { ListaAlumnosCalificacionesComponent } from './calificaciones/lista-alumnos-calificaciones/lista-alumnos-calificaciones.component';
+import { IndicePublicacionesComponent } from './publicaciones/indice-publicaciones/indice-publicaciones.component';
+import { CrearPublicacionComponent } from './publicaciones/crear-publicacion/crear-publicacion.component';
+import { InputMarkdownComponent } from './helpers/input-markdown/input-markdown.component';
+import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 
 @NgModule({
   declarations: [
@@ -111,6 +124,13 @@ import { SpinnerComponent } from './helpers/spinner/spinner.component';
     AsistenciaCrearComponent,
     ListaAlumnosComponent,
     SpinnerComponent,
+    ReporteAsistenciaComponent,
+    CalificacionCrearComponent,
+    ListaAlumnosCalificacionesComponent,
+    IndicePublicacionesComponent,
+    CrearPublicacionComponent,
+    InputMarkdownComponent,
+    ReporteCalificacionesComponent,
   ],
   imports: [
     BrowserModule,
@@ -122,6 +142,8 @@ import { SpinnerComponent } from './helpers/spinner/spinner.component';
     ReactiveFormsModule,
     FormsModule,
     SweetAlert2Module,
+    NgxDropzoneModule,
+    MarkdownModule.forRoot(),
   ],
   providers: [],
   bootstrap: [AppComponent],

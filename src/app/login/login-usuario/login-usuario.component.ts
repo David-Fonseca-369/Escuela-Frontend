@@ -19,6 +19,7 @@ export class LoginUsuarioComponent implements OnInit {
   form: FormGroup;
   errores: string[] = [];
   hide = true;
+  isLoading = false;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -45,8 +46,10 @@ export class LoginUsuarioComponent implements OnInit {
   }
 
   login() {
+    this.isLoading = true;
     this.seguridadSerive.login(this.form.value).subscribe(
       (response) => {
+        this.isLoading = false;
         this.seguridadSerive.guardarToken(response);
 
         if (this.seguridadSerive.obtenerRol() === 'Administrador') {
@@ -57,7 +60,10 @@ export class LoginUsuarioComponent implements OnInit {
           this.router.navigate(['/landingPage-docente']);
         }
       },
-      (errores) => (this.errores = parsearErroresAPI(errores))
+      (errores) => {
+        this.errores = parsearErroresAPI(errores);
+        this.isLoading = false;
+      }
     );
   }
 

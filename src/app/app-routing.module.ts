@@ -5,6 +5,9 @@ import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.com
 import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
 import { IndiceAlumnosComponent } from './alumnos/indice-alumnos/indice-alumnos.component';
 import { AsistenciaCrearComponent } from './asistencias/asistencia-crear/asistencia-crear.component';
+import { ReporteAsistenciaComponent } from './asistencias/reporte-asistencia/reporte-asistencia.component';
+import { CalificacionCrearComponent } from './calificaciones/calificacion-crear/calificacion-crear.component';
+import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { ConvocatoriasComponent } from './convocatorias/convocatorias.component';
@@ -23,6 +26,8 @@ import { IndiceMateriasComponent } from './materias/indice-materias/indice-mater
 import { CrearPeriodoComponent } from './periodos/crear-periodo/crear-periodo.component';
 import { IndicePeriodosComponent } from './periodos/indice-periodos/indice-periodos.component';
 import { PlantaDocenteComponent } from './planta-docente/planta-docente.component';
+import { CrearPublicacionComponent } from './publicaciones/crear-publicacion/crear-publicacion.component';
+import { IndicePublicacionesComponent } from './publicaciones/indice-publicaciones/indice-publicaciones.component';
 import { GaleriaComponent } from './resenia/galeria/galeria.component';
 import { ReseniaComponent } from './resenia/resenia.component';
 import { CrearAdministradorComponent } from './usuarios/crear-administrador/crear-administrador.component';
@@ -163,6 +168,13 @@ const routes: Routes = [
   { path: 'materias-docente', component: IndiceMateriasDocenteComponent },
   { path: 'alumnos-materia/:id', component: IndiceAlumnosDocenteComponent },
   { path: 'asistencias/crear', component: AsistenciaCrearComponent },
+  { path: 'asistencias/reporte', component: ReporteAsistenciaComponent },
+
+  { path: 'calificaciones/crear', component: CalificacionCrearComponent },
+  { path: 'calificaciones/reporte', component: ReporteCalificacionesComponent },
+
+  { path: 'publicaciones/:id', component: IndicePublicacionesComponent },
+  { path: 'publicaciones/crear/:id', component: CrearPublicacionComponent },
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

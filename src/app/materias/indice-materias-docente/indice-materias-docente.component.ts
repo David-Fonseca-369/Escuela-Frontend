@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { SeguridadService } from 'src/app/login/seguridad.service';
 import { materiaDTO } from '../materia';
 import { MateriasService } from '../materias.service';
@@ -16,6 +17,7 @@ export class IndiceMateriasDocenteComponent implements OnInit {
     private seguridadService: SeguridadService
   ) {}
 
+  isLoading = false;
   materias: materiaDTO[];
   columnasAMostrar = ['opciones', 'nombre', 'grupo', 'estado'];
 
@@ -23,6 +25,8 @@ export class IndiceMateriasDocenteComponent implements OnInit {
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
+
+  errores: string[] = [];
 
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
@@ -32,6 +36,7 @@ export class IndiceMateriasDocenteComponent implements OnInit {
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
+    this.isLoading = true;
     this.materiasService
       .materiasAsignadasPaginacion(
         pagina,
@@ -45,8 +50,13 @@ export class IndiceMateriasDocenteComponent implements OnInit {
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+
+          this.isLoading = false;
         },
-        (error) => console.error(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 

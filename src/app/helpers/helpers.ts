@@ -43,3 +43,19 @@ export function MensajeError(mensaje: string) {
     confirmButtonColor: '#28A745',
   });
 }
+
+export function formatearFecha(date: Date): string {
+  date = new Date(date); //a veces no viene con el formato esperado y este le vuelve a dar formato cuando viene del web-api.
+  const formato = new Intl.DateTimeFormat('en', {
+    year: 'numeric',
+    month: '2-digit',
+    day: '2-digit',
+  });
+
+  //se usan ',,'por que el mes es el primer elemnto de arreglo
+  //el día el tercer elemento y el año es el quinto.
+  const [{ value: month }, , { value: day }, , { value: year }] =
+    formato.formatToParts(date);
+
+  return `${year}-${month}-${day}`;
+}

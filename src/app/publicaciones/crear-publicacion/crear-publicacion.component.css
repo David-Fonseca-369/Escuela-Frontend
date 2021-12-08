@@ -1,0 +1,31 @@
+.cabecera {
+  display: flex;
+}
+
+.cabecera p {
+  margin-right: 1rem;
+}
+
+mat-form-field {
+  margin-right: 1rem;
+}
+
+.publicacion {
+  display: flex;
+  justify-content: space-between;
+}
+
+.dropzone {
+  width: 48%;
+  margin: 6rem 3rem;
+}
+
+.datos-publicacion {
+  width: 48%;
+}
+
+.buttons-publicacion button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+}

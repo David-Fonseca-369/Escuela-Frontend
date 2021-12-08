@@ -35,7 +35,15 @@ export interface alumnoCreacionDTO {
 }
 
 export interface alumnoAsistenciaDTO {
+  idAlumno: number;
   nombre: string;
   matricula: string;
   asistencia: number;
+}
+
+export interface alumnoCalificacionDTO {
+  idAlumno: number;
+  nombre: string;
+  matricula: string;
+  calificacion: number;
 }

@@ -1,0 +1,14 @@
+mat-form-field {
+  margin-right: 1rem;
+}
+
+.nuevo button {
+  width: 10rem;
+  background: #4f707b;
+  color: white;
+  margin-top: 1rem;
+}
+
+.cabecera {
+  display: flex;
+}

@@ -1,0 +1,70 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+
+<div>
+  <div class="title">
+    <h1>Registrar Calificaciones</h1>
+    <div class="formulario">
+      <form [formGroup]="form">
+        <mat-form-field appearance="outline">
+          <mat-label>Materia*</mat-label>
+          <mat-select
+            formControlName="materia"
+            (selectionChange)="limpiarDatos()"
+          >
+            <mat-option *ngFor="let materia of materias" [value]="materia">
+              {{ materia.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar una materia.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Periodo Actual</mat-label>
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="periodo"
+            value="{{ periodo.nombre }}"
+          />
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="!periodo"
+            value="No hay ningún periodo activo."
+          />
+          <mat-icon matSuffix>query_builder</mat-icon>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Evaluación*</mat-label>
+          <mat-select
+            formControlName="idEvaluacion"
+            (selectionChange)="limpiarDatos()"
+          >
+            <mat-option
+              *ngFor="let evaluacion of evaluaciones"
+              [value]="evaluacion.idEvaluacion"
+            >
+              {{ evaluacion.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar una evaluación.</mat-error>
+        </mat-form-field>
+
+        <button
+          (click)="obtenerAlumnosCalificacion()"
+          mat-flat-button
+          [disabled]="form.invalid || !periodo"
+        >
+          Mostrar lista
+        </button>
+      </form>
+    </div>
+
+    <app-lista-alumnos-calificaciones
+      [alumnosCalificacion]="alumnosCalificacion"
+      [calificacionCabecera]="datosCabecera"
+      *ngIf="alumnosCalificacion"
+    ></app-lista-alumnos-calificaciones>
+  </div>
+</div>

@@ -1,0 +1,16 @@
+.formulario {
+  display: flex;
+}
+
+.formulario button {
+  background: #4f707b;
+  color: white;
+}
+
+.formulario button[disabled] {
+  background: #c4cfd3;
+}
+
+.formulario mat-form-field {
+  margin-right: 1rem;
+}

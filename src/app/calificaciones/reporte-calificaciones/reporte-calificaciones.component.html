@@ -1,0 +1,48 @@
+<div>
+  <div class="title">
+    <h1>Calificaciones</h1>
+  </div>
+
+  <div class="cabecera">
+    <mat-form-field appearance="outline">
+      <mat-label>Materia*</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let materia of materias" [value]="materia">
+          {{ materia.nombre }}
+        </mat-option>
+      </mat-select>
+      <mat-error>Debe seleccionar una materia.</mat-error>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline" class="campo">
+      <mat-label>Periodo Actual</mat-label>
+      <input
+        matInput
+        [disabled]="true"
+        *ngIf="periodo"
+        value="{{ periodo.nombre }}"
+      />
+      <input
+        matInput
+        [disabled]="true"
+        *ngIf="!periodo"
+        value="No hay ningún periodo activo."
+      />
+      <mat-icon matSuffix>query_builder</mat-icon>
+    </mat-form-field>
+
+    <mat-form-field appearance="outline">
+      <mat-label>Tipo</mat-label>
+      <mat-select>
+        <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+          {{ tipo.nombre }}
+        </mat-option>
+      </mat-select>
+      <!-- <mat-error>Debe seleccionar una materia.</mat-error> -->
+    </mat-form-field>
+
+    <div class="nuevo">
+      <button mat-button>Mostrar</button>
+    </div>
+  </div>
+</div>

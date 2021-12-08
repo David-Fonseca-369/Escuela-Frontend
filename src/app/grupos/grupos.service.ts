@@ -1,4 +1,4 @@
-import { HttpClient, HttpParams } from '@angular/common/http';
+import { HttpClient, HttpHeaders, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
@@ -40,8 +40,19 @@ export class GruposService {
     return this.http.post(this.apiURL + '/crear', grupo);
   }
 
+  // public editar(id: number, grupo: grupoCreacionDTO) {
+  //   return this.http.put(`${this.apiURL}/editar/${id}`, grupo);
+  // }
+
   public editar(id: number, grupo: grupoCreacionDTO) {
-    return this.http.put(`${this.apiURL}/editar/${id}`, grupo);
+    const headers = new HttpHeaders();
+    headers.append('Access-Control-Allow-Headers', 'Content-Type');
+    headers.append('Access-Control-Allow-Methods', 'PUT');
+    headers.append('Access-Control-Allow-Origin', '*');
+
+    return this.http.put(`${this.apiURL}/editar/${id}`, grupo, {
+      headers: headers,
+    });
   }
 
   public activar(id: number) {

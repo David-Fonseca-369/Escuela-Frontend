@@ -14,6 +14,7 @@ import { MatPaginatorModule } from '@angular/material/paginator';
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatRadioModule } from '@angular/material/radio';
 import { MatTooltipModule } from '@angular/material/tooltip';
+import { MatTabsModule } from '@angular/material/tabs';
 
 //Para tabla son 2
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -37,6 +38,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatCheckboxModule,
     MatRadioModule,
     MatTooltipModule,
+    MatTabsModule,
   ],
   imports: [CommonModule],
 })

@@ -1,3 +1,4 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <div>
   <div class="title">
     <h1>Materias</h1>
@@ -22,7 +23,7 @@
 
             <a
               mat-icon-button
-              (click)="desactivar(materia)"
+              routerLink="/publicaciones/{{ materia.idMateria }}"
               matTooltip="Publicaciones"
             >
               <mat-icon>campaign</mat-icon>
@@ -74,5 +75,6 @@
       >
       </mat-paginator>
     </div>
+    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
   </div>
 </div>

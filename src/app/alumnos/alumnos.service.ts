@@ -2,7 +2,12 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { alumnoAsistenciaDTO, alumnoCreacionDTO, alumnoDTO } from './alumno';
+import {
+  alumnoAsistenciaDTO,
+  alumnoCalificacionDTO,
+  alumnoCreacionDTO,
+  alumnoDTO,
+} from './alumno';
 
 @Injectable({
   providedIn: 'root',
@@ -56,6 +61,12 @@ export class AlumnosService {
   public obtenerAlumnosAsistencia(idGrupo: number) {
     return this.http.get<alumnoAsistenciaDTO[]>(
       `${this.apiURL}/Asistencia/${idGrupo}`
+    );
+  }
+
+  public obtenerAlumnosCalificacion(idGrupo: number) {
+    return this.http.get<alumnoCalificacionDTO[]>(
+      `${this.apiURL}/Calificacion/${idGrupo}`
     );
   }
 

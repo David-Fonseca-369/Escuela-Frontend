@@ -1,0 +1,60 @@
+<div>
+  <div class="formulario">
+    <hr />
+    <table
+      #table
+      mat-table
+      [dataSource]="alumnosCalificacion"
+      class="mat-elevation-z8 tabla-alumnos"
+    >
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let alumno" align="start">
+          {{ alumno.nombre }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="matricula">
+        <th mat-header-cell *matHeaderCellDef>Matricula</th>
+        <td mat-cell *matCellDef="let alumno" align="start">
+          {{ alumno.matricula }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="asistencia">
+        <th mat-header-cell *matHeaderCellDef>Calificación</th>
+        <td mat-cell *matCellDef="let alumno; let index = index" align="start">
+          <mat-form-field appearance="outline">
+            <input
+              matInput
+              type="number"
+              placeholder="0"
+              (input)="asignarCalificacion($event.target.value, index)"
+            />
+          </mat-form-field>
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnasAMostrar; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8" style="color: red">
+          Por el momento no hay alumnos asignados a esta materia.
+        </td>
+      </tr>
+    </table>
+
+    <div class="buttons-calificacion">
+      <button
+        mat-flat-button
+        [disabled]="alumnosCalificacion.length <= 0"
+        (click)="guardarCalificaciones()"
+      >
+        Guardar Calificaciones
+      </button>
+
+      <a mat-stroked-button routerLink="/landingPage-docente">Cancelar</a>
+    </div>
+    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+  </div>
+</div>

@@ -1,0 +1,65 @@
+mat-form-field {
+  margin-right: 1rem;
+}
+
+.container {
+  display: flex;
+  flex-direction: column;
+}
+
+.filters {
+  display: flex;
+  justify-content: start;
+}
+
+.filters button {
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+  margin-top: 1rem;
+}
+
+.filters button[disabled] {
+  background: #c4cfd3;
+}
+
+.tabla-asistencias {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.tabla-asistencias table {
+  width: 80%;
+  margin: 3rem 0 1rem;
+}
+
+.tabla-asistencias table th {
+  background: black;
+  color: white;
+  font-weight: 500;
+}
+
+.tabla-asistencias table,
+th,
+td {
+  border: 1px solid #b6b6b6;
+  border-collapse: collapse;
+}
+
+.referencias {
+  display: flex;
+  justify-content: start;
+}
+
+.icon {
+  display: flex;
+  justify-content: center;
+  margin-right: 1rem;
+}
+
+.icon mat-icon {
+  margin-top: 0.8rem;
+  display: flex;
+  margin-right: 2px;
+}

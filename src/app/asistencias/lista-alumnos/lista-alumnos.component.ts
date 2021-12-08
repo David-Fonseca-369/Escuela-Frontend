@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { alumnoAsistenciaDTO } from 'src/app/alumnos/alumno';
-import { MensajeExistoso } from 'src/app/helpers/helpers';
+import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
 import { asistenciaCabecera, asistenciasCreacionDTO } from '../asistencia';
 import { AsistenciasService } from '../asistencias.service';
 
@@ -26,8 +26,9 @@ export class ListaAlumnosComponent implements OnInit {
   @Input()
   asistenciaCabecera: asistenciaCabecera;
 
-  columnasAMostrar = ['nombre', 'matricula', 'estado'];
-  opciones = [];
+  columnasAMostrar = ['nombre', 'matricula', 'asistencia'];
+
+  errores: string[] = [];
 
   ngOnInit(): void {
     this.cargarFormularioDetalles();
@@ -55,7 +56,9 @@ export class ListaAlumnosComponent implements OnInit {
         MensajeExistoso('¡Asistencia guardada!');
         this.router.navigate(['/landingPage-docente']);
       },
-      (error) => console.log(error)
+      (error) => {
+        this.errores = parsearErroresAPI(error);
+      }
     );
   }
 }

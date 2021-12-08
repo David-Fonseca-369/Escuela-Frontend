@@ -1,48 +1,48 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { alumnoAsistenciaDTO } from 'src/app/alumnos/alumno';
+import { alumnoCalificacionDTO } from 'src/app/alumnos/alumno';
 import { AlumnosService } from 'src/app/alumnos/alumnos.service';
+import { evaluacionDTO } from 'src/app/evaluaciones/evaluacion';
+import { EvaluacionesService } from 'src/app/evaluaciones/evaluaciones.service';
 import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { SeguridadService } from 'src/app/login/seguridad.service';
 import { materiaDTO } from 'src/app/materias/materia';
 import { MateriasService } from 'src/app/materias/materias.service';
 import { periodoDTO } from 'src/app/periodos/periodo';
 import { PeriodosService } from 'src/app/periodos/periodos.service';
-import { asistenciaCabecera } from '../asistencia';
+import { calificacionCabecera } from '../calificacion';
 
 @Component({
-  selector: 'app-asistencia-crear',
-  templateUrl: './asistencia-crear.component.html',
-  styleUrls: ['./asistencia-crear.component.css'],
+  selector: 'app-calificacion-crear',
+  templateUrl: './calificacion-crear.component.html',
+  styleUrls: ['./calificacion-crear.component.css'],
 })
-export class AsistenciaCrearComponent implements OnInit {
+export class CalificacionCrearComponent implements OnInit {
   constructor(
     private materiasService: MateriasService,
     private seguridadService: SeguridadService,
     private periodosService: PeriodosService,
-    private alumnosService: AlumnosService,
-    private formBuilder: FormBuilder
+    private evaluacionesService: EvaluacionesService,
+    private formBuilder: FormBuilder,
+    private alumnosService: AlumnosService
   ) {}
 
   form: FormGroup;
   isLoading = false;
   materias: materiaDTO[];
-  periodo: periodoDTO;
   errores: string[] = [];
-  alumnosAsistencia: alumnoAsistenciaDTO[];
+  periodo: periodoDTO;
+  evaluaciones: evaluacionDTO[];
 
-  asistenciaCabecera: asistenciaCabecera;
+  alumnosCalificacion: alumnoCalificacionDTO[];
+
+  datosCabecera: calificacionCabecera;
 
   ngOnInit(): void {
-    this.cargarFormulario();
     this.obtenerMateriasAsignadas();
     this.obtenerPeriodoActual();
-  }
-
-  cargarFormulario() {
-    this.form = this.formBuilder.group({
-      materia: ['', { validators: [Validators.required] }],
-    });
+    this.obtenerEvaluaciones();
+    this.cargarFormulario();
   }
 
   obtenerMateriasAsignadas() {
@@ -79,14 +79,35 @@ export class AsistenciaCrearComponent implements OnInit {
     );
   }
 
-  obtenerAlumnosAsistencia() {
+  obtenerEvaluaciones() {
+    this.isLoading = true;
+    this.evaluacionesService.obtenerEvaluaciones().subscribe(
+      (evaluaciones) => {
+        this.evaluaciones = evaluaciones;
+        this.isLoading = false;
+      },
+      (error) => {
+        this.errores = parsearErroresAPI(error);
+        this.isLoading = false;
+      }
+    );
+  }
+
+  cargarFormulario() {
+    this.form = this.formBuilder.group({
+      materia: ['', { validators: [Validators.required] }],
+      idEvaluacion: ['', { validators: [Validators.required] }],
+    });
+  }
+
+  obtenerAlumnosCalificacion() {
     this.isLoading = true;
     if (this.form.valid) {
       this.alumnosService
-        .obtenerAlumnosAsistencia(this.form.value.materia.idGrupo)
+        .obtenerAlumnosCalificacion(this.form.value.materia.idGrupo)
         .subscribe(
-          (alumnosAsistencia) => {
-            this.alumnosAsistencia = alumnosAsistencia;
+          (alumnosCalificacion) => {
+            this.alumnosCalificacion = alumnosCalificacion;
             this.isLoading = false;
           },
           (error) => {
@@ -97,19 +118,20 @@ export class AsistenciaCrearComponent implements OnInit {
     }
 
     //Mandar datos de asistencia cabecera
-    this.cargarDatosAsistencia();
+    this.cargarDatosCabecera();
   }
 
-  cargarDatosAsistencia() {
-    let asistenciaCabecera: asistenciaCabecera = {
+  cargarDatosCabecera() {
+    let datosCabecera: calificacionCabecera = {
       idMateria: this.form.value.materia.idMateria,
+      idEvaluacion: this.form.value.idEvaluacion,
       idPeriodo: this.periodo.idPeriodo,
     };
 
-    this.asistenciaCabecera = asistenciaCabecera;
+    this.datosCabecera = datosCabecera;
   }
 
   limpiarDatos() {
-    this.alumnosAsistencia = undefined;
+    this.alumnosCalificacion = undefined;
   }
 }
