@@ -12,12 +12,12 @@ export class InputMarkdownComponent implements OnInit {
 
   //Lo emitimos al componente padre
   @Output()
-  change: EventEmitter<string> = new EventEmitter<string>();
+  changeMarkdown: EventEmitter<string> = new EventEmitter<string>();
 
   ngOnInit(): void {}
 
   inputTextArea(texto) {
     this.contenidoMarkdown = texto;
-    this.change.emit(texto);
+    this.changeMarkdown.emit(texto);
   }
 }

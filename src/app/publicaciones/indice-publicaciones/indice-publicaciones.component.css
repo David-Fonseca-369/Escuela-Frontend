@@ -2,4 +2,18 @@
   width: 10rem;
   background: #4f707b;
   color: white;
+  margin: 3rem 0;
+}
+
+.cabecera {
+  display: flex;
+}
+
+.cabecera p {
+  margin-right: 1rem;
+}
+
+table,
+mat-paginator {
+  width: 60%;
 }

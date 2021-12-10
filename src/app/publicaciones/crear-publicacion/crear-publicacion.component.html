@@ -6,52 +6,71 @@
   </div>
 
   <div class="cabecera">
-    <p><strong>Materia:</strong> {{ materia.nombre }}</p>
-    <p><strong>Grupo:</strong> {{ materia.nombreGrupo }}</p>
+    <p *ngIf="materia"><strong>Materia:</strong> {{ materia.nombre }}</p>
+    <p *ngIf="materia"><strong>Grupo:</strong> {{ materia.nombreGrupo }}</p>
+    <p *ngIf="periodo"><strong>Periodo:</strong> {{ periodo.nombre }}</p>
+    <p *ngIf="!periodo">
+      <strong>Periodo:</strong> Por el momento no hay ningún periodo activo, por
+      favor comunicarse con un administrador.
+    </p>
   </div>
 
   <hr />
+  <form [formGroup]="form">
+    <div class="publicacion">
+      <div class="datos-publicacion">
+        <mat-form-field appearance="outline" style="width: 60%">
+          <mat-label>Nombre o titulo*</mat-label>
+          <input type="text" matInput formControlName="nombre" />
+          <mat-error>Debe agregar un nombre o titulo.</mat-error>
+        </mat-form-field>
 
-  <div class="publicacion">
-    <div class="datos-publicacion">
-      <mat-form-field appearance="outline" style="width: 60%">
-        <mat-label>Nombre o titulo</mat-label>
-        <input type="text" matInput />
-      </mat-form-field>
+        <mat-form-field appearance="outline" style="width: 30%">
+          <mat-label>Fecha Entrega</mat-label>
+          <!-- se asocia con #picker -->
+          <input
+            matInput
+            [matDatepicker]="pickerEntrega"
+            formControlName="fechaEntrega"
+          />
+          <!-- se asocia con #picker -->
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerEntrega"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerEntrega></mat-datepicker>
+        </mat-form-field>
 
-      <mat-form-field appearance="outline" style="width: 30%">
-        <mat-label>Fecha Entrega</mat-label>
-        <!-- se asocia con #picker -->
-        <input matInput [matDatepicker]="pickerEntrega" />
-        <!-- se asocia con #picker -->
-        <mat-datepicker-toggle
-          matSuffix
-          [for]="pickerEntrega"
-        ></mat-datepicker-toggle>
-        <mat-datepicker #pickerEntrega></mat-datepicker>
-      </mat-form-field>
+        <app-input-markdown
+          (changeMarkdown)="cambioMarkdown($event)"
+        ></app-input-markdown>
+      </div>
 
-      <app-input-markdown
-        (change)="cambioMarkdown($event)"
-      ></app-input-markdown>
+      <div class="dropzone">
+        <ngx-dropzone (change)="onSelect($event)" [maxFileSize]="10024">
+          <ngx-dropzone-label>Arrastrar archivos aquí</ngx-dropzone-label>
+          <ngx-dropzone-preview
+            *ngFor="let f of files"
+            [removable]="true"
+            (removed)="onRemove(f)"
+          >
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+      </div>
     </div>
+    <div class="buttons-publicacion">
+      <button
+        mat-flat-button
+        (click)="crearPublicacion()"
+        [disabled]="form.invalid"
+      >
+        Publicar
+      </button>
 
-    <div class="dropzone">
-      <ngx-dropzone (change)="onSelect($event)">
-        <ngx-dropzone-label>Arrastrar archivos aquí</ngx-dropzone-label>
-        <ngx-dropzone-preview
-          *ngFor="let f of files"
-          [removable]="true"
-          (removed)="onRemove(f)"
-        >
-          <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
-        </ngx-dropzone-preview>
-      </ngx-dropzone>
+      <a mat-stroked-button routerLink="/publicaciones/{{ materia.idMateria }}"
+        >Cancelar</a
+      >
     </div>
-  </div>
-  <div class="buttons-publicacion">
-    <button mat-flat-button>Publicar</button>
-
-    <a mat-stroked-button routerLink="/landingPage-docente">Cancelar</a>
-  </div>
+  </form>
 </div>

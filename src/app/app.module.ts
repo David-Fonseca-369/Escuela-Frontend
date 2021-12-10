@@ -77,6 +77,7 @@ import { IndicePublicacionesComponent } from './publicaciones/indice-publicacion
 import { CrearPublicacionComponent } from './publicaciones/crear-publicacion/crear-publicacion.component';
 import { InputMarkdownComponent } from './helpers/input-markdown/input-markdown.component';
 import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
+import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo/publicacion-dialogo.component';
 
 @NgModule({
   declarations: [
@@ -131,6 +132,7 @@ import { ReporteCalificacionesComponent } from './calificaciones/reporte-calific
     CrearPublicacionComponent,
     InputMarkdownComponent,
     ReporteCalificacionesComponent,
+    PublicacionDialogoComponent,
   ],
   imports: [
     BrowserModule,

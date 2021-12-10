@@ -1,0 +1,34 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<div class="dialog">
+  <div *ngIf="publicacion" class="content">
+    <div class="title">
+      <h1 style="font-size: large">Detalles de la publicación</h1>
+    </div>
+
+    <div>
+      <p><strong>Nombre de la publicación: </strong>{{ publicacion.nombre }}</p>
+      <p *ngIf="publicacion.fechaEntrega">
+        <strong>Fecha de entrega: </strong>
+        {{ publicacion.fechaEntrega | date: "dd/MM/yyyy" }}
+      </p>
+    </div>
+
+    <div *ngIf="publicacion.descripcion">
+      <p><strong> Descripción:</strong></p>
+      <markdown [data]="publicacion.descripcion"></markdown>
+    </div>
+    <div *ngIf="publicacion.archivos.length > 0">
+      <p><strong> Archivos Adjuntos:</strong></p>
+      <mat-chip-list>
+        <mat-chip *ngFor="let archivo of publicacion.archivos">
+          <a href="{{ archivo.rutaArchivo }}" target="_blank">
+            {{ archivo.nombre }}</a
+          >
+        </mat-chip>
+      </mat-chip-list>
+    </div>
+  </div>
+</div>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="warn">Cerrar</button>
+</mat-dialog-actions>
