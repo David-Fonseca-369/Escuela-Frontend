@@ -34,6 +34,6 @@ export interface asistenciaFechaDTO {
 
 export interface asistenciasTablaDTO {
   fechas: Date[];
-  asistencias: asistenciasDTO;
-  totalAsistencias: number;
+  asistencias: asistenciasDTO[];
+  totalAsistenciasFila: number;
 }

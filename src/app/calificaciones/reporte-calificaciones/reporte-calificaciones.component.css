@@ -12,3 +12,27 @@ mat-form-field {
 .cabecera {
   display: flex;
 }
+
+.tabla-calificaciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.tabla-calificaciones table {
+  width: 80%;
+  margin: 3rem 0 1rem;
+}
+
+.tabla-calificaciones table th {
+  background: black;
+  color: white;
+  font-weight: 500;
+}
+
+.tabla-calificaciones table,
+th,
+td {
+  border: 1px solid #b6b6b6;
+  border-collapse: collapse;
+}

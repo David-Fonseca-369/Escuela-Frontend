@@ -11,7 +11,9 @@ export class EvaluacionesService {
 
   private apiURL = environment.apiURL + 'evaluaciones';
 
-  public obtenerEvaluaciones() {
-    return this.http.get<evaluacionDTO[]>(this.apiURL);
+  public obtenerEvaluaciones(idMateria: number, idPeriodo: number) {
+    return this.http.get<evaluacionDTO>(
+      `${this.apiURL}/${idMateria}/${idPeriodo}`
+    );
   }
 }

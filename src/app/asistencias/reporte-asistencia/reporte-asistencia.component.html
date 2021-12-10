@@ -71,62 +71,81 @@
         </div>
       </div>
     </div>
-    <div class="tabla-asistencias" *ngIf="asistenciasTabla">
-      <table border="1">
-        <tr>
-          <th align="center">Nombre</th>
-          <th align="center">Matricula</th>
-          <th *ngFor="let fecha of asistenciasTabla.fechas; let index = index">
-            {{ index + 1 }}
-          </th>
-          <th>Resumen</th>
-        </tr>
-        <tr *ngFor="let alumno of asistenciasTabla.asistencias">
-          <td align="center">{{ alumno.nombre }}</td>
-          <td align="center">{{ alumno.matricula }}</td>
-          <td *ngFor="let asistencia of alumno.asistencias" align="center">
-            <p
-              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
-              *ngIf="asistencia.asistencia === 1"
+    <ng-container *ngIf="asistenciasTabla">
+      <div
+        class="tabla-asistencias"
+        *ngIf="asistenciasTabla.asistencias.length > 0"
+      >
+        <table border="1" *ngIf="asistenciasTabla.asistencias.length > 0">
+          <tr>
+            <th align="center">Nombre</th>
+            <th align="center">Matricula</th>
+            <th
+              *ngFor="let fecha of asistenciasTabla.fechas; let index = index"
             >
-              <mat-icon>check</mat-icon>
-            </p>
-            <p
-              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
-              *ngIf="asistencia.asistencia === 2"
-            >
-              <mat-icon>schedule</mat-icon>
-            </p>
-            <p
-              *ngIf="asistencia.asistencia === 3"
-              matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
-            >
-              <mat-icon>close</mat-icon>
-            </p>
-          </td>
+              {{ index + 1 }}
+            </th>
+            <th>Resumen</th>
+          </tr>
+          <tr *ngFor="let alumno of asistenciasTabla.asistencias">
+            <td align="center">{{ alumno.nombre }}</td>
+            <td align="center">{{ alumno.matricula }}</td>
+            <td *ngFor="let asistencia of alumno.asistencias" align="center">
+              <p
+                matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+                *ngIf="asistencia.asistencia === 1"
+              >
+                <mat-icon>check</mat-icon>
+              </p>
+              <p
+                matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+                *ngIf="asistencia.asistencia === 2"
+              >
+                <mat-icon>schedule</mat-icon>
+              </p>
+              <p
+                *ngIf="asistencia.asistencia === 3"
+                matTooltip="{{ asistencia.fecha | date: 'dd/MM/yy' }}"
+              >
+                <mat-icon>close</mat-icon>
+              </p>
+            </td>
 
-          <td align="center">
-            A = {{ alumno.asistenciasTotal }}, R = {{ alumno.retardosTotal }}, F
-            = {{ alumno.faltasTotal }}
-          </td>
-        </tr>
-      </table>
+            <td align="center">
+              A = {{ alumno.asistenciasTotal }}, R = {{ alumno.retardosTotal }},
+              F = {{ alumno.faltasTotal }}
+            </td>
+          </tr>
+        </table>
 
-      <div class="referencias">
-        <div class="icon">
-          <mat-icon>check</mat-icon>
-          <p>Asistencia</p>
+        <div class="referencias">
+          <div class="icon">
+            <mat-icon>check</mat-icon>
+            <p>Asistencia</p>
+          </div>
+
+          <div class="icon">
+            <mat-icon>schedule</mat-icon>
+            <p>Retardo</p>
+          </div>
+          <div class="icon">
+            <mat-icon>close</mat-icon>
+            <p>Falta</p>
+          </div>
         </div>
-
-        <div class="icon">
-          <mat-icon>schedule</mat-icon>
-          <p>Retardo</p>
-        </div>
-        <div class="icon">
-          <mat-icon>close</mat-icon>
-          <p>Falta</p>
+        <div class="buttonPDF">
+          <button mat-button (click)="generatePDF()">Generar PDF</button>
         </div>
       </div>
-    </div>
+    </ng-container>
+
+    <ng-container *ngIf="asistenciasTabla">
+      <div *ngIf="asistenciasTabla.asistencias.length <= 0">
+        <p style="color: red">
+          No se encontró ninguna asistencia registrada en este periodo. Por
+          favor, intenta nuevamente con otro rango de fechas.
+        </p>
+      </div>
+    </ng-container>
   </form>
 </div>

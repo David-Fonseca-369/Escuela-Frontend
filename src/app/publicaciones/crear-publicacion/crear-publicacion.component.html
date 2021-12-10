@@ -47,7 +47,7 @@
       </div>
 
       <div class="dropzone">
-        <ngx-dropzone (change)="onSelect($event)" [maxFileSize]="10024">
+        <ngx-dropzone (change)="onSelect($event)" [maxFileSize]="5242880">
           <ngx-dropzone-label>Arrastrar archivos aquí</ngx-dropzone-label>
           <ngx-dropzone-preview
             *ngFor="let f of files"

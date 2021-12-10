@@ -32,17 +32,16 @@ export class CalificacionCrearComponent implements OnInit {
   materias: materiaDTO[];
   errores: string[] = [];
   periodo: periodoDTO;
-  evaluaciones: evaluacionDTO[];
+  evaluacion: evaluacionDTO;
 
   alumnosCalificacion: alumnoCalificacionDTO[];
 
   datosCabecera: calificacionCabecera;
 
   ngOnInit(): void {
+    this.cargarFormulario();
     this.obtenerMateriasAsignadas();
     this.obtenerPeriodoActual();
-    this.obtenerEvaluaciones();
-    this.cargarFormulario();
   }
 
   obtenerMateriasAsignadas() {
@@ -81,16 +80,21 @@ export class CalificacionCrearComponent implements OnInit {
 
   obtenerEvaluaciones() {
     this.isLoading = true;
-    this.evaluacionesService.obtenerEvaluaciones().subscribe(
-      (evaluaciones) => {
-        this.evaluaciones = evaluaciones;
-        this.isLoading = false;
-      },
-      (error) => {
-        this.errores = parsearErroresAPI(error);
-        this.isLoading = false;
-      }
-    );
+    this.evaluacionesService
+      .obtenerEvaluaciones(
+        this.form.value.materia.idMateria,
+        this.periodo.idPeriodo
+      )
+      .subscribe(
+        (evaluaciones) => {
+          this.evaluacion = evaluaciones;
+          this.isLoading = false;
+        },
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
+      );
   }
 
   cargarFormulario() {
@@ -132,6 +136,7 @@ export class CalificacionCrearComponent implements OnInit {
   }
 
   limpiarDatos() {
+    this.obtenerEvaluaciones();
     this.alumnosCalificacion = undefined;
   }
 }

@@ -1,48 +1,98 @@
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
 <div>
   <div class="title">
     <h1>Calificaciones</h1>
   </div>
 
-  <div class="cabecera">
-    <mat-form-field appearance="outline">
-      <mat-label>Materia*</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let materia of materias" [value]="materia">
-          {{ materia.nombre }}
-        </mat-option>
-      </mat-select>
-      <mat-error>Debe seleccionar una materia.</mat-error>
-    </mat-form-field>
+  <div>
+    <form [formGroup]="form">
+      <div class="cabecera">
+        <mat-form-field appearance="outline">
+          <mat-label>Materia*</mat-label>
+          <mat-select formControlName="idMateria">
+            <mat-option
+              *ngFor="let materia of materias"
+              [value]="materia.idMateria"
+            >
+              {{ materia.nombre }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar una materia.</mat-error>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline" class="campo">
-      <mat-label>Periodo Actual</mat-label>
-      <input
-        matInput
-        [disabled]="true"
-        *ngIf="periodo"
-        value="{{ periodo.nombre }}"
-      />
-      <input
-        matInput
-        [disabled]="true"
-        *ngIf="!periodo"
-        value="No hay ningún periodo activo."
-      />
-      <mat-icon matSuffix>query_builder</mat-icon>
-    </mat-form-field>
+        <mat-form-field appearance="outline" class="campo">
+          <mat-label>Periodo Actual</mat-label>
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="periodo"
+            value="{{ periodo.nombre }}"
+          />
+          <input
+            matInput
+            [disabled]="true"
+            *ngIf="!periodo"
+            value="No hay ningún periodo activo."
+          />
+          <mat-icon matSuffix>query_builder</mat-icon>
+        </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Tipo</mat-label>
-      <mat-select>
-        <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
-          {{ tipo.nombre }}
-        </mat-option>
-      </mat-select>
-      <!-- <mat-error>Debe seleccionar una materia.</mat-error> -->
-    </mat-form-field>
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo</mat-label>
+          <mat-select>
+            <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
+              {{ tipo.nombre }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error>Debe seleccionar una materia.</mat-error> -->
+        </mat-form-field>
 
-    <div class="nuevo">
-      <button mat-button>Mostrar</button>
-    </div>
+        <div class="nuevo">
+          <button mat-button (click)="prueba()">Mostrar</button>
+        </div>
+      </div>
+    </form>
   </div>
 </div>
+
+<ng-container *ngIf="calificaciones">
+  <div class="tabla-calificaciones" *ngIf="calificaciones.length > 0">
+    <table border="1">
+      <tr>
+        <th align="center">Nombre</th>
+        <th align="center">Matricula</th>
+        <th align="center">Primer Parcial</th>
+        <th align="center">Segundo Parcial</th>
+        <th align="center">Tercer Parcial</th>
+        <th align="center">Promedio</th>
+      </tr>
+
+      <tr *ngFor="let calificacion of calificaciones">
+        <td align="start">{{ calificacion.nombre }}</td>
+        <td align="center">{{ calificacion.matricula }}</td>
+        <td align="center">{{ calificacion.primerParcial }}</td>
+        <td align="center">{{ calificacion.segundoParcial }}</td>
+        <td align="center">{{ calificacion.tercerParcial }}</td>
+        <td align="center">
+          {{
+            (
+              (calificacion.primerParcial +
+                calificacion.segundoParcial +
+                calificacion.tercerParcial) /
+              3
+            ).toFixed(2)
+          }}
+        </td>
+      </tr>
+    </table>
+
+    <div class="buttonPDF">
+      <button mat-button (click)="generatePDF()">Generar PDF</button>
+    </div>
+  </div>
+
+  <div>
+    <p>-----------------------------------</p>
+  </div>
+</ng-container>

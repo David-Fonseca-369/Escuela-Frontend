@@ -35,16 +35,10 @@
           <mat-icon matSuffix>query_builder</mat-icon>
         </mat-form-field>
 
-        <mat-form-field appearance="outline">
+        <mat-form-field appearance="outline" *ngIf="evaluacion">
           <mat-label>Evaluación*</mat-label>
-          <mat-select
-            formControlName="idEvaluacion"
-            (selectionChange)="limpiarDatos()"
-          >
-            <mat-option
-              *ngFor="let evaluacion of evaluaciones"
-              [value]="evaluacion.idEvaluacion"
-            >
+          <mat-select formControlName="idEvaluacion">
+            <mat-option [value]="evaluacion.idEvaluacion">
               {{ evaluacion.nombre }}
             </mat-option>
           </mat-select>

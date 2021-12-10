@@ -12,7 +12,7 @@ mat-form-field {
   justify-content: start;
 }
 
-.filters button {
+button {
   background: #4f707b;
   color: white;
   margin-right: 1rem;
@@ -62,4 +62,13 @@ td {
   margin-top: 0.8rem;
   display: flex;
   margin-right: 2px;
+}
+
+.buttonPDF {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonPDF button {
+  width: 20%;
 }

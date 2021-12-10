@@ -1,3 +1,6 @@
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+
 import { Component, OnInit } from '@angular/core';
 import {
   FormBuilder,
@@ -31,11 +34,16 @@ export class ReporteAsistenciaComponent implements OnInit {
   form: FormGroup;
 
   materias: materiaDTO[];
+
   isLoading = false;
+
   errores: string[] = [];
   periodo: periodoDTO;
 
   asistenciasTabla: asistenciasTablaDTO;
+
+  header = [['Nombre del Alumno', 'Asistencias', 'Retardos', 'Faltas']];
+  contenidoPDF: any[] = [];
 
   ngOnInit(): void {
     this.obtenerMateriasAsignadas();
@@ -115,5 +123,71 @@ export class ReporteAsistenciaComponent implements OnInit {
 
   limpiarDatos() {
     this.asistenciasTabla = undefined;
+  }
+
+  generatePDF() {
+    this.convertirArreglo();
+
+    //Calcular fechas
+    let desde: Date = this.range.value.desde;
+    let hasta: Date = this.range.value.hasta;
+
+    let strDesde = `${desde.getDate()}-${
+      desde.getMonth() + 1
+    }-${desde.getFullYear()}`;
+    let strHasta = `${hasta.getDate()}-${
+      hasta.getMonth() + 1
+    }-${hasta.getFullYear()}`;
+
+    var pdf = new jsPDF();
+
+    pdf.setFontSize(18);
+    pdf.text('Asistencias', 11, 8);
+    pdf.setFontSize(10);
+    pdf.text(`Materia: ${this.form.value.materia.nombre}`, 50, 8);
+    pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 75, 8);
+    pdf.text(`Periodo: ${strDesde} al ${strHasta}`, 100, 8);
+    pdf.text(
+      `Asistencias registradas: ${this.asistenciasTabla.totalAsistenciasFila}`,
+      160,
+      8
+    );
+    pdf.setFontSize(12);
+    pdf.setTextColor(99);
+
+    (pdf as any).autoTable({
+      headStyles: { halign: 'left', fillColor: [0, 0, 0] },
+      head: this.header,
+      body: this.contenidoPDF,
+
+      theme: 'grid',
+      didDrawCell: (data) => {
+        console.log(data.column.index);
+      },
+    });
+
+    // Open PDF document in browser's new tab
+    pdf.output('dataurlnewwindow');
+
+    let date = new Date();
+    let dia = date.getDate();
+    let mes = date.getMonth() + 1;
+    let anio = date.getFullYear();
+
+    // Download PDF doc
+    pdf.save(`Asistencias_${dia}-${mes}-${anio}.pdf`);
+  }
+
+  convertirArreglo() {
+    this.asistenciasTabla.asistencias.forEach((element) => {
+      //'Nombre del Alumno', 'Asistencias', 'Retardos', 'Faltas'
+      let arrTemp: any[] = [];
+      arrTemp.push(element.nombre);
+      arrTemp.push(element.asistenciasTotal);
+      arrTemp.push(element.retardosTotal);
+      arrTemp.push(element.faltasTotal);
+
+      this.contenidoPDF.push(arrTemp);
+    });
   }
 }
