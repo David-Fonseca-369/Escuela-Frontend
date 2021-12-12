@@ -48,17 +48,21 @@
         <button
           (click)="obtenerAlumnosCalificacion()"
           mat-flat-button
-          [disabled]="form.invalid || !periodo"
+          [disabled]="form.invalid || !periodo || !evaluacion"
         >
           Mostrar lista
         </button>
       </form>
     </div>
 
+    <p *ngIf="registrosCompletos" style="color: green; text-align: start">
+      Ya has registrado todas las calificaciones de este periodo escolar.
+    </p>
+
     <app-lista-alumnos-calificaciones
       [alumnosCalificacion]="alumnosCalificacion"
       [calificacionCabecera]="datosCabecera"
-      *ngIf="alumnosCalificacion"
+      *ngIf="alumnosCalificacion && !registrosCompletos"
     ></app-lista-alumnos-calificaciones>
   </div>
 </div>

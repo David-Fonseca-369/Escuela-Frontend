@@ -44,5 +44,10 @@ export class IndicePeriodosComponent implements OnInit {
   actualizarPaginacion(datos: PageEvent) {
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
+
+    this.cargarRegistrosPaginacion(
+      this.paginaActual,
+      this.cantidadRegistrosAMostrar
+    );
   }
 }

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { alumnoAsistenciaDTO } from 'src/app/alumnos/alumno';
 import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
+import Swal from 'sweetalert2';
 import { asistenciaCabecera, asistenciasCreacionDTO } from '../asistencia';
 import { AsistenciasService } from '../asistencias.service';
 
@@ -60,5 +61,22 @@ export class ListaAlumnosComponent implements OnInit {
         this.errores = parsearErroresAPI(error);
       }
     );
+  }
+
+  guardar() {
+    Swal.fire({
+      title: `Guardar asistencias`,
+      text: '¿Realmente desea guardar las asistencias?, verifique los datos, pues más tarde no se podrán editar o eliminar.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28A745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.guardarAsistencias;
+      }
+    });
   }
 }

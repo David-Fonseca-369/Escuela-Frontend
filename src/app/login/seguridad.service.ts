@@ -3,6 +3,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import Swal from 'sweetalert2';
 import { loginUsuarioDTO, respuestaAutenticacion } from './seguridad';
 
 @Injectable({
@@ -55,6 +56,23 @@ export class SeguridadService {
     localStorage.removeItem(this.llaveToken);
     localStorage.removeItem(this.llaveExpiracion);
     this.router.navigate(['']);
+  }
+
+  cerrarSesion() {
+    Swal.fire({
+      title: `Cerrar Sesión`,
+      text: '¿Estás seguro de que quieres cerrar la sesión?',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28A745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.logout();
+      }
+    });
   }
 
   public estaLogueado(): boolean {

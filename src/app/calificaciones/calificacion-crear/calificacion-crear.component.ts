@@ -37,6 +37,7 @@ export class CalificacionCrearComponent implements OnInit {
   alumnosCalificacion: alumnoCalificacionDTO[];
 
   datosCabecera: calificacionCabecera;
+  registrosCompletos = false;
 
   ngOnInit(): void {
     this.cargarFormulario();
@@ -86,9 +87,13 @@ export class CalificacionCrearComponent implements OnInit {
         this.periodo.idPeriodo
       )
       .subscribe(
-        (evaluaciones) => {
-          this.evaluacion = evaluaciones;
+        (evaluacion) => {
+          this.evaluacion = evaluacion;
           this.isLoading = false;
+
+          if (evaluacion === null) {
+            this.registrosCompletos = true;
+          }
         },
         (error) => {
           this.errores = parsearErroresAPI(error);
@@ -138,5 +143,6 @@ export class CalificacionCrearComponent implements OnInit {
   limpiarDatos() {
     this.obtenerEvaluaciones();
     this.alumnosCalificacion = undefined;
+    this.registrosCompletos = false;
   }
 }

@@ -1,0 +1,24 @@
+.carousel-imagen {
+  margin: 3rem 0;
+  display: flex;
+}
+
+.carousel-imagen button {
+  margin: 3rem 1rem;
+}
+
+button {
+  width: 10rem;
+  background: #4f707b;
+  color: white;
+  margin-top: 1rem;
+}
+
+.carousel-imagen button[disabled] {
+  background: #c4cfd3;
+}
+
+table {
+  width: 60%;
+  margin: 1rem 0;
+}

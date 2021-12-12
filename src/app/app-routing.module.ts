@@ -9,8 +9,10 @@ import { ReporteAsistenciaComponent } from './asistencias/reporte-asistencia/rep
 import { CalificacionCrearComponent } from './calificaciones/calificacion-crear/calificacion-crear.component';
 import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
+import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuracion-pagina.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { EsAdminGuard } from './es-admin.guard';
+import { EsDocenteGuard } from './es-docente.guard';
 import { CrearGrupoComponent } from './grupos/crear-grupo/crear-grupo.component';
 import { EditarGrupoComponent } from './grupos/editar-grupo/editar-grupo.component';
 import { IndiceGruposComponent } from './grupos/indice-grupos/indice-grupos.component';
@@ -51,7 +53,10 @@ const routes: Routes = [
   {
     path: 'landingPage-docente',
     component: LandingPageDocenteComponent,
+    canActivate: [EsDocenteGuard],
   },
+
+  //Rutas libres
 
   { path: 'invitado', component: InvitadoComponent },
   { path: 'contacto', component: ContactoComponent },
@@ -128,7 +133,6 @@ const routes: Routes = [
     component: MateriasDocentesComponent,
     canActivate: [EsAdminGuard],
   },
-  //
 
   {
     path: 'administradores',
@@ -162,17 +166,59 @@ const routes: Routes = [
     canActivate: [EsAdminGuard],
   },
 
+  {
+    path: 'configuracion-pagina',
+    component: ConfiguracionPaginaComponent,
+    canActivate: [EsAdminGuard],
+  },
+
+  //
+
   //Menu docente
-  { path: 'materias-docente', component: IndiceMateriasDocenteComponent },
-  { path: 'alumnos-materia/:id', component: IndiceAlumnosDocenteComponent },
-  { path: 'asistencias/crear', component: AsistenciaCrearComponent },
-  { path: 'asistencias/reporte', component: ReporteAsistenciaComponent },
+  {
+    path: 'materias-docente',
+    component: IndiceMateriasDocenteComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'alumnos-materia/:id',
+    component: IndiceAlumnosDocenteComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'asistencias/crear',
+    component: AsistenciaCrearComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'asistencias/reporte',
+    component: ReporteAsistenciaComponent,
+    canActivate: [EsDocenteGuard],
+  },
 
-  { path: 'calificaciones/crear', component: CalificacionCrearComponent },
-  { path: 'calificaciones/reporte', component: ReporteCalificacionesComponent },
+  {
+    path: 'calificaciones/crear',
+    component: CalificacionCrearComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'calificaciones/reporte',
+    component: ReporteCalificacionesComponent,
+    canActivate: [EsDocenteGuard],
+  },
 
-  { path: 'publicaciones/:id', component: IndicePublicacionesComponent },
-  { path: 'publicaciones/crear/:id', component: CrearPublicacionComponent },
+  {
+    path: 'publicaciones/:id',
+    component: IndicePublicacionesComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'publicaciones/crear/:id',
+    component: CrearPublicacionComponent,
+    canActivate: [EsDocenteGuard],
+  },
+
+  //
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

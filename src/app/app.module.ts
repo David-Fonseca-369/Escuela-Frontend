@@ -80,6 +80,7 @@ import { CrearPublicacionComponent } from './publicaciones/crear-publicacion/cre
 import { InputMarkdownComponent } from './helpers/input-markdown/input-markdown.component';
 import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo/publicacion-dialogo.component';
+import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuracion-pagina.component';
 
 @NgModule({
   declarations: [
@@ -134,6 +135,7 @@ import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo
     InputMarkdownComponent,
     ReporteCalificacionesComponent,
     PublicacionDialogoComponent,
+    ConfiguracionPaginaComponent,
   ],
   imports: [
     BrowserModule,

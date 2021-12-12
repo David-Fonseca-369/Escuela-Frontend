@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup } from '@angular/forms';
 import { Router } from '@angular/router';
 import { alumnoCalificacionDTO } from 'src/app/alumnos/alumno';
 import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
+import Swal from 'sweetalert2';
 import { calificacionCabecera, calificacionCreacionDTO } from '../calificacion';
 import { CalificacionesService } from '../calificaciones.service';
 
@@ -64,5 +65,22 @@ export class ListaAlumnosCalificacionesComponent implements OnInit {
       },
       (error) => (this.errores = parsearErroresAPI(error))
     );
+  }
+
+  guardar() {
+    Swal.fire({
+      title: `Guardar calificaciones`,
+      text: '¿Realmente desea guardar las calificaciones?, verifique los datos, pues más tarde no se podrán editar o eliminar.',
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#28A745',
+      cancelButtonColor: '#d33',
+      confirmButtonText: 'Confirmar',
+      cancelButtonText: 'Cancelar',
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.guardarCalificaciones();
+      }
+    });
   }
 }

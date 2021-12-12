@@ -88,6 +88,10 @@
         </mat-menu>
 
         <a mat-button routerLink="periodos">Periodos</a>
+
+        <a mat-button routerLink="configuracion-pagina"
+          >Configuración de la Página</a
+        >
       </div>
     </ng-container>
   </app-autorizado>
@@ -136,7 +140,7 @@
 
       <mat-menu #opciones="matMenu">
         <button mat-menu-item>Perfil</button>
-        <button mat-menu-item (click)="seguridadService.logout()">
+        <button mat-menu-item (click)="seguridadService.cerrarSesion()">
           Cerrar Sesión
         </button>
       </mat-menu>

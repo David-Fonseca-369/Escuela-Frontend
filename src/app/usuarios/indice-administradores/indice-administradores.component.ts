@@ -46,6 +46,11 @@ export class IndiceAdministradoresComponent implements OnInit {
   actualizarPaginacion(datos: PageEvent) {
     this.paginaActual = datos.pageIndex + 1;
     this.cantidadRegistrosAMostrar = datos.pageSize;
+
+    this.cargarRegistrosPaginacion(
+      this.paginaActual,
+      this.cantidadRegistrosAMostrar
+    );
   }
 
   activar(usuario: usuarioDTO) {
