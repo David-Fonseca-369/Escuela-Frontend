@@ -27,9 +27,11 @@ import { MarkdownModule } from 'ngx-markdown';
 //modulo dropzone
 import { NgxDropzoneModule } from 'ngx-dropzone';
 
+//Modulo ngx-chart
+import { NgxChartsModule } from '@swimlane/ngx-charts';
+
 import { MenuComponent } from './menu/menu.component';
 import { InvitadoComponent } from './invitado/invitado.component';
-import { ConvocatoriasComponent } from './convocatorias/convocatorias.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { FooterComponent } from './footer/footer.component';
@@ -84,7 +86,6 @@ import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo
     AppComponent,
     MenuComponent,
     InvitadoComponent,
-    ConvocatoriasComponent,
     LandingPageComponent,
     ContactoComponent,
     FooterComponent,
@@ -145,6 +146,7 @@ import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo
     FormsModule,
     SweetAlert2Module,
     NgxDropzoneModule,
+    NgxChartsModule,
     MarkdownModule.forRoot(),
   ],
   providers: [],

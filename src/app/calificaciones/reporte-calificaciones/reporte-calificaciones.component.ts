@@ -1,3 +1,7 @@
+import { jsPDF } from 'jspdf';
+import 'jspdf-autotable';
+import html2canvas from 'html2canvas';
+
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { parsearErroresAPI } from 'src/app/helpers/helpers';
@@ -6,7 +10,7 @@ import { materiaDTO } from 'src/app/materias/materia';
 import { MateriasService } from 'src/app/materias/materias.service';
 import { periodoDTO } from 'src/app/periodos/periodo';
 import { PeriodosService } from 'src/app/periodos/periodos.service';
-import { calificacionDTO } from '../calificacion';
+import { calificacionDTO, calificacionesMateriaDTO } from '../calificacion';
 import { CalificacionesService } from '../calificaciones.service';
 
 @Component({
@@ -29,24 +33,71 @@ export class ReporteCalificacionesComponent implements OnInit {
 
   calificaciones: calificacionDTO[];
 
+  calificacionesMateria: calificacionesMateriaDTO[];
+
   form: FormGroup;
 
   errrores: string[] = [];
+  ///PDF
+  header = [
+    [
+      'Nombre del Alumno',
+      'Matricula',
+      'Primer Parcial',
+      'Segundo Parcial',
+      'Tercer Parcial',
+      'Promedio',
+    ],
+  ];
+
+  contenidoPDF: any[] = [];
+  ///
+
+  tipoSelected: number = 1;
 
   tipos = [
     { id: 1, nombre: 'Tabla' },
     { id: 2, nombre: 'Grafica' },
   ];
 
+  evaluaciones = [
+    { id: 1, nombre: 'Primera Evaluación' },
+    { id: 2, nombre: 'Segunda Evaluación' },
+    { id: 3, nombre: 'Tercera Evaluación' },
+  ];
+
+  view = [10, 10];
+
+  //Options
+  showXAxis = true;
+  showYAxis = true;
+  gradient = false;
+  showLegend = true;
+  showXAxisLabel = true;
+  xAxisLabel = 'Calificaciones';
+  showYAxisLabel = true;
+  yAxisLabel = 'Alumnos';
+
+  colorScheme = {
+    domain: ['#AA0000', '#D47800', '#FFCD42', '#FFDD81', '#55AF83', '#387457'],
+  };
+
+  //
+
   ngOnInit(): void {
     this.obtenerMateriasAsignadas();
     this.obtenerPeriodoActual();
     this.cargarFormulario();
+
+    this.form.get('idTipo').setValue(1);
+    this.form.get('idEvaluacion').setValue(1);
   }
 
   cargarFormulario() {
     this.form = this.formBuilder.group({
-      idMateria: ['', { validators: [Validators.required] }],
+      materia: ['', { validators: [Validators.required] }],
+      idTipo: '',
+      idEvaluacion: '',
     });
   }
 
@@ -86,18 +137,148 @@ export class ReporteCalificacionesComponent implements OnInit {
 
   obtenerCalificaciones() {
     this.calificacionesService
-      .calificaciones(this.form.value.idMateria, this.periodo.idPeriodo)
+      .calificaciones(this.form.value.materia.idMateria, this.periodo.idPeriodo)
       .subscribe(
         (calificaciones) => {
-          this.calificaciones = calificaciones;
-
-          console.log(this.calificaciones);
+          if (calificaciones) {
+            this.calificaciones = calificaciones;
+          } else {
+            this.calificaciones = [];
+          }
         },
         (error) => (this.errores = parsearErroresAPI(error))
       );
   }
 
   prueba() {
-    this.obtenerCalificaciones();
+    console.log(this.form.value.idTipo);
+  }
+
+  onSelect(event: any) {
+    console.log(event);
+  }
+
+  generatePDF() {
+    this.convertirArreglo();
+
+    var pdf = new jsPDF();
+
+    pdf.setFontSize(18);
+    pdf.text('Calificaciones', 11, 8);
+    pdf.setFontSize(10);
+    pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
+    pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 95, 8);
+    pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
+    pdf.setFontSize(12);
+    pdf.setTextColor(99);
+
+    (pdf as any).autoTable({
+      headStyles: { halign: 'left', fillColor: [0, 0, 0] },
+      head: this.header,
+      body: this.contenidoPDF,
+
+      theme: 'grid',
+      didDrawCell: (data) => {
+        console.log(data.column.index);
+      },
+    });
+
+    // Open PDF document in browser's new tab
+    pdf.output('dataurlnewwindow');
+
+    let date = new Date();
+    let dia = date.getDate();
+    let mes = date.getMonth() + 1;
+    let anio = date.getFullYear();
+
+    // Download PDF doc
+    pdf.save(
+      `Calificaciones_${this.form.value.materia.nombre}_${dia}-${mes}-${anio}.pdf`
+    );
+  }
+
+  convertirArreglo() {
+    this.calificaciones.forEach((element) => {
+      //'Nombre del Alumno', 'Asistencias', 'Retardos', 'Faltas'
+      let arrTemp: any[] = [];
+      let sum: number =
+        element.primerParcial + element.segundoParcial + element.tercerParcial;
+      let promedio: number = sum / 3;
+
+      arrTemp.push(element.nombre);
+      arrTemp.push(element.matricula);
+      arrTemp.push(element.primerParcial);
+      arrTemp.push(element.segundoParcial);
+      arrTemp.push(element.tercerParcial);
+      arrTemp.push(promedio.toFixed(2));
+
+      this.contenidoPDF.push(arrTemp);
+    });
+  }
+
+  limpiarDatos() {
+    this.calificaciones = undefined;
+    this.calificacionesMateria = undefined;
+  }
+
+  calcularCalificacionesEvaluacion() {
+    this.calificacionesService
+      .calificacionesEvaluacion(
+        this.form.value.materia.idMateria,
+        this.periodo.idPeriodo,
+        this.form.value.idEvaluacion
+      )
+      .subscribe(
+        (calificacionesMateria) => {
+          if (calificacionesMateria) {
+            Object.assign(calificacionesMateria);
+            this.calificacionesMateria = calificacionesMateria;
+          } else {
+            this.calificacionesMateria = [];
+          }
+        },
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+        }
+      );
+  }
+
+  downloadGrafica() {
+    // Extraemos el
+    const DATA: any = document.getElementById('htmlData'); //tomtamos todo lo que esta en el htmldata
+    const doc = new jsPDF('p', 'pt', 'a4'); //configuración del pdf parametros = orientacion |unidades | formato
+
+    const options = {
+      background: 'white', //color fondo
+      scale: 3, //escala
+    };
+    html2canvas(DATA, options)
+      .then((canvas) => {
+        const img = canvas.toDataURL('image/PNG'); //crear una imagen en png
+
+        // Add image Canvas to PDF
+        const bufferX = 30;
+        const bufferY = 30;
+        const imgProps = (doc as any).getImageProperties(img);
+        const pdfWidth = doc.internal.pageSize.getWidth() - 1 * bufferX; //dejamos margen de 30 pt
+        const pdfHeight = (imgProps.height * pdfWidth) / imgProps.width;
+
+        doc.addImage(
+          img,
+          'PNG',
+          bufferX,
+          bufferY,
+          pdfWidth,
+          pdfHeight,
+          undefined,
+          'FAST' //comresión rápida
+        );
+        return doc;
+      })
+      .then((docResult) => {
+        docResult.save(
+          `${new Date().toISOString().slice(0, 10)}_Calificaciones.pdf`
+        ); //nombre del pdf
+      });
   }
 }

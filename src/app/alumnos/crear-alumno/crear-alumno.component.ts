@@ -52,9 +52,18 @@ export class CrearAlumnoComponent implements OnInit {
       ],
       matricula: [
         '',
-        { validators: [Validators.required, Validators.maxLength(20)] },
+        { validators: [Validators.required, Validators.maxLength(50)] },
       ],
-      correo: ['', { validators: [Validators.required, Validators.email] }],
+      correo: [
+        '',
+        {
+          validators: [
+            Validators.required,
+            Validators.email,
+            Validators.maxLength(50),
+          ],
+        },
+      ],
       telefono: '',
       fechaNacimiento: ['', { validators: [Validators.required] }],
       genero: ['', { validators: [Validators.required] }],

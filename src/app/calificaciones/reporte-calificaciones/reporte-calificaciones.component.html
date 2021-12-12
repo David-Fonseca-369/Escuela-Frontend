@@ -10,11 +10,11 @@
       <div class="cabecera">
         <mat-form-field appearance="outline">
           <mat-label>Materia*</mat-label>
-          <mat-select formControlName="idMateria">
-            <mat-option
-              *ngFor="let materia of materias"
-              [value]="materia.idMateria"
-            >
+          <mat-select
+            formControlName="materia"
+            (selectionChange)="limpiarDatos()"
+          >
+            <mat-option *ngFor="let materia of materias" [value]="materia">
               {{ materia.nombre }}
             </mat-option>
           </mat-select>
@@ -40,7 +40,10 @@
 
         <mat-form-field appearance="outline">
           <mat-label>Tipo</mat-label>
-          <mat-select>
+          <mat-select
+            formControlName="idTipo"
+            (selectionChange)="limpiarDatos()"
+          >
             <mat-option *ngFor="let tipo of tipos" [value]="tipo.id">
               {{ tipo.nombre }}
             </mat-option>
@@ -48,8 +51,39 @@
           <!-- <mat-error>Debe seleccionar una materia.</mat-error> -->
         </mat-form-field>
 
+        <mat-form-field appearance="outline" *ngIf="form.value.idTipo === 2">
+          <mat-label>Evaluación</mat-label>
+          <mat-select
+            (selectionChange)="limpiarDatos()"
+            formControlName="idEvaluacion"
+          >
+            <mat-option
+              *ngFor="let evaluacion of evaluaciones"
+              [value]="evaluacion.id"
+            >
+              {{ evaluacion.nombre }}
+            </mat-option>
+          </mat-select>
+          <!-- <mat-error>Debe seleccionar una materia.</mat-error> -->
+        </mat-form-field>
+
         <div class="nuevo">
-          <button mat-button (click)="prueba()">Mostrar</button>
+          <button
+            *ngIf="form.value.idTipo === 1"
+            mat-button
+            (click)="obtenerCalificaciones()"
+            [disabled]="form.invalid || !periodo"
+          >
+            Mostrar
+          </button>
+          <button
+            *ngIf="form.value.idTipo === 2"
+            mat-button
+            (click)="calcularCalificacionesEvaluacion()"
+            [disabled]="form.invalid || !periodo"
+          >
+            Mostrar
+          </button>
         </div>
       </div>
     </form>
@@ -91,8 +125,46 @@
       <button mat-button (click)="generatePDF()">Generar PDF</button>
     </div>
   </div>
+</ng-container>
 
-  <div>
-    <p>-----------------------------------</p>
+<ng-container *ngIf="calificacionesMateria">
+  <div class="contenido-grafica" *ngIf="calificacionesMateria.length > 0">
+    <div class="grafica" id="htmlData">
+      <ngx-charts-bar-vertical
+        [view]="[700, 600]"
+        [scheme]="colorScheme"
+        [results]="calificacionesMateria"
+        [gradient]="gradient"
+        [xAxis]="showXAxis"
+        [yAxis]="showYAxis"
+        [legend]="showLegend"
+        [showXAxisLabel]="showXAxisLabel"
+        [showYAxisLabel]="showYAxisLabel"
+        [xAxisLabel]="xAxisLabel"
+        [yAxisLabel]="yAxisLabel"
+        (select)="onSelect($event)"
+      >
+      </ngx-charts-bar-vertical>
+    </div>
+
+    <div class="buttonPDF">
+      <button mat-button (click)="downloadGrafica()">Generar PDF</button>
+    </div>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="calificaciones">
+  <div *ngIf="calificaciones.length <= 0">
+    <p style="color: red">
+      Aun no has registrado ninguna calificación en esta materia.
+    </p>
+  </div>
+</ng-container>
+
+<ng-container *ngIf="calificacionesMateria">
+  <div *ngIf="calificacionesMateria.length <= 0">
+    <p style="color: red">
+      Aun no has registrado ninguna calificación en esta materia.
+    </p>
   </div>
 </ng-container>

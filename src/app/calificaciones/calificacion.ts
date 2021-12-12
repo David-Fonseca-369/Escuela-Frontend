@@ -21,7 +21,12 @@ export interface calificacionDetalleCreacionDTO {
 export interface calificacionDTO {
   nombre: string;
   matricula: string;
-  primerParcial: string;
-  segundoParcial: string;
-  tercerParcial: string;
+  primerParcial: number;
+  segundoParcial: number;
+  tercerParcial: number;
+}
+
+export interface calificacionesMateriaDTO {
+  name: string;
+  value: string;
 }

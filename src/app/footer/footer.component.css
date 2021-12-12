@@ -12,22 +12,22 @@
 }
 
 .footer p {
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   font-size: small;
 }
 
 .icons {
-  margin-top: -0.5rem;
   display: flex;
   justify-content: center;
 }
 
 .icons a {
+  margin-top: -0.5rem;
   margin-right: 1rem;
 }
 
 .icons img {
-  width: 20px;
+  width: 18px;
 }
 
 @media screen and (max-width: 600px) {

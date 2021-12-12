@@ -1,12 +1,15 @@
 mat-form-field {
   margin-right: 1rem;
 }
-
-.nuevo button {
+button {
   width: 10rem;
   background: #4f707b;
   color: white;
   margin-top: 1rem;
+}
+
+.nuevo button[disabled] {
+  background: #c4cfd3;
 }
 
 .cabecera {
@@ -21,7 +24,7 @@ mat-form-field {
 
 .tabla-calificaciones table {
   width: 80%;
-  margin: 3rem 0 1rem;
+  margin: 3rem auto;
 }
 
 .tabla-calificaciones table th {
@@ -35,4 +38,29 @@ th,
 td {
   border: 1px solid #b6b6b6;
   border-collapse: collapse;
+}
+
+.grafica {
+  display: flex;
+  justify-content: center;
+}
+
+.buttonPDF {
+  display: flex;
+  justify-content: center;
+}
+.buttonPDF button {
+  width: 20%;
+}
+
+.tabla-calificaciones {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.contenido-grafica {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }

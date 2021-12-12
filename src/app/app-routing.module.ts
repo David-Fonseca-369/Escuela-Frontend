@@ -10,7 +10,6 @@ import { CalificacionCrearComponent } from './calificaciones/calificacion-crear/
 import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
 import { ContactoComponent } from './contacto/contacto.component';
-import { ConvocatoriasComponent } from './convocatorias/convocatorias.component';
 import { EsAdminGuard } from './es-admin.guard';
 import { CrearGrupoComponent } from './grupos/crear-grupo/crear-grupo.component';
 import { EditarGrupoComponent } from './grupos/editar-grupo/editar-grupo.component';
@@ -55,7 +54,6 @@ const routes: Routes = [
   },
 
   { path: 'invitado', component: InvitadoComponent },
-  { path: 'convocatorias', component: ConvocatoriasComponent },
   { path: 'contacto', component: ContactoComponent },
   { path: 'resenia', component: ReseniaComponent },
   { path: 'galeria', component: GaleriaComponent },
