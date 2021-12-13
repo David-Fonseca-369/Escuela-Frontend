@@ -4,7 +4,11 @@ import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
-import { loginUsuarioDTO, respuestaAutenticacion } from './seguridad';
+import {
+  loginAlumnoDTO,
+  loginUsuarioDTO,
+  respuestaAutenticacion,
+} from './seguridad';
 
 @Injectable({
   providedIn: 'root',
@@ -23,6 +27,13 @@ export class SeguridadService {
     return this.httpClient.post<respuestaAutenticacion>(
       this.apiURL + '/usuario',
       loginUsuario
+    );
+  }
+
+  loginAlumno(loginAlumno: loginAlumnoDTO): Observable<respuestaAutenticacion> {
+    return this.httpClient.post<respuestaAutenticacion>(
+      this.apiURL + '/alumno',
+      loginAlumno
     );
   }
 

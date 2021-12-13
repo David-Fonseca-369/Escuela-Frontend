@@ -59,3 +59,18 @@ export function formatearFecha(date: Date): string {
 
   return `${year}-${month}-${day}`;
 }
+
+export function toBase64(file: File) {
+  //una "promise" en javascript es una funcion que va temrinar su ejecución en un futuro
+  //es decir que aunque no va a terminar inmeediatamente nos promete que eventualmente
+  //lo va a terminar y cuando termine se va a ejecutar la función
+  //..."resolve" para que trabaje con el resultado y un error en caso de que lo haya
+
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = (error) => reject(error);
+  });
+}

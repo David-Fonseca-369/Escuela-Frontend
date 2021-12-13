@@ -2,7 +2,7 @@ import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { materiaCreacionDTO, materiaDTO } from './materia';
+import { materiaCreacionDTO, materiaDTO, materiaGrupoDTO } from './materia';
 
 @Injectable({
   providedIn: 'root',
@@ -71,6 +71,10 @@ export class MateriasService {
     return this.http.get<materiaDTO[]>(
       `${this.apiURL}/asignadasTodas/${idDocente}`
     );
+  }
+
+  public obtenerPorGrupo(idGrupo: number) {
+    return this.http.get<materiaGrupoDTO[]>(`${this.apiURL}/grupo/${idGrupo}`);
   }
 
   public obtenerPorId(id: number): Observable<materiaDTO> {

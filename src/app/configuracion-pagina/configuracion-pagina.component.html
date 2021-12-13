@@ -17,7 +17,7 @@
             <ngx-dropzone-label>
               <div>
                 <p style="margin: 0 0.5rem">
-                  Arrastra la imagen aquí o clic para abrir el exporador de
+                  Arrastra la imagen aquí o clic para abrir el explorador de
                   archivos
                 </p>
               </div>
@@ -79,7 +79,7 @@
               <th mat-header-cell *matHeaderCellDef>Imagen</th>
               <td mat-cell *matCellDef="let imagen" align="start">
                 <img
-                  [src]="imagen - ruta"
+                  [src]="imagen.ruta"
                   alt="{{ imagen.nombre }}"
                   style="width: 1rem"
                 />
@@ -101,11 +101,136 @@
           </table>
         </div>
       </mat-tab>
+
       <mat-tab label="Planta Docente">
-        <h1>hola 2</h1>
+        <button
+          type="button"
+          mat-raised-button
+          (click)="fileInput.click()"
+          style="background: transparent; color: black"
+        >
+          Seleccionar Imagen
+        </button>
+
+        <input type="file" hidden #fileInput (change)="cambiarImagen($event)" />
+
+        <div>
+          <div *ngIf="imagenBase64" class="imagen-planta-docente">
+            <img [src]="imagenBase64" />
+            <div>
+              <button
+                mat-button
+                style="margin-right: 1rem"
+                (click)="editarPlantaDocente()"
+              >
+                Guardar Cambios
+              </button>
+              <a mat-stroked-button (click)="limpiarImagenPlantaDocente()"
+                >Cancelar</a
+              >
+            </div>
+          </div>
+          <div *ngIf="urlImagenActual" class="imagen-planta-docente">
+            <img [src]="urlImagenActual" alt="{{ urlImagenActual.ruta }}" />
+          </div>
+        </div>
       </mat-tab>
+
       <mat-tab label="Galería">
-        <h1>hola 3</h1>
+        <div class="carousel-imagen">
+          <div
+            class="custom-dropzone"
+            ngx-dropzone
+            [accept]="'image/*'"
+            (change)="onSelectImageGaleria($event)"
+            [multiple]="false"
+          >
+            <ngx-dropzone-label>
+              <div>
+                <p style="margin: 0 0.5rem">
+                  Arrastra la imagen aquí o clic para abrir el explorador de
+                  archivos
+                </p>
+              </div>
+            </ngx-dropzone-label>
+            <!-- <ngx-dropzone-image-preview ngProjectAs="ngx-dropzone-preview" *ngFor="let i of images" [file]="i" [removable]="true" (removed)="onRemoveImage(i)" > -->
+            <ngx-dropzone-image-preview
+              ngProjectAs="ngx-dropzone-preview"
+              *ngFor="let i of images_galeria"
+              [file]="i"
+              [removable]="true"
+              (removed)="onRemoveImageGaleria(i)"
+              [expandable]="false"
+            >
+              <ngx-dropzone-label
+                >{{ i.name }} ({{ i.type }})</ngx-dropzone-label
+              >
+            </ngx-dropzone-image-preview>
+          </div>
+
+          <div>
+            <button
+              (click)="cargarImagenGaleria()"
+              mat-button
+              [disabled]="images_galeria.length <= 0"
+            >
+              Cargar Imagen
+            </button>
+          </div>
+        </div>
+
+        <div>
+          <p>
+            Se recomienda cargar imágenes con relación aspecto 16:9
+            (Horizontal).
+          </p>
+
+          <h2>Imágenes de la Galería</h2>
+
+          <table
+            #table
+            mat-table
+            [dataSource]="galeria_imagenes"
+            class="mat-elevation-z8 tabla-materias"
+          >
+            <ng-container matColumnDef="opciones">
+              <th mat-header-cell *matHeaderCellDef>Opciones</th>
+              <td mat-cell *matCellDef="let imagen" align="start">
+                <a
+                  mat-icon-button
+                  (click)="eliminarImagenGaleria(imagen.id)"
+                  matTooltip="Eliminar"
+                >
+                  <mat-icon>delete</mat-icon>
+                </a>
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="imagen">
+              <th mat-header-cell *matHeaderCellDef>Imagen</th>
+              <td mat-cell *matCellDef="let imagen" align="start">
+                <img
+                  [src]="imagen.ruta"
+                  alt="{{ imagen.nombre }}"
+                  style="width: 1rem"
+                />
+              </td>
+            </ng-container>
+
+            <ng-container matColumnDef="nombre">
+              <th mat-header-cell *matHeaderCellDef>Nombre</th>
+              <td mat-cell *matCellDef="let imagen" align="start">
+                {{ imagen.nombre }}
+              </td>
+            </ng-container>
+
+            <tr
+              mat-header-row
+              *matHeaderRowDef="columnasAMostrar; sticky: true"
+            ></tr>
+            <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+          </table>
+        </div>
       </mat-tab>
     </mat-tab-group>
   </div>

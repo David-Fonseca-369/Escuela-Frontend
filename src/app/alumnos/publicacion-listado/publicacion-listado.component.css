@@ -1,0 +1,20 @@
+.publicacion {
+  margin-top: 4rem;
+
+  border-color: #dadce0;
+  border-width: 1px;
+  border-style: solid;
+  border-radius: 9px;
+
+  width: 60rem;
+  height: auto;
+}
+
+.contenido {
+  padding: 12px;
+}
+
+a {
+  text-decoration: none;
+  color: black;
+}

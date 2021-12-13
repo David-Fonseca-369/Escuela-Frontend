@@ -1,42 +1,52 @@
 <div class="container">
   <div class="content">
-    <div class="login-container">
-      <div class="logo">
-        <img src="assets/images/login/graduado.png" alt="Graduado" />
-      </div>
+    <form [formGroup]="form">
+      <div class="login-container">
+        <div class="logo">
+          <img src="assets/images/login/graduado.png" alt="Graduado" />
+        </div>
 
-      <h1 class="title">Iniciar Sesión</h1>
+        <h1 class="title">Iniciar Sesión</h1>
 
-      <div class="inputs">
-        <mat-form-field appearance="outline">
-          <mat-label>CURP</mat-label>
-          <input matInput />
-          <mat-error>La CURP es requerida.</mat-error>
-        </mat-form-field>
-      </div>
-      <div class="inputs">
-        <mat-form-field appearance="outline">
-          <mat-label>Contraseña</mat-label>
-          <input matInput [type]="hide ? 'password' : 'text'" />
-          <button
-            mat-icon-button
-            matSuffix
-            (click)="hide = !hide"
-            [attr.aria-label]="'Hide password'"
-            [attr.aria-pressed]="hide"
-          >
-            <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>CURP</mat-label>
+            <input matInput formControlName="curp" />
+            <mat-error>La CURP es requerida (18 caracteres).</mat-error>
+          </mat-form-field>
+        </div>
+        <div class="inputs">
+          <mat-form-field appearance="outline">
+            <mat-label>Contraseña</mat-label>
+            <input
+              matInput
+              [type]="hide ? 'password' : 'text'"
+              formControlName="password"
+            />
+            <button
+              mat-icon-button
+              matSuffix
+              (click)="hide = !hide"
+              [attr.aria-label]="'Hide password'"
+              [attr.aria-pressed]="hide"
+            >
+              <mat-icon>{{ hide ? "visibility_off" : "visibility" }}</mat-icon>
+            </button>
+            <mat-error>La contraseña es requerida (8 caracteres).</mat-error>
+          </mat-form-field>
+        </div>
+
+        <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+        <!-- <app-show-errors [errors]="errors"></app-show-errors> -->
+
+        <div class="button-login">
+          <button mat-flat-button [disabled]="form.invalid" (click)="login()">
+            Iniciar Sesión
           </button>
-          <mat-error>El campo Contraseña es requerido.</mat-error>
-        </mat-form-field>
+        </div>
       </div>
-
-      <!-- <app-show-errors [errors]="errors"></app-show-errors> -->
-
-      <div class="button-login">
-        <button mat-flat-button>Iniciar Sesión</button>
-      </div>
-    </div>
+    </form>
 
     <div class="links">
       <a href="">Política</a>

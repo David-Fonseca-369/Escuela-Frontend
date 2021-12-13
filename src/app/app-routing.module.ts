@@ -4,6 +4,8 @@ import { CrearAlumnoComponent } from './alumnos/crear-alumno/crear-alumno.compon
 import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.component';
 import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
 import { IndiceAlumnosComponent } from './alumnos/indice-alumnos/indice-alumnos.component';
+import { LandingPageAlumnoComponent } from './alumnos/landing-page-alumno/landing-page-alumno.component';
+import { PublicacionesMateriaComponent } from './alumnos/publicaciones-materia/publicaciones-materia.component';
 import { AsistenciaCrearComponent } from './asistencias/asistencia-crear/asistencia-crear.component';
 import { ReporteAsistenciaComponent } from './asistencias/reporte-asistencia/reporte-asistencia.component';
 import { CalificacionCrearComponent } from './calificaciones/calificacion-crear/calificacion-crear.component';
@@ -12,6 +14,7 @@ import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.compo
 import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuracion-pagina.component';
 import { ContactoComponent } from './contacto/contacto.component';
 import { EsAdminGuard } from './es-admin.guard';
+import { EsAlumnoGuard } from './es-alumno.guard';
 import { EsDocenteGuard } from './es-docente.guard';
 import { CrearGrupoComponent } from './grupos/crear-grupo/crear-grupo.component';
 import { EditarGrupoComponent } from './grupos/editar-grupo/editar-grupo.component';
@@ -54,6 +57,12 @@ const routes: Routes = [
     path: 'landingPage-docente',
     component: LandingPageDocenteComponent,
     canActivate: [EsDocenteGuard],
+  },
+
+  {
+    path: 'landingPage-alumno',
+    component: LandingPageAlumnoComponent,
+    canActivate: [EsAlumnoGuard],
   },
 
   //Rutas libres
@@ -219,6 +228,13 @@ const routes: Routes = [
   },
 
   //
+
+  //Menu alumno
+  {
+    path: 'publicaciones-materia/:id',
+    component: PublicacionesMateriaComponent,
+    canActivate: [EsAlumnoGuard],
+  },
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

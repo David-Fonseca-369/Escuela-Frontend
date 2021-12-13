@@ -22,3 +22,8 @@ table {
   width: 60%;
   margin: 1rem 0;
 }
+
+.imagen-planta-docente img {
+  width: 15rem;
+  margin: 3rem 0;
+}

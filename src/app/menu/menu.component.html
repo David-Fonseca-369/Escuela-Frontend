@@ -20,6 +20,13 @@
     </a>
   </span>
 
+  <span *ngIf="seguridadService.obtenerRol() === 'Alumno'">
+    <a mat-button routerLink="/landingPage-alumno" class="logo-text">
+      <img src="./assets/images/logo_prepa.png" alt="Logo CBT" class="image" />
+      <span>CBT No.3 San Felipe del Progreso</span>
+    </a>
+  </span>
+
   <!-- Opcion resoponsiva -->
   <a mat-button class="opciones-menu" [matMenuTriggerFor]="options">
     <mat-icon>dehaze</mat-icon>
@@ -118,6 +125,14 @@
             Reporte de Calificaciones
           </button>
         </mat-menu>
+      </div>
+    </ng-container>
+  </app-autorizado>
+
+  <app-autorizado [rol]="'Alumno'">
+    <ng-container autorizado>
+      <div>
+        <a mat-button routerLink="/materias-docente">Descargar Boleta</a>
       </div>
     </ng-container>
   </app-autorizado>

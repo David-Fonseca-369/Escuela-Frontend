@@ -81,6 +81,10 @@ import { InputMarkdownComponent } from './helpers/input-markdown/input-markdown.
 import { ReporteCalificacionesComponent } from './calificaciones/reporte-calificaciones/reporte-calificaciones.component';
 import { PublicacionDialogoComponent } from './publicaciones/publicacion-dialogo/publicacion-dialogo.component';
 import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuracion-pagina.component';
+import { LandingPageAlumnoComponent } from './alumnos/landing-page-alumno/landing-page-alumno.component';
+import { MateriasListadoComponent } from './alumnos/materias-listado/materias-listado.component';
+import { PublicacionesMateriaComponent } from './alumnos/publicaciones-materia/publicaciones-materia.component';
+import { PublicacionListadoComponent } from './alumnos/publicacion-listado/publicacion-listado.component';
 
 @NgModule({
   declarations: [
@@ -136,6 +140,10 @@ import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuraci
     ReporteCalificacionesComponent,
     PublicacionDialogoComponent,
     ConfiguracionPaginaComponent,
+    LandingPageAlumnoComponent,
+    MateriasListadoComponent,
+    PublicacionesMateriaComponent,
+    PublicacionListadoComponent,
   ],
   imports: [
     BrowserModule,

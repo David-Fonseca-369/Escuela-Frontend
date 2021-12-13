@@ -1,0 +1,11 @@
+<div class="title"><h1>Publicaciones</h1></div>
+<div class="container">
+  <app-publicacion-listado
+    *ngIf="publicaciones"
+    [publicaciones]="publicaciones"
+  ></app-publicacion-listado>
+
+  <p style="color: green" *ngIf="publicaciones.length <= 0">
+    Por el momento no se ha publicado nada en esta materia.
+  </p>
+</div>

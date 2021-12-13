@@ -1,0 +1,17 @@
+<div class="row">
+  <div class="column" *ngFor="let materia of materiasGrupo">
+    <a routerLink="/publicaciones-materia/{{ materia.idMateria }}">
+      <div class="card">
+        <div class="content">
+          <div class="datos">
+            <h3>{{ materia.nombre }}</h3>
+            <p>{{ materia.nombreDocente }}</p>
+          </div>
+          <div>
+            <img src="./assets/images/alumno/pizarra.png" alt="Pizarra.png" />
+          </div>
+        </div>
+      </div>
+    </a>
+  </div>
+</div>

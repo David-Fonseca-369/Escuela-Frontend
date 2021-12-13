@@ -39,6 +39,12 @@ export class PublicacionesService {
       }
     );
   }
+
+  public obtenerPublicacionesMateria(idMateria: number, idPeriodo: number) {
+    return this.http.get<publicacionDetallesDTO[]>(
+      `${this.apiURL}/materia/${idMateria}/${idPeriodo}`
+    );
+  }
   public obtenerPorId(idPublicacion: number) {
     return this.http.get<publicacionDetallesDTO>(
       `${this.apiURL}/${idPublicacion}`

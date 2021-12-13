@@ -1,0 +1,32 @@
+<div class="container">
+  <div class="publicacion" *ngFor="let publicacion of publicaciones">
+    <div class="contenido">
+      <div style="display: flex; justify-content: space-between">
+        <p>
+          <strong>{{ publicacion.nombre }}</strong>
+        </p>
+
+        <p *ngIf="publicacion.fechaEntrega">
+          <strong>Fecha de entrega: </strong>
+          {{ publicacion.fechaEntrega | date: "dd/MM/yyyy" }}
+        </p>
+      </div>
+
+      <div *ngIf="publicacion.descripcion">
+        <p><strong> Descripción:</strong></p>
+        <markdown [data]="publicacion.descripcion"></markdown>
+      </div>
+
+      <div *ngIf="publicacion.archivos.length > 0">
+        <p><strong> Archivos Adjuntos:</strong></p>
+        <mat-chip-list>
+          <mat-chip *ngFor="let archivo of publicacion.archivos">
+            <a href="{{ archivo.rutaArchivo }}" target="_blank">
+              {{ archivo.nombre }}</a
+            >
+          </mat-chip>
+        </mat-chip-list>
+      </div>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,15 @@
+<div>
+  <div class="title">
+    <h1>
+      Hola,
+      {{ seguridadService.obtenerCampoJWT("nombre") }}
+    </h1>
+    <div class="materias-alumno">
+      <div>
+        <app-materias-listado
+          [materiasGrupo]="materiasGrupo"
+        ></app-materias-listado>
+      </div>
+    </div>
+  </div>
+</div>
