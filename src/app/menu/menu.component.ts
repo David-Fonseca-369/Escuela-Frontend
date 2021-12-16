@@ -9,5 +9,7 @@ import { SeguridadService } from '../login/seguridad.service';
 export class MenuComponent implements OnInit {
   constructor(public seguridadService: SeguridadService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    console.log(this.seguridadService.obtenerCampoJWT('apellidoMaterno'));
+  }
 }

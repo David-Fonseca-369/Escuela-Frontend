@@ -60,6 +60,7 @@ export class SeguridadService {
     }
 
     var dataToken = JSON.parse(atob(token.split('.')[1])); //se divide en 3, y el 1 es el de la data.
+    console.log(JSON.parse(atob(token.split('.')[1])));
     return dataToken[campo];
   }
 

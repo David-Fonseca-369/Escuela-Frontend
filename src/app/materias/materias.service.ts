@@ -67,13 +67,13 @@ export class MateriasService {
     );
   }
 
-  public materiasAsignadasTodas(idDocente: number) {
+  public materiasAsignadasTodas(idDocente: number): Observable<materiaDTO[]> {
     return this.http.get<materiaDTO[]>(
       `${this.apiURL}/asignadasTodas/${idDocente}`
     );
   }
 
-  public obtenerPorGrupo(idGrupo: number) {
+  public obtenerPorGrupo(idGrupo: number): Observable<materiaGrupoDTO[]> {
     return this.http.get<materiaGrupoDTO[]>(`${this.apiURL}/grupo/${idGrupo}`);
   }
 

@@ -75,7 +75,7 @@ export class ListaAlumnosComponent implements OnInit {
       cancelButtonText: 'Cancelar',
     }).then((result) => {
       if (result.isConfirmed) {
-        this.guardarAsistencias;
+        this.guardarAsistencias();
       }
     });
   }

@@ -34,7 +34,7 @@ export class PeriodosService {
     return this.http.get<periodoDTO[]>(`${this.apiURL}/todos`);
   }
 
-  public obtenerPeriodoActual() {
+  public obtenerPeriodoActual(): Observable<periodoDTO> {
     return this.http.get<periodoDTO>(`${this.apiURL}/periodoActual`);
   }
 
