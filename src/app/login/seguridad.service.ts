@@ -1,10 +1,13 @@
 import { HttpClient } from '@angular/common/http';
+import { utf8Encode } from '@angular/compiler/src/util';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import Swal from 'sweetalert2';
 import {
+  actualizarPasswordDTO,
+  datosUsuarioDTO,
   loginAlumnoDTO,
   loginUsuarioDTO,
   respuestaAutenticacion,
@@ -22,6 +25,14 @@ export class SeguridadService {
   private readonly llaveToken = 'token';
   private readonly llaveExpiracion = 'token-expiracion';
   private readonly campoRol = 'rol';
+  private readonly llaveNombre = 'nombre';
+  private readonly llaveApellidoPaterno = 'apellidoPaterno';
+  private readonly llaveApellidoMaterno = 'apellidoMaterno';
+
+  nombre: string;
+  apellidoPaterno: string;
+
+  apellidoMaterno: string;
 
   login(loginUsuario: loginUsuarioDTO): Observable<respuestaAutenticacion> {
     return this.httpClient.post<respuestaAutenticacion>(
@@ -44,6 +55,16 @@ export class SeguridadService {
       this.llaveExpiracion,
       respuestaAutenticacion.expiracion.toString()
     );
+
+    localStorage.setItem(this.llaveNombre, respuestaAutenticacion.nombre);
+    localStorage.setItem(
+      this.llaveApellidoPaterno,
+      respuestaAutenticacion.apellidoPaterno
+    );
+    localStorage.setItem(
+      this.llaveApellidoMaterno,
+      respuestaAutenticacion.apellidoMaterno
+    );
   }
 
   obtenerToken() {
@@ -60,13 +81,18 @@ export class SeguridadService {
     }
 
     var dataToken = JSON.parse(atob(token.split('.')[1])); //se divide en 3, y el 1 es el de la data.
-    console.log(JSON.parse(atob(token.split('.')[1])));
+
     return dataToken[campo];
   }
 
   logout() {
     localStorage.removeItem(this.llaveToken);
     localStorage.removeItem(this.llaveExpiracion);
+
+    localStorage.removeItem(this.llaveNombre);
+    localStorage.removeItem(this.llaveApellidoPaterno);
+    localStorage.removeItem(this.llaveApellidoMaterno);
+
     this.router.navigate(['']);
   }
 
@@ -105,5 +131,37 @@ export class SeguridadService {
     }
 
     return true; //el token sigue vigente
+  }
+
+  obtenerNombre(): string {
+    return localStorage.getItem(this.llaveNombre);
+  }
+
+  obtenerApellidoPaterno(): string {
+    return localStorage.getItem(this.llaveApellidoPaterno);
+  }
+
+  obtenerApellidoMaterno(): string {
+    return localStorage.getItem(this.llaveApellidoMaterno);
+  }
+
+  obtenerDatosUsario(
+    idUsuario: number,
+    rol: string
+  ): Observable<datosUsuarioDTO> {
+    return this.httpClient.get<datosUsuarioDTO>(
+      `${this.apiURL}/datosUsuario/${idUsuario}/${rol}`
+    );
+  }
+
+  cambiarPassword(
+    actualizarPasswordDTO: actualizarPasswordDTO,
+    idUsuario: number,
+    rol: string
+  ) {
+    return this.httpClient.put(
+      `${this.apiURL}/cambiarPassword/${idUsuario}/${rol}`,
+      actualizarPasswordDTO
+    );
   }
 }

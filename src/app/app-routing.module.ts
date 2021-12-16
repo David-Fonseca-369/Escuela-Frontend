@@ -1,5 +1,6 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.component';
 import { CrearAlumnoComponent } from './alumnos/crear-alumno/crear-alumno.component';
 import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.component';
 import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
@@ -27,6 +28,7 @@ import { CrearMateriaComponent } from './materias/crear-materia/crear-materia.co
 import { EditarMateriaComponent } from './materias/editar-materia/editar-materia.component';
 import { IndiceMateriasDocenteComponent } from './materias/indice-materias-docente/indice-materias-docente.component';
 import { IndiceMateriasComponent } from './materias/indice-materias/indice-materias.component';
+import { PerfilComponent } from './perfil/perfil.component';
 import { CrearPeriodoComponent } from './periodos/crear-periodo/crear-periodo.component';
 import { IndicePeriodosComponent } from './periodos/indice-periodos/indice-periodos.component';
 import { PlantaDocenteComponent } from './planta-docente/planta-docente.component';
@@ -235,6 +237,12 @@ const routes: Routes = [
     component: PublicacionesMateriaComponent,
     canActivate: [EsAlumnoGuard],
   },
+
+  //Perfil todos
+  { path: 'perfil', component: PerfilComponent },
+
+  //
+  { path: 'prueba', component: BoletaDialogoComponent },
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

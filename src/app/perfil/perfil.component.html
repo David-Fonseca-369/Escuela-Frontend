@@ -1,0 +1,90 @@
+<app-spinner *ngIf="!datosUsuario"></app-spinner>
+<form (submit)="cambiarPassword()" [formGroup]="form">
+  <div *ngIf="datosUsuario">
+    <h1 class="title">Perfil</h1>
+
+    <div class="container">
+      <div class="img-profile">
+        <img src="./assets/images/perfil/user.png" alt="Login" />
+      </div>
+
+      <div class="details-profile">
+        <h1>{{ datosUsuario.nombre }}</h1>
+        <p class="mail">{{ datosUsuario.correo }}</p>
+
+        <div class="details">
+          <div class="property">
+            <p>Nombre</p>
+          </div>
+
+          <div class="result">
+            <p>{{ datosUsuario.nombre }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="details">
+          <div class="property">
+            <p>Apellido Paterno</p>
+          </div>
+
+          <div class="result">
+            <p>{{ datosUsuario.apellidoPaterno }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="details">
+          <div class="property">
+            <p>Apellido Materno</p>
+          </div>
+
+          <div class="result">
+            <p>{{ datosUsuario.apellidoMaterno }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="details">
+          <div class="property">
+            <p>Rol</p>
+          </div>
+
+          <div class="result">
+            <p>{{ datosUsuario.rol }}</p>
+          </div>
+        </div>
+        <hr />
+        <div class="content-password">
+          <div class="check">
+            <mat-checkbox
+              color="primary"
+              [(ngModel)]="checked"
+              formControlName="checkbox"
+              >Nueva Contraseña</mat-checkbox
+            >
+          </div>
+
+          <div class="password" *ngIf="checked">
+            <mat-form-field appearance="outline">
+              <mat-label>Nueva Contraseña</mat-label>
+              <input
+                formControlName="password"
+                placeholder="Ingrese una nueva contraseña"
+                matInput
+              />
+              <mat-icon matSuffix>lock</mat-icon>
+              <mat-error
+                >La contraseña debe tener mínimo 8 caracteres.</mat-error
+              >
+            </mat-form-field>
+          </div>
+
+          <div *ngIf="checked" class="option">
+            <button mat-flat-button [disabled]="form.invalid">
+              Cambiar Contraseña
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</form>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>

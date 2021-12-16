@@ -1,3 +1,4 @@
+import { typeWithParameters } from '@angular/compiler/src/render3/util';
 import { Component, OnInit } from '@angular/core';
 import { SeguridadService } from '../login/seguridad.service';
 
@@ -9,7 +10,5 @@ import { SeguridadService } from '../login/seguridad.service';
 export class MenuComponent implements OnInit {
   constructor(public seguridadService: SeguridadService) {}
 
-  ngOnInit(): void {
-    console.log(this.seguridadService.obtenerCampoJWT('apellidoMaterno'));
-  }
+  ngOnInit(): void {}
 }

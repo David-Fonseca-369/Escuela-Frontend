@@ -85,6 +85,8 @@ import { LandingPageAlumnoComponent } from './alumnos/landing-page-alumno/landin
 import { MateriasListadoComponent } from './alumnos/materias-listado/materias-listado.component';
 import { PublicacionesMateriaComponent } from './alumnos/publicaciones-materia/publicaciones-materia.component';
 import { PublicacionListadoComponent } from './alumnos/publicacion-listado/publicacion-listado.component';
+import { PerfilComponent } from './perfil/perfil.component';
+import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.component';
 
 @NgModule({
   declarations: [
@@ -144,6 +146,8 @@ import { PublicacionListadoComponent } from './alumnos/publicacion-listado/publi
     MateriasListadoComponent,
     PublicacionesMateriaComponent,
     PublicacionListadoComponent,
+    PerfilComponent,
+    BoletaDialogoComponent,
   ],
   imports: [
     BrowserModule,

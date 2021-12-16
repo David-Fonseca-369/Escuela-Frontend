@@ -9,6 +9,21 @@ export interface loginAlumnoDTO {
 }
 
 export interface respuestaAutenticacion {
+  nombre: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
   token: string;
   expiracion: string;
+}
+
+export interface datosUsuarioDTO {
+  nombre: string;
+  apellidoPaterno: string;
+  apellidoMaterno: string;
+  rol: string;
+  correo: string;
+}
+
+export interface actualizarPasswordDTO {
+  password: string;
 }

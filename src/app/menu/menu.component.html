@@ -144,17 +144,17 @@
       <a mat-button [matMenuTriggerFor]="opciones">
         <span
           >{{
-            seguridadService.obtenerCampoJWT("nombre") +
+            seguridadService.obtenerNombre() +
               " " +
-              seguridadService.obtenerCampoJWT("apellidoPaterno") +
+              seguridadService.obtenerApellidoPaterno() +
               " " +
-              seguridadService.obtenerCampoJWT("apellidoMaterno")
+              seguridadService.obtenerApellidoMaterno()
           }} </span
         ><mat-icon>account_circle</mat-icon>
       </a>
 
       <mat-menu #opciones="matMenu">
-        <button mat-menu-item>Perfil</button>
+        <button mat-menu-item routerLink="perfil">Perfil</button>
         <button mat-menu-item (click)="seguridadService.cerrarSesion()">
           Cerrar Sesión
         </button>
