@@ -30,3 +30,9 @@ export interface calificacionesMateriaDTO {
   name: string;
   value: string;
 }
+
+export interface calificacionesBoletaDTO {
+  nombreMateria: string;
+  nombrePeriodo: string;
+  calificacion: number;
+}

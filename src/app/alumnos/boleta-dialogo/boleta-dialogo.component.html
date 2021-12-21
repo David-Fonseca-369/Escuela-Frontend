@@ -1,108 +1,115 @@
-<div class="container">
-  <div class="cabecera">
-    <img
-      src="./assets/images/boleta/logo-estado.jpg"
-      alt="Logo Estado de México"
-    />
-    <p>
-      2021. Año del Centenario de las Constituciones Mexicana y Mexiquense de
-      1917
+<h2 mat-dialog-title>Boleta de calificaciones</h2>
+<mat-dialog-content>
+  <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
+  <div class="container" *ngIf="calificacionesBoleta">
+    <div class="cabecera">
+      <img
+        src="./assets/images/boleta/logo-estado.jpg"
+        alt="Logo Estado de México"
+      />
+      <p>
+        2021. Año del Centenario de las Constituciones Mexicana y Mexiquense de
+        1917
+      </p>
+      <img
+        src="./assets/images/boleta/logo-grande.png"
+        alt="Logo Piensa en Grande"
+      />
+    </div>
+    <hr />
+    <hr />
+
+    <h3 style="text-align: center">BOLETA DE CALIFICACIONES</h3>
+
+    <div class="CCT">
+      <p>LA DIRECCION DEL PLANTEL</p>
+      <p>C. C. T. <strong>15ECTO192O</strong></p>
+    </div>
+
+    <p style="text-align: center">
+      <strong>CBT NO.3 SAN FELIPE DEL PROGRESO</strong>
     </p>
-    <img
-      src="./assets/images/boleta/logo-grande.png"
-      alt="Logo Piensa en Grande"
-    />
-  </div>
-  <hr />
-  <hr />
+    <p>ESTABLECIDA EN CONOCIDO S/N, SAN FELIPE DEL PROGRESO</p>
+    <P
+      >HACE CONSTAR QUE SEGUN REGISTROS QUE OBRAN EN EL ARCHIVO DE ESTE
+      PLANTEL</P
+    >
+    <P style="text-align: center"
+      ><strong>{{
+        seguridadService.obtenerNombre() +
+          " " +
+          seguridadService.obtenerApellidoPaterno() +
+          " " +
+          seguridadService.obtenerApellidoMaterno()
+      }}</strong></P
+    >
+    <p>
+      DEL GRUPO
+      <strong>{{ seguridadService.obtenerCampoJWT("nombreGrupo") }}</strong>
+      SUSTENTO LOS EXAMENES FINALES DE LAS MATERIAS QUE A CONTINUACION SE ANOTAN
+    </p>
 
-  <h3 style="text-align: center">BOLETA DE CALIFICACIONES</h3>
+    <div class="boleta">
+      <table border="1">
+        <tr>
+          <th align="center">MATERIA</th>
+          <th align="center">CICLO</th>
+          <th align="center">CALIFICACIÓN</th>
+          <th align="center">OBSERVACIONES</th>
+        </tr>
 
-  <div class="CCT">
-    <p>LA DIRECCION DEL PLANTEL</p>
-    <p>C. C. T. <strong>15ECTO192O</strong></p>
-  </div>
+        <tr *ngFor="let calificacion of calificacionesBoleta">
+          <td>{{ calificacion.nombreMateria }}</td>
+          <td align="center">{{ calificacion.nombrePeriodo }}</td>
+          <td align="center">{{ calificacion.calificacion }}</td>
+          <td align="center">
+            {{ calificacion.calificacion > 5.9 ? "APROBADA" : "REPROBADA" }}
+          </td>
+        </tr>
+      </table>
 
-  <p style="text-align: center">
-    <strong>CBT NO.3 SAN FELIPE DEL PROGRESO</strong>
-  </p>
-  <p>ESTABLECIDA EN CONOCIDO S/N, SAN FELIPE DEL PROGRESO</p>
-  <P
-    >HACE CONSTAR QUE SEGUN REGISTROS QUE OBRAN EN EL ARCHIVO DE ESTE PLANTEL</P
-  >
-  <P style="text-align: center"><strong>Alejandra López Cruz</strong></P>
-  <p>
-    DEL GRUPO <strong>103</strong> SUSTENTO LOS EXAMENES FINALES DE LAS MATERIAS
-    QUE A CONTINUACION SE ANOTAN
-  </p>
+      <div class="promedio">
+        <p>
+          <strong>PROMEDIO: {{ calcularPromedio() }}</strong>
+        </p>
+      </div>
 
-  <div class="boleta">
-    <table border="1">
-      <tr>
-        <th align="center">MATERIA</th>
-        <th align="center">CICLO</th>
-        <th align="center">CALIFICACIÓN</th>
-        <th align="center">OBSERVACIONES</th>
-      </tr>
-
-      <tr>
-        <td>CIENCIA CONTEMPORANEA</td>
-        <td align="center">2021-2022</td>
-        <td align="center">9</td>
-        <td align="center">APROBATORIA</td>
-      </tr>
-      <tr>
-        <td>CIENCIA CONTEMPORANEA</td>
-        <td align="center">2021-2022</td>
-        <td align="center">9</td>
-        <td align="center">APROBATORIA</td>
-      </tr>
-      <tr>
-        <td>CIENCIA CONTEMPORANEA</td>
-        <td align="center">2021-2022</td>
-        <td align="center">9</td>
-        <td align="center">APROBATORIA</td>
-      </tr>
-      <tr>
-        <td>CIENCIA CONTEMPORANEA</td>
-        <td align="center">2021-2022</td>
-        <td align="center">9</td>
-        <td align="center">APROBATORIA</td>
-      </tr>
-      <tr>
-        <td>CIENCIA CONTEMPORANEA</td>
-        <td align="center">2021-2022</td>
-        <td align="center">9</td>
-        <td align="center">APROBATORIA</td>
-      </tr>
-    </table>
-
-    <div class="promedio">
-      <p><strong>PROMEDIO: 9</strong></p>
-    </div>
-
-    <div>
-      <p style="text-align: center">
-        <strong
-          >LA CALIFICACION MINIMA APROBATORIA ES DE 6 (SEIS) PUNTOS</strong
+      <div>
+        <p style="text-align: center">
+          <strong
+            >LA CALIFICACION MINIMA APROBATORIA ES DE 6 (SEIS) PUNTOS</strong
+          >
+        </p>
+        <P style="text-align: center"
+          >ESTA BOLETA NO ES VALIDA SI SE PRESENTA BORRADURAS O ALTERACIONES</P
         >
-      </p>
-      <P style="text-align: center"
-        >ESTA BOLETA NO ES VALIDA SI SE PRESENTA BORRADURAS O ALTERACIONES</P
-      >
-      <P style="text-align: center"
-        >SAN FELIPE DEL PROGRESO MEX. A LOS 16 DIAS DEL MES ENERO DE 2021.</P
-      >
+        <P style="text-align: center"
+          >SAN FELIPE DEL PROGRESO MEX. A LOS 16 DIAS DEL MES ENERO DE 2021.</P
+        >
+      </div>
     </div>
-  </div>
 
-  <div class="firma-padre">
-    <div class="firma-hijo">
-      <p style="text-align: center">
-        <strong>DIRECTOR(A) DE LA ESCUELA</strong>
-      </p>
-      <hr style="margin-top: 3rem" />
-      <p style="text-align: center">NOMBRE Y FIRMA</p>
+    <div class="firma-padre">
+      <div class="firma-hijo">
+        <p style="text-align: center">
+          <strong>DIRECTOR(A) DE LA ESCUELA</strong>
+        </p>
+        <hr style="margin-top: 3rem" />
+        <p style="text-align: center">NOMBRE Y FIRMA</p>
+      </div>
     </div>
   </div>
-</div>
+</mat-dialog-content>
+
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close color="warn">Cerrar</button>
+  <button
+    mat-button
+    [mat-dialog-close]="true"
+    cdkFocusInitial
+    *ngIf="calificacionesBoleta"
+  >
+    Descargar
+  </button>
+</mat-dialog-actions>

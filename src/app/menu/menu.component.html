@@ -132,7 +132,7 @@
   <app-autorizado [rol]="'Alumno'">
     <ng-container autorizado>
       <div>
-        <a mat-button routerLink="/materias-docente">Descargar Boleta</a>
+        <a mat-button (click)="openBoletaDialog()">Descargar Boleta</a>
       </div>
     </ng-container>
   </app-autorizado>

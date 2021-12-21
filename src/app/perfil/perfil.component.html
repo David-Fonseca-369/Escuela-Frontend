@@ -9,7 +9,7 @@
       </div>
 
       <div class="details-profile">
-        <h1>{{ datosUsuario.nombre }}</h1>
+        <h2>{{ datosUsuario.nombre }}</h2>
         <p class="mail">{{ datosUsuario.correo }}</p>
 
         <div class="details">
@@ -69,6 +69,7 @@
                 formControlName="password"
                 placeholder="Ingrese una nueva contraseña"
                 matInput
+                type="password"
               />
               <mat-icon matSuffix>lock</mat-icon>
               <mat-error

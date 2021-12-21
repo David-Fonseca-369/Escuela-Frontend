@@ -1,9 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   calificacionCreacionDTO,
   calificacionDTO,
+  calificacionesBoletaDTO,
   calificacionesMateriaDTO,
 } from './calificacion';
 
@@ -32,6 +34,14 @@ export class CalificacionesService {
   ) {
     return this.http.get<calificacionesMateriaDTO[]>(
       `${this.apiURL}/evaluacion/${idMateria}/${idPeriodo}/${idEvaluacion}`
+    );
+  }
+
+  public obtenerCalificacionesBoleta(
+    idAlumno: number
+  ): Observable<calificacionesBoletaDTO[]> {
+    return this.http.get<calificacionesBoletaDTO[]>(
+      `${this.apiURL}/calificacionesBoleta/${idAlumno}`
     );
   }
 }
