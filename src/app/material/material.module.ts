@@ -17,6 +17,7 @@ import { MatTooltipModule } from '@angular/material/tooltip';
 import { MatTabsModule } from '@angular/material/tabs';
 import { MatDialogModule } from '@angular/material/dialog';
 import { MatChipsModule } from '@angular/material/chips';
+import { MatStepperModule } from '@angular/material/stepper';
 
 //Para tabla son 2
 import { MatDatepickerModule } from '@angular/material/datepicker';
@@ -43,6 +44,7 @@ import { MatNativeDateModule } from '@angular/material/core';
     MatTabsModule,
     MatDialogModule,
     MatChipsModule,
+    MatStepperModule,
   ],
   imports: [CommonModule],
 })

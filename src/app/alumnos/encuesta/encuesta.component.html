@@ -1,0 +1,346 @@
+<mat-stepper linear #stepper>
+  <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
+    <form [formGroup]="firstFormGroup">
+      <ng-template matStepLabel> Datos del Alumno </ng-template>
+
+      <div class="section">
+        <mat-form-field appearance="outline">
+          <mat-label>Estado Civil*</mat-label>
+          <mat-select formControlName="estadoCivil">
+            <mat-option
+              *ngFor="let estadoCivil of estadosCiviles"
+              [value]="estadoCivil"
+            >
+              {{ estadoCivil }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un estado civil.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Nacionalidad*</mat-label>
+          <input
+            formControlName="nacionalidad"
+            placeholder="Ingrese su nacionalidad"
+            matInput
+          />
+          <mat-error>Debe agregar su nacionalidad.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Idiomas</mat-label>
+          <input
+            formControlName="idiomas"
+            placeholder="Ingrese sus idiomas"
+            matInput
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Tipo de Sangre*</mat-label>
+          <input
+            formControlName="tipoSangre"
+            placeholder="Ingrese su tipo de sangre"
+            matInput
+          />
+          <mat-error>Debe agregar su tipo de sangre.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section">
+        <mat-form-field appearance="outline">
+          <mat-label>No. del Seguro Social*</mat-label>
+          <input
+            formControlName="seguroSocial"
+            placeholder="Ingrese su número del seguro social."
+            matInput
+          />
+          <mat-error>Debe agregar su tipo de sangre.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Grado*</mat-label>
+          <mat-select formControlName="grado">
+            <mat-option *ngFor="let grado of grados" [value]="grado">
+              {{ grado }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un grado.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Grupo*</mat-label>
+          <mat-select formControlName="grupo">
+            <mat-option *ngFor="let grupo of grupos" [value]="grupo.nombre">
+              {{ grupo.nombre }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un grupo.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Semestre*</mat-label>
+          <mat-select formControlName="semestre">
+            <mat-option *ngFor="let semestre of semestres" [value]="semestre">
+              {{ semestre }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un semestre.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section2">
+        <mat-form-field appearance="outline">
+          <mat-label>Facebook</mat-label>
+          <input
+            formControlName="facebook"
+            placeholder="Ingrese su Facebook."
+            matInput
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Twitter</mat-label>
+          <input
+            formControlName="twitter"
+            placeholder="Ingrese su Twitter."
+            matInput
+          />
+        </mat-form-field>
+      </div>
+      <div>
+        <button mat-button (click)="goFordward(stepper)">Siguiente</button>
+      </div>
+    </form>
+  </mat-step>
+
+  <mat-step [stepControl]="secondFormGroup" [editable]="isEditable">
+    <form [formGroup]="secondFormGroup">
+      <ng-template matStepLabel>Datos del Tutor</ng-template>
+
+      <div class="section">
+        <mat-form-field appearance="outline">
+          <mat-label>Nombre del Tutor*</mat-label>
+          <input
+            formControlName="nombreTutor"
+            placeholder="Nombre del Tutor"
+            matInput
+          />
+          <mat-error>Debe agregar el nombre del Tutor.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Parentesco*</mat-label>
+          <mat-select formControlName="parentesco">
+            <mat-option
+              *ngFor="let parentesco of parentescos"
+              [value]="parentesco"
+            >
+              {{ parentesco }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un parentesco.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Fecha Nacimiento*</mat-label>
+          <!-- se asocia con #picker -->
+          <input
+            formControlName="fechaNacimiento"
+            matInput
+            [matDatepicker]="pickerInicio"
+          />
+          <mat-error>Debe indicar una fecha de nacimiento.</mat-error>
+          <!-- se asocia con #picker -->
+          <mat-datepicker-toggle
+            matSuffix
+            [for]="pickerInicio"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #pickerInicio></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>INE*</mat-label>
+          <input formControlName="ine" placeholder="INE del tutor" matInput />
+          <mat-error>Debe agregar INE.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section">
+        <mat-form-field appearance="outline">
+          <mat-label>CURP*</mat-label>
+          <input formControlName="curp" placeholder="CURP del tutor" matInput />
+          <mat-error>Debe agregar una CURP.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Género*</mat-label>
+          <mat-select formControlName="genero">
+            <mat-option *ngFor="let genero of generos" [value]="genero">
+              {{ genero }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un género.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Estado Civil*</mat-label>
+          <mat-select formControlName="estadoCivilTutor">
+            <mat-option
+              *ngFor="let estadoCivil of estadosCiviles"
+              [value]="estadoCivil"
+            >
+              {{ estadoCivil }}</mat-option
+            >
+          </mat-select>
+          <mat-error>Debe seleccionar un estado civil.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Ocupación*</mat-label>
+          <input formControlName="ocupacion" placeholder="Ocupación" matInput />
+          <mat-error>Debe agregar su ocupación.</mat-error>
+        </mat-form-field>
+      </div>
+
+      <div class="section">
+        <mat-form-field appearance="outline">
+          <mat-label>Estudios*</mat-label>
+          <mat-select formControlName="estudios">
+            <mat-option
+              *ngFor="let estudios of estudiosTutor"
+              [value]="estudios"
+            >
+              {{ estudios }}
+            </mat-option>
+          </mat-select>
+          <mat-error>Debe seleccionar sus estudios.</mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Teléfono</mat-label>
+          <input
+            formControlName="telefono"
+            placeholder="Teléfono"
+            matInput
+            type="number"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Celular</mat-label>
+          <input
+            formControlName="celular"
+            placeholder="Celular"
+            matInput
+            type="number"
+          />
+        </mat-form-field>
+
+        <mat-form-field appearance="outline">
+          <mat-label>Correo</mat-label>
+          <input
+            formControlName="correo"
+            placeholder="Correo"
+            matInput
+            type="email"
+          />
+        </mat-form-field>
+      </div>
+
+      <div class="domicilio">
+        <mat-form-field appearance="outline">
+          <mat-label>Domicilio*</mat-label>
+          <textarea
+            formControlName="domicilio"
+            placeholder="Domicilio"
+            matInput
+          ></textarea>
+          <mat-error>Debe agregar un domicilio.</mat-error>
+        </mat-form-field>
+      </div>
+    </form>
+    <div>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button mat-button matStepperNext>Siguiente</button>
+    </div>
+  </mat-step>
+
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>Subir Documentos</ng-template>
+
+    <div>
+      <div>
+        <p>Documentacion a entregar para la inscripción:</p>
+        <p><strong>Alumno</strong></p>
+        <ol>
+          <li>Acta de Nacimiento</li>
+          <li>CURP</li>
+          <li>Comporbante de Domicilio</li>
+          <li>Certificado Médico</li>
+        </ol>
+
+        <p><strong>Padre o Tutor</strong></p>
+        <ol>
+          <li>Acta de Nacimiento</li>
+          <li>CURP</li>
+          <li>Comprobante de Domicilio</li>
+          <li>Certificado Médico</li>
+          <li>INE</li>
+        </ol>
+
+        <p>
+          La siguiente documentación debe estar en el orden mostrado
+          anteriormente en un solo archivo PDF no mayor a 5mb.
+        </p>
+      </div>
+
+      <div>
+        <ngx-dropzone
+          (change)="onSelect($event)"
+          [multiple]="false"
+          accept="application/pdf"
+          [maxFileSize]="5000000"
+        >
+          <ngx-dropzone-label>
+            <div>
+              <h4 style="margin-right: 1rem; margin-left: 1rem">
+                Arrastra o suelta el archivo PDF aquí
+              </h4>
+            </div>
+          </ngx-dropzone-label>
+          <ngx-dropzone-preview
+            *ngFor="let f of files"
+            [removable]="true"
+            (removed)="onRemove(f)"
+          >
+            <ngx-dropzone-label>{{ f.name }} ({{ f.type }})</ngx-dropzone-label>
+          </ngx-dropzone-preview>
+        </ngx-dropzone>
+      </div>
+    </div>
+    <div>
+      <button mat-button matStepperPrevious>Atrás</button>
+      <button
+        mat-button
+        [disabled]="files.length === 0"
+        (click)="GuardarEncuesta(stepper)"
+      >
+        Inscribirme
+      </button>
+    </div>
+  </mat-step>
+
+  <mat-step [editable]="isEditable">
+    <ng-template matStepLabel>¡Listo!</ng-template>
+    <div class="reinscrito">
+      <h2>¡Has completado tu reinscripción!</h2>
+
+      <img src="./assets/images/alumno/correcto.png " alt="Correcto" />
+
+      <button mat-button>Ver Comprobante</button>
+    </div>
+  </mat-step>
+</mat-stepper>
+
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>

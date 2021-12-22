@@ -1,19 +1,19 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <h2 mat-dialog-title>Boleta de calificaciones</h2>
 <mat-dialog-content>
   <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
 
-  <div class="container" *ngIf="calificacionesBoleta">
+  <div class="container" *ngIf="calificacionesBoleta" id="htmlData">
     <div class="cabecera">
       <img
         src="./assets/images/boleta/logo-estado.jpg"
         alt="Logo Estado de México"
       />
       <p>
-        2021. Año del Centenario de las Constituciones Mexicana y Mexiquense de
-        1917
+        2021. Año de la Consumación de la Independencia y la Grandeza de México
       </p>
       <img
-        src="./assets/images/boleta/logo-grande.png"
+        src="./assets/images/boleta/logo_edomex.png"
         alt="Logo Piensa en Grande"
       />
     </div>
@@ -85,7 +85,9 @@
           >ESTA BOLETA NO ES VALIDA SI SE PRESENTA BORRADURAS O ALTERACIONES</P
         >
         <P style="text-align: center"
-          >SAN FELIPE DEL PROGRESO MEX. A LOS 16 DIAS DEL MES ENERO DE 2021.</P
+          >SAN FELIPE DEL PROGRESO MEX. A LOS {{ fechaHoy | date: "dd" }} DIAS
+          DEL MES {{ fechaHoy | date: "MM" }} DE
+          {{ fechaHoy | date: "yyyy" }}.</P
         >
       </div>
     </div>
@@ -109,6 +111,7 @@
     [mat-dialog-close]="true"
     cdkFocusInitial
     *ngIf="calificacionesBoleta"
+    (click)="downloadPDF()"
   >
     Descargar
   </button>

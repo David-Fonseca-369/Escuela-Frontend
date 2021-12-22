@@ -1,8 +1,9 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.component';
+import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprobante-dialog.component';
 import { CrearAlumnoComponent } from './alumnos/crear-alumno/crear-alumno.component';
 import { EditarAlumnoComponent } from './alumnos/editar-alumno/editar-alumno.component';
+import { EncuestaComponent } from './alumnos/encuesta/encuesta.component';
 import { IndiceAlumnosDocenteComponent } from './alumnos/indice-alumnos-docente/indice-alumnos-docente.component';
 import { IndiceAlumnosComponent } from './alumnos/indice-alumnos/indice-alumnos.component';
 import { LandingPageAlumnoComponent } from './alumnos/landing-page-alumno/landing-page-alumno.component';
@@ -242,7 +243,9 @@ const routes: Routes = [
   { path: 'perfil', component: PerfilComponent },
 
   //
-  { path: 'prueba', component: BoletaDialogoComponent },
+  { path: 'reinscripcion', component: EncuestaComponent },
+
+  { path: 'prueba', component: ComprobanteDialogComponent },
 
   //Esta redireciona
   { path: '**', redirectTo: '' },

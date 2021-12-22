@@ -9,7 +9,10 @@
 }
 
 .cabecera img {
-  width: 5rem;
+  width: 6rem;
+}
+.cabecera p {
+  font-size: small;
 }
 
 .CCT {

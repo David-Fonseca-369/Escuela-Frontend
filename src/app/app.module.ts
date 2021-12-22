@@ -87,6 +87,8 @@ import { PublicacionesMateriaComponent } from './alumnos/publicaciones-materia/p
 import { PublicacionListadoComponent } from './alumnos/publicacion-listado/publicacion-listado.component';
 import { PerfilComponent } from './perfil/perfil.component';
 import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.component';
+import { EncuestaComponent } from './alumnos/encuesta/encuesta.component';
+import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprobante-dialog.component';
 
 @NgModule({
   declarations: [
@@ -148,6 +150,8 @@ import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.
     PublicacionListadoComponent,
     PerfilComponent,
     BoletaDialogoComponent,
+    EncuestaComponent,
+    ComprobanteDialogComponent,
   ],
   imports: [
     BrowserModule,

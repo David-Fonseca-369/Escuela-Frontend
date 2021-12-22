@@ -1,0 +1,41 @@
+mat-form-field {
+  margin-right: 1rem;
+}
+
+.section {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section mat-form-field {
+  width: 23%;
+}
+
+.section2 {
+  display: flex;
+  justify-content: space-between;
+}
+
+.section2 mat-form-field {
+  width: 48%;
+}
+
+.domicilio mat-form-field {
+  width: 100%;
+}
+
+.reinscrito {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.reinscrito img {
+  width: 15rem;
+  margin-bottom: 2rem;
+}
+
+.reinscrito h2 {
+  margin-bottom: 3rem;
+}

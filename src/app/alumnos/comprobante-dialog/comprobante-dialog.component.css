@@ -1,0 +1,21 @@
+.firmas-container {
+  margin-top: 3rem;
+  display: flex;
+  justify-content: space-around;
+}
+
+.firmas-container p {
+  margin-bottom: 3rem;
+  font: large;
+}
+
+table {
+  width: 95%;
+  border-collapse: collapse;
+  margin: 0 auto;
+}
+
+td {
+  border-bottom: 1px solid #dee2e6;
+  height: 3rem;
+}

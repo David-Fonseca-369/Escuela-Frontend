@@ -15,6 +15,8 @@ export class LandingPageAlumnoComponent implements OnInit {
     private materiasService: MateriasService
   ) {}
 
+  isLoading = false;
+
   materiasGrupo: materiaGrupoDTO[];
   errores: string[] = [];
   ngOnInit(): void {
@@ -22,13 +24,18 @@ export class LandingPageAlumnoComponent implements OnInit {
   }
 
   obtenerPorGrupo() {
+    this.isLoading = true;
     this.materiasService
       .obtenerPorGrupo(Number(this.seguridadService.obtenerCampoJWT('idGrupo')))
       .subscribe(
         (materiasGrupo) => {
           this.materiasGrupo = materiasGrupo;
+          this.isLoading = false;
         },
-        (error) => (this.errores = parsearErroresAPI(error))
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 }
