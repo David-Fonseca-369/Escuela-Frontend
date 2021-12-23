@@ -58,6 +58,15 @@ export class AlumnosService {
     return this.http.get<alumnoDTO[]>(`${this.apiURL}/todos`);
   }
 
+  public filtrarTodos(valores: any): Observable<any> {
+    const params = new HttpParams({ fromObject: valores });
+
+    return this.http.get<alumnoDTO[]>(`${this.apiURL}/filtrarTodos`, {
+      params,
+      observe: 'response',
+    });
+  }
+
   public obtenerAlumnosAsistencia(idGrupo: number) {
     return this.http.get<alumnoAsistenciaDTO[]>(
       `${this.apiURL}/Asistencia/${idGrupo}`

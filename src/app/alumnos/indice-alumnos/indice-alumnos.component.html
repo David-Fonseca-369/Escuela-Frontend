@@ -1,9 +1,24 @@
 <div>
   <div class="title">
     <h1>Alumnos</h1>
+    <div>
+      <form [formGroup]="form" *ngIf="alumnos">
+        <mat-form-field appearance="outline">
+          <mat-label>Buscar</mat-label>
+          <input
+            type="text"
+            formControlName="nombreAlumno"
+            placeholder="Buscar por nombre o apellidos..."
+            matInput
+          />
+          <mat-icon matSuffix>search</mat-icon>
+        </mat-form-field>
+      </form>
+    </div>
     <div class="nuevo">
       <button mat-button routerLink="/alumnos/crear">Nuevo</button>
     </div>
+
     <div>
       <table
         #table
@@ -94,6 +109,12 @@
           *matHeaderRowDef="columnasAMostrar; sticky: true"
         ></tr>
         <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+
+        <tr class="mat-row" *matNoDataRow>
+          <td class="mat-cell" colspan="8" style="color: red">
+            No se encontró ningún resultado.
+          </td>
+        </tr>
       </table>
       <mat-paginator
         class="mat-elevation-z8"

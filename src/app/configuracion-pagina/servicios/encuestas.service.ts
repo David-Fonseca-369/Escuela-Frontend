@@ -4,7 +4,11 @@ import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
 import { formatearFecha } from 'src/app/helpers/helpers';
 import { environment } from 'src/environments/environment';
-import { encuestaCreacionDTO, encuestaDTO } from '../models/encuesta';
+import {
+  encuestaCreacionDTO,
+  encuestaDTO,
+  respuestaEncuestaDTO,
+} from '../models/encuesta';
 
 @Injectable({
   providedIn: 'root',
@@ -13,9 +17,20 @@ export class EncuestasService {
   constructor(private http: HttpClient) {}
   private apiURL = environment.apiURL + 'encuestas';
 
-  public Crear(encuesta: encuestaCreacionDTO): Observable<encuestaDTO> {
+  public Crear(
+    encuesta: encuestaCreacionDTO
+  ): Observable<respuestaEncuestaDTO> {
     const formData = this.construirFormulario(encuesta);
-    return this.http.post<encuestaDTO>(this.apiURL + '/crear', formData);
+    return this.http.post<respuestaEncuestaDTO>(
+      this.apiURL + '/crear',
+      formData
+    );
+  }
+
+  public obtenerComprobante(idEncuesta: number): Observable<encuestaDTO> {
+    return this.http.get<encuestaDTO>(
+      `${this.apiURL}/comprobante/${idEncuesta}`
+    );
   }
 
   private construirFormulario(encuesta: encuestaCreacionDTO): FormData {
@@ -24,14 +39,24 @@ export class EncuestasService {
     formData.append('idAlumno', String(encuesta.idAlumno));
     formData.append('estadoCivil', encuesta.estadoCivil);
     formData.append('nacionalidad', encuesta.nacionalidad);
-    formData.append('idiomas', encuesta.idiomas);
+
+    if (encuesta.idiomas) {
+      formData.append('idiomas', encuesta.idiomas);
+    }
+
     formData.append('tipoSangre', encuesta.tipoSangre);
     formData.append('seguroSocial', encuesta.seguroSocial);
     formData.append('grado', encuesta.grado);
     formData.append('grupo', encuesta.grupo);
     formData.append('semestre', encuesta.semestre);
-    formData.append('facebook', encuesta.facebook);
-    formData.append('twitter', encuesta.twitter);
+
+    if (encuesta.facebook) {
+      formData.append('facebook', encuesta.facebook);
+    }
+
+    if (encuesta.twitter) {
+      formData.append('twitter', encuesta.twitter);
+    }
 
     formData.append('nombreTutor', encuesta.nombreTutor);
     formData.append('parentesco', encuesta.parentesco);
@@ -45,9 +70,19 @@ export class EncuestasService {
     formData.append('estadoCivilTutor', encuesta.estadoCivilTutor);
     formData.append('ocupacion', encuesta.ocupacion);
     formData.append('estudios', encuesta.estudios);
-    formData.append('telefono', encuesta.telefono);
-    formData.append('celular', encuesta.celular);
-    formData.append('correo', encuesta.correo);
+
+    if (encuesta.telefono) {
+      formData.append('telefono', encuesta.telefono);
+    }
+
+    if (encuesta.celular) {
+      formData.append('celular', encuesta.celular);
+    }
+
+    if (encuesta.correo) {
+      formData.append('correo', encuesta.correo);
+    }
+
     formData.append('domicilio', encuesta.domicilio);
     formData.append('archivo', encuesta.archivo);
 

@@ -29,6 +29,7 @@ export interface encuestaDTO {
   genero: string;
   estadoCivilTutor: string;
   ocupacion: string;
+  estudios: string;
   telefono: string;
   celular: string;
   correo: string;
@@ -63,4 +64,8 @@ export interface encuestaCreacionDTO {
   correo: string;
   domicilio: string;
   archivo: File;
+}
+
+export interface respuestaEncuestaDTO {
+  idEncuesta: number;
 }

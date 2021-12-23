@@ -17,3 +17,10 @@ mat-paginator {
   background: #4f707b;
   color: white;
 }
+
+@media screen and (max-width: 600px) {
+  .tabla-materias,
+  mat-paginator {
+    width: 100%;
+  }
+}

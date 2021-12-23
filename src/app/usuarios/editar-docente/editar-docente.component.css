@@ -31,3 +31,16 @@
   margin-top: 1rem;
   width: 20%;
 }
+
+@media screen and (max-width: 600px) {
+  .inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .input mat-form-field,
+  .inputs mat-form-field,
+  .password mat-form-field {
+    width: 100%;
+  }
+}

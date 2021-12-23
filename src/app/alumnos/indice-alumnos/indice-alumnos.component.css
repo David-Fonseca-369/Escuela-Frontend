@@ -17,3 +17,13 @@ mat-paginator {
   background: #4f707b;
   color: white;
 }
+
+mat-form-field {
+  width: 50%;
+}
+
+@media screen and (max-width: 600px) {
+  .tabla-alumnos {
+    width: 100%;
+  }
+}

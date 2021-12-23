@@ -21,3 +21,16 @@
 .formulario button[disabled] {
   background: #c4cfd3;
 }
+
+@media screen and (max-width: 600px) {
+  .fechas {
+    flex-direction: column;
+    width: 100%;
+  }
+  .fechas mat-form-field {
+    width: 100%;
+  }
+  .nombre mat-form-field {
+    width: 100%;
+  }
+}

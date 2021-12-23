@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { MatDialog } from '@angular/material/dialog';
 import { MatStepper } from '@angular/material/stepper';
 import { stringify } from 'querystring';
 import { encuestaCreacionDTO } from 'src/app/configuracion-pagina/models/encuesta';
@@ -9,6 +10,7 @@ import { grupoDTO } from 'src/app/grupos/indice-grupos/grupo';
 import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { SeguridadService } from 'src/app/login/seguridad.service';
 import Swal from 'sweetalert2';
+import { ComprobanteDialogComponent } from '../comprobante-dialog/comprobante-dialog.component';
 
 @Component({
   selector: 'app-encuesta',
@@ -21,6 +23,7 @@ export class EncuestaComponent implements OnInit {
 
   files: File[] = [];
   isEditable = true;
+  isLoading = false;
 
   errores: string[] = [];
   estadosCiviles = [
@@ -54,36 +57,61 @@ export class EncuestaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private gruposService: GruposService,
     private encuestasService: EncuestasService,
-    private seguridadService: SeguridadService
+    private seguridadService: SeguridadService,
+    private dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
     this.firstFormGroup = this.formBuilder.group({
       estadoCivil: ['', { validators: [Validators.required] }],
-      nacionalidad: ['', { validators: [Validators.required] }],
-      idiomas: '',
-      tipoSangre: ['', { validators: [Validators.required] }],
-      seguroSocial: ['', { validators: [Validators.required] }],
+      nacionalidad: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(50)] },
+      ],
+      idiomas: ['', { validators: [Validators.maxLength(99)] }],
+      tipoSangre: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(50)] },
+      ],
+      seguroSocial: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(50)] },
+      ],
       grado: ['', { validators: [Validators.required] }],
       grupo: ['', { validators: [Validators.required] }],
       semestre: ['', { validators: [Validators.required] }],
-      facebook: '',
-      twitter: '',
+      facebook: ['', { validators: [Validators.maxLength(50)] }],
+      twitter: ['', { validators: [Validators.maxLength(50)] }],
     });
 
     this.secondFormGroup = this.formBuilder.group({
-      nombreTutor: ['', { validators: [Validators.required] }],
+      nombreTutor: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(250)] },
+      ],
       parentesco: ['', { validators: [Validators.required] }],
       fechaNacimiento: ['', { validators: [Validators.required] }],
-      ine: ['', { validators: [Validators.required] }],
-      curp: ['', { validators: [Validators.required] }],
+      ine: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(60)] },
+      ],
+      curp: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(20)] },
+      ],
       genero: ['', { validators: [Validators.required] }],
       estadoCivilTutor: ['', { validators: [Validators.required] }],
-      ocupacion: ['', { validators: [Validators.required] }],
+      ocupacion: [
+        '',
+        { validators: [Validators.required, Validators.maxLength(60)] },
+      ],
       estudios: ['', { validators: [Validators.required] }],
       telefono: '',
       celular: '',
-      correo: '',
+      correo: [
+        '',
+        { validators: [Validators.email, Validators.maxLength(60)] },
+      ],
       domicilio: ['', { validators: [Validators.required] }],
     });
 
@@ -115,6 +143,7 @@ export class EncuestaComponent implements OnInit {
     );
   }
   GuardarEncuesta(stepper: MatStepper) {
+    this.isLoading = true;
     let idAlumno = Number(this.seguridadService.obtenerCampoJWT('idAlumno'));
 
     const encuesta: encuestaCreacionDTO = {
@@ -147,17 +176,26 @@ export class EncuestaComponent implements OnInit {
     };
 
     this.encuestasService.Crear(encuesta).subscribe(
-      (encuestaRespuesta) => {
-        console.log(encuestaRespuesta);
+      (respuesta) => {
+        // console.log(respuesta);
+        sessionStorage.setItem('idEncuesta', respuesta.idEncuesta.toString());
         stepper.next();
         this.isEditable = false;
         this.errores = [];
+        this.isLoading = false;
       },
-      (error) => (this.errores = parsearErroresAPI(error))
+      (error) => {
+        this.errores = parsearErroresAPI(error);
+        this.isLoading = false;
+      }
     );
   }
 
   goFordward(stepper: MatStepper) {
     stepper.next();
+  }
+
+  openComprobanteDialog() {
+    const dialogRef = this.dialog.open(ComprobanteDialogComponent);
   }
 }

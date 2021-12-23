@@ -1,5 +1,6 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
 import { MensajeExistoso } from 'src/app/helpers/helpers';
 import { usuarioDTO } from 'src/app/usuarios/usuario';
@@ -13,7 +14,10 @@ import { AlumnosService } from '../alumnos.service';
   styleUrls: ['./indice-alumnos.component.css'],
 })
 export class IndiceAlumnosComponent implements OnInit {
-  constructor(private alumnosService: AlumnosService) {}
+  constructor(
+    private alumnosService: AlumnosService,
+    private formBuilder: FormBuilder
+  ) {}
 
   columnasAMostrar = [
     'opciones',
@@ -31,11 +35,23 @@ export class IndiceAlumnosComponent implements OnInit {
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
 
+  form: FormGroup;
+
+  formularioOriginal = {
+    nombreAlumno: '',
+  };
+
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
       this.paginaActual,
       this.cantidadRegistrosAMostrar
     );
+
+    this.form = this.formBuilder.group(this.formularioOriginal);
+
+    this.form.valueChanges.subscribe((valores) => {
+      this.buscarAlumnos(valores);
+    });
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
@@ -111,6 +127,19 @@ export class IndiceAlumnosComponent implements OnInit {
           (error) => console.log(error)
         );
       }
+    });
+  }
+
+  buscarAlumnos(valores: any) {
+    valores.pagina = this.paginaActual;
+    valores.recordsPorPagina = this.cantidadRegistrosAMostrar;
+
+    this.alumnosService.filtrarTodos(valores).subscribe((response) => {
+      this.alumnos = response.body;
+
+      this.cantidadTotalRegistros = response.headers.get(
+        'cantidadTotalRegistros'
+      );
     });
   }
 }

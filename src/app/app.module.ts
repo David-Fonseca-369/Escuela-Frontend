@@ -30,6 +30,9 @@ import { NgxDropzoneModule } from 'ngx-dropzone';
 //Modulo ngx-chart
 import { NgxChartsModule } from '@swimlane/ngx-charts';
 
+//barcode
+import { NgxBarcodeModule } from 'ngx-barcode';
+
 import { MenuComponent } from './menu/menu.component';
 import { InvitadoComponent } from './invitado/invitado.component';
 import { LandingPageComponent } from './landing-page/landing-page.component';
@@ -165,6 +168,7 @@ import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprob
     SweetAlert2Module,
     NgxDropzoneModule,
     NgxChartsModule,
+    NgxBarcodeModule,
     MarkdownModule.forRoot(),
   ],
   providers: [],

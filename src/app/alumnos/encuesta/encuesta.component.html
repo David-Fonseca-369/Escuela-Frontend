@@ -1,3 +1,4 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
 <mat-stepper linear #stepper>
   <mat-step [stepControl]="firstFormGroup" [editable]="isEditable">
     <form [formGroup]="firstFormGroup">
@@ -109,7 +110,13 @@
         </mat-form-field>
       </div>
       <div>
-        <button mat-button (click)="goFordward(stepper)">Siguiente</button>
+        <button
+          mat-button
+          [disabled]="firstFormGroup.invalid"
+          (click)="goFordward(stepper)"
+        >
+          Siguiente
+        </button>
       </div>
     </form>
   </mat-step>
@@ -245,6 +252,7 @@
             matInput
             type="email"
           />
+          <mat-error>Debe agregar un correo valido.</mat-error>
         </mat-form-field>
       </div>
 
@@ -262,7 +270,9 @@
     </form>
     <div>
       <button mat-button matStepperPrevious>Atrás</button>
-      <button mat-button matStepperNext>Siguiente</button>
+      <button mat-button matStepperNext [disabled]="secondFormGroup.invalid">
+        Siguiente
+      </button>
     </div>
   </mat-step>
 
@@ -338,7 +348,9 @@
 
       <img src="./assets/images/alumno/correcto.png " alt="Correcto" />
 
-      <button mat-button>Ver Comprobante</button>
+      <button mat-button (click)="openComprobanteDialog()">
+        Ver Comprobante
+      </button>
     </div>
   </mat-step>
 </mat-stepper>

@@ -39,3 +39,10 @@ mat-form-field {
 .reinscrito h2 {
   margin-bottom: 3rem;
 }
+
+button {
+  margin-top: 1rem;
+  background: #4f707b;
+  color: white;
+  margin-right: 1rem;
+}

@@ -3,41 +3,6 @@
     <h1>¡Mándanos un mensaje!</h1>
   </div>
   <div class="contacto">
-    <div class="datos-interesado">
-      <div>
-        <mat-form-field appearance="outline">
-          <mat-label>Nombre</mat-label>
-          <input matInput />
-          <mat-error>El campo concepto es requerido.</mat-error>
-        </mat-form-field>
-        <mat-form-field appearance="outline">
-          <mat-label>Apellidos</mat-label>
-          <input matInput />
-          <mat-error>El campo concepto es requerido.</mat-error>
-        </mat-form-field>
-
-        <div>
-          <mat-form-field appearance="outline">
-            <mat-label>Correo Electrónico</mat-label>
-            <input matInput />
-            <mat-error>El campo concepto es requerido.</mat-error>
-          </mat-form-field>
-        </div>
-        <div>
-          <mat-form-field class="example-full-width" appearance="outline">
-            <mat-label>Mensaje</mat-label>
-            <textarea
-              matInput
-              placeholder="Ej. Estoy interesado en inscribirme, pero..."
-            ></textarea>
-          </mat-form-field>
-        </div>
-        <div>
-          <button mat-button class="enviar-datos">Enviar Mensaje</button>
-        </div>
-      </div>
-    </div>
-
     <div class="datos-contacto">
       <div class="mapa">
         <iframe
@@ -68,6 +33,15 @@
           Colonia la Institución, San Antonio Mextepec, San Felipe del Progreso,
           C.P. 60687.
         </p>
+      </div>
+      <div>
+        <a
+          class="button-whatsapp"
+          mat-button
+          href="https://api.whatsapp.com/send?phone=34695685920&text=Hola,%20¿Puede%20darme%20información?,%20por%20favor."
+          target="_blank"
+          >Mensaje Whatsapp</a
+        >
       </div>
     </div>
   </div>

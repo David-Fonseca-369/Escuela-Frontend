@@ -16,3 +16,9 @@ mat-form-field {
 .formulario button[disabled] {
   background: #c4cfd3;
 }
+
+@media screen and (max-width: 600px) {
+  mat-form-field {
+    width: 100%;
+  }
+}

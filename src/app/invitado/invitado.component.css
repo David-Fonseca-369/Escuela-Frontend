@@ -80,3 +80,18 @@
     display: block;
   }
 }
+.imagess img {
+  width: 60rem;
+  margin-right: 0.5rem;
+  margin-bottom: 1rem;
+  margin-left: 0.5rem;
+  overflow: hidden;
+  position: relative;
+
+  filter: drop-shadow(1px 2px 3px black);
+}
+
+.imagess {
+  display: flex;
+  justify-content: center;
+}

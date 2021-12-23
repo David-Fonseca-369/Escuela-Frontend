@@ -25,3 +25,15 @@
 .inputs mat-form-field {
   width: 49%;
 }
+
+@media screen and (max-width: 600px) {
+  .inputs {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .nombre mat-form-field,
+  .inputs mat-form-field {
+    width: 100%;
+  }
+}

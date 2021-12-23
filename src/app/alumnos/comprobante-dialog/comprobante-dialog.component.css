@@ -1,3 +1,7 @@
+.container {
+  width: 1000px;
+  height: auto;
+}
 .firmas-container {
   margin-top: 3rem;
   display: flex;

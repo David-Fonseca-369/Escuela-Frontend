@@ -17,3 +17,12 @@ mat-paginator {
   background: #4f707b;
   color: white;
 }
+
+@media screen and (max-width: 600px) {
+  .tabla-grupos {
+    width: 100%;
+  }
+  mat-paginator {
+    width: 100%;
+  }
+}

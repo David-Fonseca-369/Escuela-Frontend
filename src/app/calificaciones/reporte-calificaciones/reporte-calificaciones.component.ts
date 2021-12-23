@@ -169,6 +169,7 @@ export class ReporteCalificacionesComponent implements OnInit {
     pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
     pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 95, 8);
     pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
+    // pdf.addImage()
     pdf.setFontSize(12);
     pdf.setTextColor(99);
 

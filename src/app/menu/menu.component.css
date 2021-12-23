@@ -8,7 +8,8 @@ mat-toolbar {
   background-color: #cdbfa4;
   color: #243438;
 }
-.opciones-invitado {
+.opciones-invitado,
+.opciones-administrador {
   display: flex;
 }
 
@@ -20,19 +21,22 @@ mat-toolbar {
   font-weight: bold;
 }
 
-.opciones-menu {
+.opciones-menu,
+.opciones-administrador-responsiva {
   display: none;
 }
 
 @media screen and (max-width: 600px) {
-  .opciones-invitado {
+  .opciones-invitado,
+  .opciones-administrador {
     display: none;
   }
   .logo-text {
     display: none;
   }
 
-  .opciones-menu {
+  .opciones-menu,
+  .opciones-administrador-responsiva {
     display: block;
   }
 }

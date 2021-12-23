@@ -58,3 +58,23 @@
 .form button[disabled] {
   background: #c4cfd3;
 }
+
+@media screen and (max-width: 600px) {
+  .nombres,
+  .datos,
+  .datos2,
+  .tutor {
+    flex-direction: column;
+  }
+
+  .nombres mat-form-field,
+  .datos mat-form-field,
+  .datos2 mat-form-field,
+  .tutor mat-form-field {
+    width: 100%;
+  }
+
+  .form {
+    width: 100%;
+  }
+}

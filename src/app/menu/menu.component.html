@@ -27,29 +27,6 @@
     </a>
   </span>
 
-  <!-- Opcion resoponsiva -->
-  <a mat-button class="opciones-menu" [matMenuTriggerFor]="options">
-    <mat-icon>dehaze</mat-icon>
-
-    <mat-menu #options="matMenu">
-      <div class="image-options">
-        <a mat-button routerLink="">
-          <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
-          <span>Inicio</span>
-        </a>
-      </div>
-
-      <hr />
-      <button mat-menu-item routerLink="invitado">Invitado</button>
-      <button mat-menu-item routerLink="resenia">Reseña</button>
-      <button mat-menu-item>Planta Docente</button>
-      <button mat-menu-item routerLink="carrera-tecnica">
-        Carrera Técnica
-      </button>
-      <button mat-menu-item routerLink="contacto">Contacto</button>
-    </mat-menu>
-  </a>
-
   <app-autorizado>
     <ng-container noAutorizado>
       <div class="opciones-invitado">
@@ -71,6 +48,30 @@
           <a mat-button routerLink="contacto">Contacto</a>
         </div>
       </div>
+      <!-- Opcion resoponsiva  invitado -->
+      <a mat-button class="opciones-menu" [matMenuTriggerFor]="options">
+        <mat-icon>dehaze</mat-icon>
+
+        <mat-menu #options="matMenu">
+          <div class="image-options">
+            <a mat-button routerLink="">
+              <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <hr />
+          <button mat-menu-item routerLink="invitado">Invitado</button>
+          <button mat-menu-item routerLink="resenia">Reseña</button>
+          <button mat-menu-item routerLink="planta-docente">
+            Planta Docente
+          </button>
+          <button mat-menu-item routerLink="carrera-tecnica">
+            Carrera Técnica
+          </button>
+          <button mat-menu-item routerLink="contacto">Contacto</button>
+        </mat-menu>
+      </a>
     </ng-container>
   </app-autorizado>
 
@@ -100,6 +101,50 @@
           >Configuración de la Página</a
         >
       </div>
+
+      <!-- Opciones responsivas administrador -->
+      <a
+        mat-button
+        class="opciones-administrador-responsiva"
+        [matMenuTriggerFor]="optionsAdministrador"
+      >
+        <mat-icon>dehaze</mat-icon>
+
+        <mat-menu #optionsAdministrador="matMenu">
+          <div class="image-options">
+            <a mat-button routerLink="/landingPage-administrador">
+              <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <hr />
+          <button mat-menu-item routerLink="grupos">Grupos</button>
+          <button mat-menu-item routerLink="materias">Materias</button>
+          <button mat-menu-item [matMenuTriggerFor]="usuariosResponsivo">
+            Usuarios
+          </button>
+          <mat-menu #usuariosResponsivo="matMenu">
+            <button mat-menu-item routerLink="alumnos">Alumnos</button>
+            <button mat-menu-item [matMenuTriggerFor]="docentesResponsivo">
+              Docentes
+            </button>
+            <mat-menu #docentesResponsivo="matMenu">
+              <button mat-menu-item routerLink="docentes">Ver Docentes</button>
+              <button mat-menu-item routerLink="materiasDocentes">
+                Materias de Docentes
+              </button>
+            </mat-menu>
+            <button mat-menu-item routerLink="administradores">
+              Admnistradores
+            </button>
+          </mat-menu>
+          <button mat-menu-item routerLink="periodos">Periodos</button>
+          <button mat-menu-item routerLink="configuracion-pagina">
+            Configuración
+          </button>
+        </mat-menu>
+      </a>
     </ng-container>
   </app-autorizado>
 
