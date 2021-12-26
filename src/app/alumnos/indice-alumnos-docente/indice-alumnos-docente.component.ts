@@ -30,29 +30,23 @@ export class IndiceAlumnosDocenteComponent implements OnInit {
   cantidadRegistrosAMostrar = 10;
 
   ngOnInit(): void {
-    this.cargarRegistrosPaginacion(
-      this.paginaActual,
-      this.cantidadRegistrosAMostrar
-    );
-
     this.obtenerDatosMateria();
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
-    this.activatedRoute.params.subscribe((params) => {
-      this.alumnosService
-        .grupoPaginacion(pagina, cantidadElementosAMostrar, params.id)
-        .subscribe(
-          (respuesta: HttpResponse<alumnoDTO[]>) => {
-            this.alumnos = respuesta.body;
+    this.alumnosService
+      .grupoPaginacion(pagina, cantidadElementosAMostrar, this.materia.idGrupo)
+      .subscribe(
+        (respuesta: HttpResponse<alumnoDTO[]>) => {
+          this.alumnos = respuesta.body;
 
-            this.cantidadTotalRegistros = respuesta.headers.get(
-              'cantidadTotalRegistros'
-            );
-          },
-          (error) => console.log(error)
-        );
-    });
+          this.cantidadTotalRegistros = respuesta.headers.get(
+            'cantidadTotalRegistros'
+          );
+          console.log(this.materia.idGrupo);
+        },
+        (error) => console.log(error)
+      );
   }
 
   actualizarPaginacion(datos: PageEvent) {
@@ -70,6 +64,10 @@ export class IndiceAlumnosDocenteComponent implements OnInit {
       this.materiasService.obtenerPorId(params.id).subscribe(
         (materia) => {
           this.materia = materia;
+          this.cargarRegistrosPaginacion(
+            this.paginaActual,
+            this.cantidadRegistrosAMostrar
+          );
         },
         (error) => console.log(error)
       );

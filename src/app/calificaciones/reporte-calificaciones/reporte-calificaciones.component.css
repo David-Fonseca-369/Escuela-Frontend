@@ -41,6 +41,7 @@ td {
 }
 
 .grafica {
+  width: 800px;
   display: flex;
   justify-content: center;
 }
@@ -49,6 +50,7 @@ td {
   display: flex;
   justify-content: center;
 }
+
 .buttonPDF button {
   width: 20%;
 }
@@ -63,4 +65,34 @@ td {
   display: flex;
   flex-direction: column;
   justify-content: center;
+}
+
+.solo-pc {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .cabecera {
+    flex-direction: column;
+  }
+  mat-form-field {
+    width: 100%;
+  }
+
+  table th,
+  tr {
+    font-size: 9px;
+  }
+  .buttonPDF button {
+    width: 100%;
+  }
+
+  .solo-pc {
+    display: flex;
+  }
+
+  .buttonGrafica,
+  .grafica {
+    display: none;
+  }
 }

@@ -150,7 +150,7 @@
 
   <app-autorizado [rol]="'Docente'">
     <ng-container autorizado>
-      <div>
+      <div class="opciones-docente">
         <a mat-button routerLink="/materias-docente">Materias</a>
         <a mat-button [matMenuTriggerFor]="asistencia">Asistencia</a>
         <mat-menu #asistencia="matMenu">
@@ -171,16 +171,83 @@
           </button>
         </mat-menu>
       </div>
+
+      <!-- Opciones responsivas docente -->
+      <a
+        mat-button
+        class="opciones-docente-responsiva"
+        [matMenuTriggerFor]="optionsDocente"
+      >
+        <mat-icon>dehaze</mat-icon>
+
+        <mat-menu #optionsDocente="matMenu">
+          <div class="image-options">
+            <a mat-button routerLink="/landingPage-docente">
+              <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <hr />
+          <button mat-menu-item routerLink="/materias-docente">Materias</button>
+          <a mat-menu-item [matMenuTriggerFor]="asistencia">Asistencia</a>
+          <mat-menu #asistencia="matMenu">
+            <button mat-menu-item routerLink="/asistencias/crear">
+              Registrar Asistencia
+            </button>
+            <button mat-menu-item routerLink="/asistencias/reporte">
+              Ver Asistencias
+            </button>
+          </mat-menu>
+          <a mat-menu-item [matMenuTriggerFor]="calificaciones"
+            >Calificaciones</a
+          >
+          <mat-menu #calificaciones="matMenu">
+            <button mat-menu-item routerLink="/calificaciones/crear">
+              Registrar Calificaciones
+            </button>
+            <button mat-menu-item routerLink="/calificaciones/reporte">
+              Reporte de Calificaciones
+            </button>
+          </mat-menu>
+        </mat-menu>
+      </a>
     </ng-container>
   </app-autorizado>
 
   <app-autorizado [rol]="'Alumno'">
     <ng-container autorizado>
-      <div>
+      <div class="opciones-alumno">
         <a mat-button (click)="openBoletaDialog()">Descargar Boleta</a>
 
         <a mat-button routerLink="reinscripcion">Realizar reinscripción</a>
       </div>
+
+      <!-- Opciones responsivas alumno -->
+      <a
+        mat-button
+        class="opciones-alumno-responsiva"
+        [matMenuTriggerFor]="optionsAlumno"
+      >
+        <mat-icon>dehaze</mat-icon>
+
+        <mat-menu #optionsAlumno="matMenu">
+          <div class="image-options">
+            <a mat-button routerLink="/landingPage-alumno">
+              <img src="./assets/images/logo_prepa.png" alt="Logo CBT" />
+              <span>Inicio</span>
+            </a>
+          </div>
+
+          <hr />
+          <button mat-menu-item (click)="openBoletaDialog()">
+            Descargar Boleta
+          </button>
+          <button mat-menu-item routerLink="reinscripcion">
+            Realizar Reinscripción
+          </button>
+        </mat-menu>
+      </a>
     </ng-container>
   </app-autorizado>
 
@@ -201,7 +268,28 @@
       </a>
 
       <mat-menu #opciones="matMenu">
-        <button mat-menu-item routerLink="perfil">Perfil</button>
+        <button
+          mat-menu-item
+          routerLink="perfilAdministrador"
+          *ngIf="seguridadService.obtenerRol() === 'Administrador'"
+        >
+          Perfil
+        </button>
+        <button
+          mat-menu-item
+          routerLink="perfilDocente"
+          *ngIf="seguridadService.obtenerRol() === 'Docente'"
+        >
+          Perfil
+        </button>
+        <button
+          mat-menu-item
+          routerLink="perfilAlumno"
+          *ngIf="seguridadService.obtenerRol() === 'Alumno'"
+        >
+          Perfil
+        </button>
+
         <button mat-menu-item (click)="seguridadService.cerrarSesion()">
           Cerrar Sesión
         </button>

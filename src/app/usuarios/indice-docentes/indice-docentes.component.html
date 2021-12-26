@@ -4,7 +4,62 @@
     <div class="nuevo">
       <button mat-button routerLink="/docentes/crear">Nuevo</button>
     </div>
-    <div>
+
+    <!-- Responsive lista usuarios -->
+    <div class="usuarios-responsive">
+      <div *ngFor="let usuario of usuarios">
+        <div style="text-align: start">
+          <p>
+            <strong>
+              {{
+                usuario.nombre +
+                  " " +
+                  usuario.apellidoPaterno +
+                  " " +
+                  usuario.apellidoMaterno
+              }}</strong
+            >
+          </p>
+          <div style="display: flex; justify-content: space-between">
+            <p style="color: gray">{{ usuario.nombreGrupo }}</p>
+
+            <div class="icons">
+              <a
+                mat-icon-button
+                routerLink="/docentes/editar/{{ usuario.idUsuario }}"
+                ><mat-icon>edit</mat-icon></a
+              >
+              <a
+                mat-icon-button
+                (click)="activar(usuario)"
+                *ngIf="!usuario.estado"
+              >
+                <mat-icon>check</mat-icon>
+              </a>
+              <a
+                mat-icon-button
+                (click)="desactivar(usuario)"
+                *ngIf="usuario.estado"
+              >
+                <mat-icon>block</mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 15, 20, 50]"
+        showFirstLastButtons
+        [length]="cantidadTotalRegistros"
+        [pageSize]="cantidadRegistrosAMostrar"
+        (page)="actualizarPaginacion($event)"
+      >
+      </mat-paginator>
+    </div>
+
+    <div *ngIf="usuarios">
       <table
         #table
         mat-table
@@ -75,7 +130,7 @@
         <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
       </table>
       <mat-paginator
-        class="mat-elevation-z8"
+        class="mat-elevation-z8 paginator"
         [pageSizeOptions]="[5, 10, 15, 20, 50]"
         showFirstLastButtons
         [length]="cantidadTotalRegistros"

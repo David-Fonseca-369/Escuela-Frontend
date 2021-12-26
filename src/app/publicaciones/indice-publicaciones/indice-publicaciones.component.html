@@ -19,12 +19,53 @@
     </button>
   </div>
 
+  <!-- Responsive lista publicaciones -->
+  <div class="publicaciones-responsive">
+    <div *ngFor="let publicacion of publicaciones">
+      <div style="text-align: start">
+        <p>
+          <strong> {{ publicacion.nombre }}</strong>
+        </p>
+        <div style="display: flex; justify-content: space-between">
+          <p style="color: gray">
+            {{ publicacion.fechaCreacion | date: "dd/MM/yyyy, h:mm a" }}
+          </p>
+
+          <div class="icons">
+            <a mat-icon-button (click)="openDialog(publicacion.idPublicacion)"
+              ><mat-icon>description</mat-icon></a
+            >
+            <a mat-icon-button (click)="eliminar(publicacion)">
+              <mat-icon>delete</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
+      showFirstLastButtons
+      [length]="cantidadTotalRegistros"
+      [pageSize]="cantidadRegistrosAMostrar"
+      (page)="actualizarPaginacion($event)"
+    >
+    </mat-paginator>
+  </div>
+
+  <div class="messagge-responsive" *ngIf="publicaciones">
+    <div *ngIf="publicaciones.length === 0">
+      <p style="color: red">Por el momento no tienes niguna publicación.</p>
+    </div>
+  </div>
+
   <div>
     <table
       #table
       mat-table
       [dataSource]="publicaciones"
-      class="mat-elevation-z8 tabla-materias"
+      class="mat-elevation-z8 tabla-publicaciones"
     >
       <ng-container matColumnDef="opciones">
         <th mat-header-cell *matHeaderCellDef>Opciones</th>
@@ -68,8 +109,9 @@
         </td>
       </tr>
     </table>
+
     <mat-paginator
-      class="mat-elevation-z8"
+      class="mat-elevation-z8 paginator"
       [pageSizeOptions]="[5, 10, 15, 20, 50]"
       showFirstLastButtons
       [length]="cantidadTotalRegistros"

@@ -14,3 +14,9 @@
 .formulario mat-form-field {
   margin-right: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .formulario mat-form-field {
+    width: 100%;
+  }
+}

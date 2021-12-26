@@ -46,10 +46,8 @@ mat-form-field {
 }
 
 .button-login button[disabled] {
-  width: 50%;
   background-color: gray;
   color: white;
-  border-radius: 15px;
 }
 .logo {
   display: flex;
@@ -74,4 +72,27 @@ mat-form-field {
   text-decoration-line: none;
   color: #7d7d7d;
   margin-left: 2rem;
+}
+
+@media screen and (max-width: 600px) {
+  .content {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+  }
+  .login-container {
+    width: 100%;
+  }
+
+  .logo {
+    display: block;
+    margin: 1rem auto;
+    padding-left: 1rem;
+    width: 6rem;
+  }
+
+  .button-login button {
+    width: 80%;
+    margin-top: 1rem;
+  }
 }

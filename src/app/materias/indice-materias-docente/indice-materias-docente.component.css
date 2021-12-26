@@ -17,3 +17,28 @@ mat-paginator {
   background: #4f707b;
   color: white;
 }
+
+.materias-responsive {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .tabla-materias,
+  mat-paginator {
+    width: 100%;
+  }
+
+  .paginator,
+  .tabla-materias {
+    display: none;
+  }
+
+  .materias-responsive {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .materias-responsive p {
+    font-size: medium;
+  }
+}

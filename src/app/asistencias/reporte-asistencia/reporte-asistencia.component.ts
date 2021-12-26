@@ -97,13 +97,6 @@ export class ReporteAsistenciaComponent implements OnInit {
   }
 
   obtenerAsistencias() {
-    console.log(
-      'idMateria: ' +
-        this.form.value.materia.idMateria +
-        ' idGrupo: ' +
-        this.form.value.materia.idGrupo
-    );
-
     this.asistenciasService
       .obtenerAsistencias(
         this.form.value.materia.idMateria,
@@ -115,7 +108,6 @@ export class ReporteAsistenciaComponent implements OnInit {
       .subscribe(
         (asistencias) => {
           this.asistenciasTabla = asistencias;
-          console.log(asistencias);
         },
         (errores) => (this.errores = parsearErroresAPI(errores))
       );
@@ -126,6 +118,11 @@ export class ReporteAsistenciaComponent implements OnInit {
   }
 
   generatePDF() {
+    //imagen
+    var img = new Image();
+    img.src = './assets/images/logo_prepa.png';
+
+    //
     this.convertirArreglo();
 
     //Calcular fechas
@@ -141,11 +138,11 @@ export class ReporteAsistenciaComponent implements OnInit {
 
     var pdf = new jsPDF();
 
-    pdf.setFontSize(18);
-    pdf.text('Asistencias', 11, 8);
+    pdf.addImage(img, 'png', 6, 1, 14, 10);
+    pdf.setFontSize(12);
+    pdf.text('Asistencias', 22, 8);
     pdf.setFontSize(10);
     pdf.text(`Materia: ${this.form.value.materia.nombre}`, 50, 8);
-    pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 75, 8);
     pdf.text(`Periodo: ${strDesde} al ${strHasta}`, 100, 8);
     pdf.text(
       `Asistencias registradas: ${this.asistenciasTabla.totalAsistenciasFila}`,

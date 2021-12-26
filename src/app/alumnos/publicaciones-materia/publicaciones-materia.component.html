@@ -4,8 +4,9 @@
     *ngIf="publicaciones"
     [publicaciones]="publicaciones"
   ></app-publicacion-listado>
-
-  <p style="color: green" *ngIf="publicaciones.length <= 0">
-    Por el momento no se ha publicado nada en esta materia.
-  </p>
+  <div *ngIf="publicaciones">
+    <p style="color: green" *ngIf="publicaciones.length <= 0">
+      Por el momento no se ha publicado nada en esta materia.
+    </p>
+  </div>
 </div>

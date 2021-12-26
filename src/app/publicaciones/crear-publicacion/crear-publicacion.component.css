@@ -33,3 +33,30 @@ mat-form-field {
 .buttons-publicacion button[disabled] {
   background: #c4cfd3;
 }
+
+.nombre {
+  width: 60%;
+}
+
+.fecha {
+  width: 30%;
+}
+
+@media screen and (max-width: 600px) {
+  .cabecera,
+  .publicacion {
+    flex-direction: column;
+  }
+  .datos-publicacion,
+  .nombre,
+  .fecha {
+    width: 100%;
+  }
+
+  .dropzone {
+    background-color: rebeccapurple;
+    width: 100%;
+
+    margin: 1rem 0;
+  }
+}

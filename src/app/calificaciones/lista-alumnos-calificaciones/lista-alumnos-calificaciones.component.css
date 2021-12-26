@@ -19,3 +19,10 @@ table {
 .buttons-calificacion {
   display: flex;
 }
+
+@media screen and (max-width: 600px) {
+  table mat-form-field {
+    width: 5rem;
+    margin-left: 0.5rem;
+  }
+}

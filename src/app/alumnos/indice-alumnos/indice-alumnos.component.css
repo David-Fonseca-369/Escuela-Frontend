@@ -22,8 +22,35 @@ mat-form-field {
   width: 50%;
 }
 
+a {
+  text-decoration: none;
+  color: black;
+}
+
+.alumnos-responsive {
+  display: none;
+}
+
+.icons a {
+  margin-right: 0.5rem;
+}
 @media screen and (max-width: 600px) {
   .tabla-alumnos {
+    display: none;
+  }
+  mat-form-field {
     width: 100%;
+  }
+
+  mat-paginator {
+    width: 100%;
+  }
+  .paginator {
+    display: none;
+  }
+
+  .alumnos-responsive {
+    display: flex;
+    flex-direction: column;
   }
 }

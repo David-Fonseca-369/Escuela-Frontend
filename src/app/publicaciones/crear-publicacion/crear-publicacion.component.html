@@ -19,13 +19,13 @@
   <form [formGroup]="form">
     <div class="publicacion">
       <div class="datos-publicacion">
-        <mat-form-field appearance="outline" style="width: 60%">
+        <mat-form-field appearance="outline" class="nombre">
           <mat-label>Nombre o titulo*</mat-label>
           <input type="text" matInput formControlName="nombre" />
           <mat-error>Debe agregar un nombre o titulo.</mat-error>
         </mat-form-field>
 
-        <mat-form-field appearance="outline" style="width: 30%">
+        <mat-form-field appearance="outline" class="fecha">
           <mat-label>Fecha Entrega</mat-label>
           <!-- se asocia con #picker -->
           <input
@@ -68,7 +68,10 @@
         Publicar
       </button>
 
-      <a mat-stroked-button routerLink="/publicaciones/{{ materia.idMateria }}"
+      <a
+        *ngIf="materia"
+        mat-stroked-button
+        routerLink="/publicaciones/{{ materia.idMateria }}"
         >Cancelar</a
       >
     </div>

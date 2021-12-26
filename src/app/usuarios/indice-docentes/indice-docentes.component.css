@@ -17,3 +17,29 @@ mat-paginator {
   background: #4f707b;
   color: white;
 }
+
+.usuarios-responsive {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .tabla-usuarios {
+    display: none;
+  }
+
+  mat-paginator {
+    width: 100%;
+  }
+  .paginator {
+    display: none;
+  }
+
+  .usuarios-responsive {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .usuarios-responsive p {
+    font-size: medium;
+  }
+}

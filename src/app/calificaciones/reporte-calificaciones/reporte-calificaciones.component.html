@@ -89,6 +89,18 @@
     </form>
   </div>
 </div>
+<ng-container *ngIf="form.value.idTipo === 2">
+  <div *ngIf="calificacionesMateria">
+    <p
+      class="solo-pc"
+      style="color: red; text-align: justify"
+      *ngIf="calificacionesMateria.length > 0"
+    >
+      Por favor, abre la página desde el navegador de la PC, para poder mostrar
+      la gráfica.
+    </p>
+  </div>
+</ng-container>
 
 <ng-container *ngIf="calificaciones">
   <div class="tabla-calificaciones" *ngIf="calificaciones.length > 0">
@@ -147,7 +159,7 @@
       </ngx-charts-bar-vertical>
     </div>
 
-    <div class="buttonPDF">
+    <div class="buttonPDF buttonGrafica">
       <button mat-button (click)="downloadGrafica()">Generar PDF</button>
     </div>
   </div>

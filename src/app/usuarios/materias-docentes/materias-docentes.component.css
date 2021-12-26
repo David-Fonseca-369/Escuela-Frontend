@@ -27,3 +27,23 @@ mat-paginator {
   display: flex;
   justify-content: start;
 }
+
+@media screen and (max-width: 600px) {
+  .asignadas,
+  .disponibles {
+    width: 100%;
+  }
+  .contenedor-materias {
+    flex-direction: column;
+  }
+  table {
+    width: 100%;
+  }
+  mat-paginator {
+    width: 100%;
+  }
+
+  mat-form-field {
+    width: 100%;
+  }
+}

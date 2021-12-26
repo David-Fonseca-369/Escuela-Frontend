@@ -32,6 +32,7 @@ export class PublicacionesMateriaComponent implements OnInit {
 
   obtenerPublicaciones() {
     this.isLoading = true;
+    console.log('period' + this.periodo.idPeriodo);
     this.activatedRoute.params.subscribe((params) => {
       this.publicacionesService
         .obtenerPublicacionesMateria(params.id, this.periodo.idPeriodo)

@@ -46,3 +46,19 @@ button {
   color: white;
   margin-right: 1rem;
 }
+
+@media screen and (max-width: 600px) {
+  .section,
+  .section2 {
+    flex-direction: column;
+  }
+
+  .section mat-form-field,
+  .section2 mat-form-field {
+    width: 100%;
+  }
+
+  .reinscrito img {
+    width: 9rem;
+  }
+}

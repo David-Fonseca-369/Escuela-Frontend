@@ -19,6 +19,60 @@
       <button mat-button routerLink="/alumnos/crear">Nuevo</button>
     </div>
 
+    <!-- Responsive lista alumnos -->
+    <div class="alumnos-responsive">
+      <div *ngFor="let alumno of alumnos">
+        <div style="text-align: start">
+          <p>
+            <strong>
+              {{
+                alumno.nombre +
+                  " " +
+                  alumno.apellidoPaterno +
+                  " " +
+                  alumno.apellidoMaterno
+              }}</strong
+            >
+          </p>
+          <div style="display: flex; justify-content: space-between">
+            <p style="color: gray">{{ alumno.nombreGrupo }}</p>
+
+            <div class="icons">
+              <a
+                mat-icon-button
+                routerLink="/alumnos/editar/{{ alumno.idAlumno }}"
+                ><mat-icon>edit</mat-icon></a
+              >
+              <a
+                mat-icon-button
+                (click)="activar(alumno)"
+                *ngIf="!alumno.estado"
+              >
+                <mat-icon>check</mat-icon>
+              </a>
+              <a
+                mat-icon-button
+                (click)="desactivar(alumno)"
+                *ngIf="alumno.estado"
+              >
+                <mat-icon>block</mat-icon>
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 15, 20, 50]"
+        showFirstLastButtons
+        [length]="cantidadTotalRegistros"
+        [pageSize]="cantidadRegistrosAMostrar"
+        (page)="actualizarPaginacion($event)"
+      >
+      </mat-paginator>
+    </div>
+
     <div>
       <table
         #table
@@ -117,7 +171,7 @@
         </tr>
       </table>
       <mat-paginator
-        class="mat-elevation-z8"
+        class="mat-elevation-z8 paginator"
         [pageSizeOptions]="[5, 10, 15, 20, 50]"
         showFirstLastButtons
         [length]="cantidadTotalRegistros"

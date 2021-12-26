@@ -5,6 +5,39 @@
       <p><strong>Materia: </strong>{{ materia.nombre }}</p>
       <p><strong>Grupo: </strong>{{ materia.nombreGrupo }}</p>
     </div>
+
+    <!-- Responsive lista usuarios -->
+    <div class="usuarios-responsive">
+      <div *ngFor="let alumno of alumnos">
+        <div style="text-align: start">
+          <p>
+            <strong>
+              {{
+                alumno.nombre +
+                  " " +
+                  alumno.apellidoPaterno +
+                  " " +
+                  alumno.apellidoMaterno
+              }}</strong
+            >
+          </p>
+          <div style="display: flex; justify-content: space-between">
+            <p style="color: gray">{{ alumno.matricula }}</p>
+          </div>
+        </div>
+
+        <hr />
+      </div>
+      <mat-paginator
+        [pageSizeOptions]="[5, 10, 15, 20, 50]"
+        showFirstLastButtons
+        [length]="cantidadTotalRegistros"
+        [pageSize]="cantidadRegistrosAMostrar"
+        (page)="actualizarPaginacion($event)"
+      >
+      </mat-paginator>
+    </div>
+
     <div>
       <table
         #table
@@ -67,7 +100,7 @@
         </tr>
       </table>
       <mat-paginator
-        class="mat-elevation-z8"
+        class="mat-elevation-z8 paginator"
         [pageSizeOptions]="[5, 10, 15, 20, 50]"
         showFirstLastButtons
         [length]="cantidadTotalRegistros"

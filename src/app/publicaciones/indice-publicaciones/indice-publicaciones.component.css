@@ -17,3 +17,33 @@ table,
 mat-paginator {
   width: 60%;
 }
+
+.publicaciones-responsive {
+  display: none;
+}
+.messagge-responsive {
+  display: none;
+}
+@media screen and (max-width: 600px) {
+  mat-paginator {
+    width: 100%;
+  }
+  .paginator,
+  .tabla-publicaciones {
+    display: none;
+  }
+
+  .publicaciones-responsive {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .cabecera {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .messagge-responsive {
+    display: flex;
+  }
+}

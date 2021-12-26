@@ -1,7 +1,7 @@
-<div class="container">
+<div class="container" *ngIf="publicaciones">
   <div class="publicacion" *ngFor="let publicacion of publicaciones">
     <div class="contenido">
-      <div style="display: flex; justify-content: space-between">
+      <div class="cabecera-contenido">
         <p>
           <strong>{{ publicacion.nombre }}</strong>
         </p>

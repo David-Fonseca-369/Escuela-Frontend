@@ -9,11 +9,9 @@ mat-toolbar {
   color: #243438;
 }
 .opciones-invitado,
-.opciones-administrador {
-  display: flex;
-}
-
-.opciones-administrador {
+.opciones-administrador,
+.opciones-docente,
+.opciones-alumno {
   display: flex;
 }
 
@@ -22,13 +20,17 @@ mat-toolbar {
 }
 
 .opciones-menu,
-.opciones-administrador-responsiva {
+.opciones-administrador-responsiva,
+.opciones-docente-responsiva,
+.opciones-alumno-responsiva {
   display: none;
 }
 
 @media screen and (max-width: 600px) {
   .opciones-invitado,
-  .opciones-administrador {
+  .opciones-administrador,
+  .opciones-docente,
+  .opciones-alumno {
     display: none;
   }
   .logo-text {
@@ -36,7 +38,9 @@ mat-toolbar {
   }
 
   .opciones-menu,
-  .opciones-administrador-responsiva {
+  .opciones-administrador-responsiva,
+  .opciones-docente-responsiva,
+  .opciones-alumno-responsiva {
     display: block;
   }
 }

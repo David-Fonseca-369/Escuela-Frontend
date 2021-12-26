@@ -18,3 +18,26 @@ a {
   text-decoration: none;
   color: black;
 }
+
+.cabecera-contenido {
+  display: flex;
+  justify-content: space-between;
+}
+
+@media screen and (max-width: 600px) {
+  .publicacion {
+    width: 100%;
+    padding: 3px;
+  }
+  .publicacion p {
+    font-size: 10px;
+  }
+
+  .cabecera-contenido {
+    flex-direction: column;
+  }
+
+  markdown {
+    font-size: 10px;
+  }
+}

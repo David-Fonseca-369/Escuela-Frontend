@@ -27,3 +27,33 @@ mat-paginator {
 .texto-cabecera p {
   margin-right: 5%;
 }
+
+.usuarios-responsive {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .tabla-alumnos {
+    display: none;
+  }
+
+  mat-paginator {
+    width: 100%;
+  }
+  .paginator {
+    display: none;
+  }
+
+  .usuarios-responsive {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .usuarios-responsive p {
+    font-size: medium;
+  }
+  .texto-cabecera {
+    font-size: medium;
+    flex-direction: column;
+  }
+}

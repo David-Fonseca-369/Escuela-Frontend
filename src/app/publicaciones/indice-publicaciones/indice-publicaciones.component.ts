@@ -50,13 +50,13 @@ export class IndicePublicacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.asignarIdMateria();
-    this.obtenerPeriodoActual();
+    // this.obtenerPeriodoActual();
     this.obtenerMateria();
 
-    this.cargarRegistrosPaginacion(
-      this.paginaActual,
-      this.cantidadRegistrosAMostrar
-    );
+    // this.cargarRegistrosPaginacion(
+    //   this.paginaActual,
+    //   this.cantidadRegistrosAMostrar
+    // );
   }
 
   obtenerPeriodoActual() {
@@ -66,6 +66,11 @@ export class IndicePublicacionesComponent implements OnInit {
         if (periodo !== null) {
           this.periodo = periodo;
           this.isLoading = false;
+
+          this.cargarRegistrosPaginacion(
+            this.paginaActual,
+            this.cantidadRegistrosAMostrar
+          );
         }
       },
       (error) => {
@@ -85,7 +90,12 @@ export class IndicePublicacionesComponent implements OnInit {
     this.isLoading = true;
 
     this.publicacionesService
-      .obtenerPaginacion(this.idMateria, 2, pagina, cantidadElementosAMostrar)
+      .obtenerPaginacion(
+        this.idMateria,
+        this.periodo.idPeriodo,
+        pagina,
+        cantidadElementosAMostrar
+      )
       .subscribe(
         (respuesta: HttpResponse<publicacionDTO[]>) => {
           this.publicaciones = respuesta.body;
@@ -110,6 +120,8 @@ export class IndicePublicacionesComponent implements OnInit {
       (materia) => {
         this.materia = materia;
         this.isLoading = false;
+
+        this.obtenerPeriodoActual();
       },
       (error) => {
         this.errores = parsearErroresAPI(error);

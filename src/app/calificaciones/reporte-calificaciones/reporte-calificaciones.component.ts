@@ -159,15 +159,20 @@ export class ReporteCalificacionesComponent implements OnInit {
   }
 
   generatePDF() {
+    //imagen
+    var img = new Image();
+    img.src = './assets/images/logo_prepa.png';
+
+    //
     this.convertirArreglo();
 
     var pdf = new jsPDF();
 
-    pdf.setFontSize(18);
-    pdf.text('Calificaciones', 11, 8);
+    pdf.addImage(img, 'png', 6, 1, 14, 10);
+    pdf.setFontSize(12);
+    pdf.text('Calificaciones', 24, 8);
     pdf.setFontSize(10);
     pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
-    pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 95, 8);
     pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
     // pdf.addImage()
     pdf.setFontSize(12);

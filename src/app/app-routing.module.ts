@@ -239,14 +239,28 @@ const routes: Routes = [
     canActivate: [EsAlumnoGuard],
   },
 
-  //Perfil todos
-  { path: 'perfil', component: PerfilComponent },
-
   //
-  { path: 'reinscripcion', component: EncuestaComponent },
-
-  { path: 'prueba', component: ComprobanteDialogComponent },
-
+  {
+    path: 'reinscripcion',
+    component: EncuestaComponent,
+    canActivate: [EsAlumnoGuard],
+  },
+  //Perfil todos
+  {
+    path: 'perfilAdministrador',
+    component: PerfilComponent,
+    canActivate: [EsAdminGuard],
+  },
+  {
+    path: 'perfilDocente',
+    component: PerfilComponent,
+    canActivate: [EsDocenteGuard],
+  },
+  {
+    path: 'perfilAlumno',
+    component: PerfilComponent,
+    canActivate: [EsAlumnoGuard],
+  },
   //Esta redireciona
   { path: '**', redirectTo: '' },
 ];
