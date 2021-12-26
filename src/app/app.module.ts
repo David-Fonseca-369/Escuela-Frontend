@@ -12,7 +12,7 @@ import { MaterialModule } from './material/material.module';
 import { IvyCarouselModule } from 'angular-responsive-carousel';
 
 //Http client
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 //Modulo para formularios reactivos
 //Tambien para el binding de doble vía 'FormsModule'
@@ -92,6 +92,7 @@ import { PerfilComponent } from './perfil/perfil.component';
 import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.component';
 import { EncuestaComponent } from './alumnos/encuesta/encuesta.component';
 import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprobante-dialog.component';
+import { SeguridadInterceptorService } from './seguridad/seguridad-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -171,7 +172,13 @@ import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprob
     NgxBarcodeModule,
     MarkdownModule.forRoot(),
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: SeguridadInterceptorService,
+      multi: true,
+    },
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

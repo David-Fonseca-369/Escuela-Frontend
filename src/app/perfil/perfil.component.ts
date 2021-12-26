@@ -52,8 +52,6 @@ export class PerfilComponent implements OnInit {
       .subscribe(
         (datosUsuario) => {
           this.datosUsuario = datosUsuario;
-
-          console.log(datosUsuario);
         },
         (error) => (this.errores = parsearErroresAPI(error))
       );

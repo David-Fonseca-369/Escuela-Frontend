@@ -49,17 +49,19 @@ mat-form-field {
   background-color: gray;
   color: white;
 }
-.logo {
-  display: flex;
+
+.content {
+  display: block;
+  text-align: center;
 }
 
-.logo img {
+.logo {
   width: 9rem;
-  margin: 3rem auto 0;
+  margin: 3rem auto;
 }
 
 .content {
-  text-align: end;
+  text-align: center;
   display: inline-block;
 }
 
@@ -94,5 +96,13 @@ mat-form-field {
   .button-login button {
     width: 80%;
     margin-top: 1rem;
+  }
+
+  mat-form-field {
+    margin-bottom: 1.5rem;
+  }
+
+  .button-login {
+    margin-top: 0;
   }
 }
