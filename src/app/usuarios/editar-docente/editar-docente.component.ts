@@ -23,6 +23,7 @@ export class EditarDocenteComponent implements OnInit {
   modelo: usuarioDTO;
 
   errores: string[] = [];
+  isLoading = false;
   checked = false;
 
   ngOnInit(): void {
@@ -39,6 +40,7 @@ export class EditarDocenteComponent implements OnInit {
   }
 
   obtenerUsuario() {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe((params) => {
       this.usuariosService.obtenerPorId(params.id).subscribe(
         (docente) => {
@@ -47,6 +49,7 @@ export class EditarDocenteComponent implements OnInit {
         },
         () => this.router.navigate(['/docentes'])
       );
+      this.isLoading = false;
     });
   }
 

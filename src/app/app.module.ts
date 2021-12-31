@@ -93,6 +93,7 @@ import { BoletaDialogoComponent } from './alumnos/boleta-dialogo/boleta-dialogo.
 import { EncuestaComponent } from './alumnos/encuesta/encuesta.component';
 import { ComprobanteDialogComponent } from './alumnos/comprobante-dialog/comprobante-dialog.component';
 import { SeguridadInterceptorService } from './seguridad/seguridad-interceptor.service';
+import { IndiceEncuestaComponent } from './encuesta/indice-encuesta/indice-encuesta.component';
 
 @NgModule({
   declarations: [
@@ -156,6 +157,7 @@ import { SeguridadInterceptorService } from './seguridad/seguridad-interceptor.s
     BoletaDialogoComponent,
     EncuestaComponent,
     ComprobanteDialogComponent,
+    IndiceEncuestaComponent,
   ],
   imports: [
     BrowserModule,

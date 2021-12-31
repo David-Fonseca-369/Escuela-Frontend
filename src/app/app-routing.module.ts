@@ -15,6 +15,7 @@ import { ReporteCalificacionesComponent } from './calificaciones/reporte-calific
 import { CarreraTecnicaComponent } from './carrera-tecnica/carrera-tecnica.component';
 import { ConfiguracionPaginaComponent } from './configuracion-pagina/configuracion-pagina.component';
 import { ContactoComponent } from './contacto/contacto.component';
+import { IndiceEncuestaComponent } from './encuesta/indice-encuesta/indice-encuesta.component';
 import { EsAdminGuard } from './es-admin.guard';
 import { EsAlumnoGuard } from './es-alumno.guard';
 import { EsDocenteGuard } from './es-docente.guard';
@@ -184,6 +185,12 @@ const routes: Routes = [
     canActivate: [EsAdminGuard],
   },
 
+  {
+    path: 'reinscripciones',
+    component: IndiceEncuestaComponent,
+    canActivate: [EsAdminGuard],
+  },
+
   //
 
   //Menu docente
@@ -261,6 +268,7 @@ const routes: Routes = [
     component: PerfilComponent,
     canActivate: [EsAlumnoGuard],
   },
+
   //Esta redireciona
   { path: '**', redirectTo: '' },
 ];

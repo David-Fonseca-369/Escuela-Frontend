@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { BoletaDialogoComponent } from '../alumnos/boleta-dialogo/boleta-dialogo.component';
 import { CalificacionesService } from '../calificaciones/calificaciones.service';
+import { galeriaDTO } from '../configuracion-pagina/models/galeria';
+import { GaleriasService } from '../configuracion-pagina/servicios/galerias.service';
 import { SeguridadService } from '../login/seguridad.service';
 
 @Component({
@@ -12,7 +14,6 @@ import { SeguridadService } from '../login/seguridad.service';
 export class MenuComponent implements OnInit {
   constructor(
     public seguridadService: SeguridadService,
-    private calificacionesService: CalificacionesService,
     public dialog: MatDialog
   ) {}
 

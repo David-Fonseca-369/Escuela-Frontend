@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { stringify } from 'querystring';
 import { Observable } from 'rxjs';
@@ -7,6 +7,7 @@ import { environment } from 'src/environments/environment';
 import {
   encuestaCreacionDTO,
   encuestaDTO,
+  indiceEncuestaDTO,
   respuestaEncuestaDTO,
 } from '../models/encuesta';
 
@@ -31,6 +32,37 @@ export class EncuestasService {
     return this.http.get<encuestaDTO>(
       `${this.apiURL}/comprobante/${idEncuesta}`
     );
+  }
+
+  public obtenerTodasPaginacion(
+    pagina: number,
+    cantidadRegistrosAMostrar: number
+  ): Observable<any> {
+    let params = new HttpParams();
+
+    params = params.append('pagina', pagina.toString());
+    params = params.append(
+      'recordsPorPagina',
+      cantidadRegistrosAMostrar.toString()
+    );
+
+    return this.http.get<indiceEncuestaDTO[]>(
+      this.apiURL + '/todasPaginacion',
+      { observe: 'response', params }
+    );
+  }
+
+  public filtrarTodas(valores: any): Observable<any> {
+    const params = new HttpParams({ fromObject: valores });
+
+    return this.http.get<indiceEncuestaDTO[]>(`${this.apiURL}/filtrarTodas`, {
+      params,
+      observe: 'response',
+    });
+  }
+
+  public eliminar(id: number) {
+    return this.http.delete(`${this.apiURL}/eliminar/${id}`);
   }
 
   private construirFormulario(encuesta: encuestaCreacionDTO): FormData {

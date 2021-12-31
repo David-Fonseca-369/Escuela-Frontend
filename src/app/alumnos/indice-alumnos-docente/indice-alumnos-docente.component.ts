@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
 import { ActivatedRoute } from '@angular/router';
+import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { materiaDTO } from 'src/app/materias/materia';
 import { MateriasService } from 'src/app/materias/materias.service';
 import { alumnoDTO } from '../alumno';
@@ -28,6 +29,10 @@ export class IndiceAlumnosDocenteComponent implements OnInit {
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
+
+  isLoading = false;
+
+  errores: string[] = [];
 
   ngOnInit(): void {
     this.obtenerDatosMateria();
@@ -60,6 +65,7 @@ export class IndiceAlumnosDocenteComponent implements OnInit {
   }
 
   obtenerDatosMateria() {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe((params) => {
       this.materiasService.obtenerPorId(params.id).subscribe(
         (materia) => {
@@ -68,8 +74,12 @@ export class IndiceAlumnosDocenteComponent implements OnInit {
             this.paginaActual,
             this.cantidadRegistrosAMostrar
           );
+          this.isLoading = false;
         },
-        (error) => console.log(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
     });
   }

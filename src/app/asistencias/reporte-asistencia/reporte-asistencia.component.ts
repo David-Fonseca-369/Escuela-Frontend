@@ -97,6 +97,7 @@ export class ReporteAsistenciaComponent implements OnInit {
   }
 
   obtenerAsistencias() {
+    this.isLoading = true;
     this.asistenciasService
       .obtenerAsistencias(
         this.form.value.materia.idMateria,
@@ -108,8 +109,12 @@ export class ReporteAsistenciaComponent implements OnInit {
       .subscribe(
         (asistencias) => {
           this.asistenciasTabla = asistencias;
+          this.isLoading = false;
         },
-        (errores) => (this.errores = parsearErroresAPI(errores))
+        (errores) => {
+          this.errores = parsearErroresAPI(errores);
+          this.isLoading = false;
+        }
       );
   }
 

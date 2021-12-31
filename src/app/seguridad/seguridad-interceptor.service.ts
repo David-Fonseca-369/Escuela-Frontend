@@ -19,11 +19,11 @@ export class SeguridadInterceptorService implements HttpInterceptor {
   ): Observable<HttpEvent<any>> {
     const token = this.seguridadService.obtenerToken();
 
-    // if (token) {
-    //   req = req.clone({
-    //     setHeaders: { Authorization: `Bearer ${token}` },
-    //   });
-    // }
+    if (token) {
+      req = req.clone({
+        setHeaders: { Authorization: `Bearer ${token}` },
+      });
+    }
 
     return next.handle(req);
   }

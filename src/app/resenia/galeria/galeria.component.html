@@ -1,15 +1,17 @@
 <div class="container">
   <div class="title">
     <h1>Galería</h1>
+    <app-spinner *ngIf="isLoading"></app-spinner>
+    <app-mostrar-errores [errores]="errores"></app-mostrar-errores>
   </div>
   <div class="gallery">
     <div
-      *ngFor="let image of images; let i = index"
+      *ngFor="let image of imagenesGaleria; let i = index"
       [style.gridRow]="image.row"
       [style.gridCol]="image.col"
       class="image"
     >
-      <img [src]="image.url" (click)="selectedImage = i" />
+      <img [src]="image.ruta" (click)="selectedImage = i" />
       <span>+</span>
     </div>
   </div>
@@ -18,7 +20,7 @@
 <app-galeria-carousel
   *ngIf="selectedImage !== null"
   (closeCarousel)="selectedImage = null"
-  [images]="images"
+  [images]="imagenesGaleria"
   [selectedImage]="selectedImage"
 >
 </app-galeria-carousel>

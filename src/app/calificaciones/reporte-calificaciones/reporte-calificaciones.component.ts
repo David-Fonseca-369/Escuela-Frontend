@@ -103,6 +103,7 @@ export class ReporteCalificacionesComponent implements OnInit {
 
   obtenerMateriasAsignadas() {
     this.isLoading = true;
+
     this.materiasService
       .materiasAsignadasTodas(
         Number(this.seguridadService.obtenerCampoJWT('idUsuario'))
@@ -136,6 +137,7 @@ export class ReporteCalificacionesComponent implements OnInit {
   }
 
   obtenerCalificaciones() {
+    this.isLoading = true;
     this.calificacionesService
       .calificaciones(this.form.value.materia.idMateria, this.periodo.idPeriodo)
       .subscribe(
@@ -145,8 +147,13 @@ export class ReporteCalificacionesComponent implements OnInit {
           } else {
             this.calificaciones = [];
           }
+
+          this.isLoading = false;
         },
-        (error) => (this.errores = parsearErroresAPI(error))
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 

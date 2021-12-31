@@ -1,11 +1,11 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+
 <div>
   <div class="title">
     <h1>Planta Docente</h1>
     <div class="images">
-      <img
-        src="./assets/images/planta_docente/organigrama.jpg"
-        alt="Planta Docente"
-      />
+      <img [src]="imagenOrg.ruta" alt="Planta Docente" />
     </div>
   </div>
 </div>

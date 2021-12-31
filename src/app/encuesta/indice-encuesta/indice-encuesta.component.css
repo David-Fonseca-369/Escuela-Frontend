@@ -1,0 +1,26 @@
+.tabla-encuestas {
+  width: 40%;
+}
+
+mat-paginator {
+  width: 40%;
+}
+
+.encuestas-responsive {
+  display: none;
+}
+
+@media screen and (max-width: 600px) {
+  .tabla-encuestas,
+  .paginator {
+    display: none;
+  }
+  mat-paginator {
+    width: 100%;
+  }
+
+  .encuestas-responsive {
+    display: flex;
+    flex-direction: column;
+  }
+}

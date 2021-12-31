@@ -1,3 +1,5 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
 <div>
   <div class="title">
     <h1>Reseña</h1>
@@ -6,7 +8,7 @@
   <div class="carousel">
     <carousel
       [borderRadius]="15"
-      [images]="images"
+      [images]="imagenesCarousel"
       [autoplay]="true"
       [loop]="true"
     >

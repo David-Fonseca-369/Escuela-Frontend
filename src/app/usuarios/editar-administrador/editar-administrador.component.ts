@@ -25,6 +25,8 @@ export class EditarAdministradorComponent implements OnInit {
   errores: string[] = [];
   checked = false;
 
+  isLoading = false;
+
   ngOnInit(): void {
     this.form = this.formBuilder.group({
       nombre: ['', { validators: [Validators.required] }],
@@ -39,6 +41,7 @@ export class EditarAdministradorComponent implements OnInit {
   }
 
   obtenerUsuario() {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe((params) => {
       this.usuariosService.obtenerPorId(params.id).subscribe(
         (docente) => {
@@ -47,6 +50,7 @@ export class EditarAdministradorComponent implements OnInit {
         },
         () => this.router.navigate(['/administradores'])
       );
+      this.isLoading = false;
     });
   }
 

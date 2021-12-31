@@ -1,5 +1,3 @@
-import { dateInputsHaveChanged } from '@angular/material/datepicker/datepicker-input-base';
-
 export interface encuestaDTO {
   idEncuesta: number;
   nombreAlumno: string;
@@ -68,4 +66,11 @@ export interface encuestaCreacionDTO {
 
 export interface respuestaEncuestaDTO {
   idEncuesta: number;
+}
+
+export interface indiceEncuestaDTO {
+  idEncuesta: number;
+  nombreAlumno: string;
+  matricula: string;
+  rutaArchivo: string;
 }

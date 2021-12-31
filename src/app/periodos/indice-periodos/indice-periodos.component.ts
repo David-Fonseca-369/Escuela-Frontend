@@ -1,6 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
+import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { periodoDTO } from '../periodo';
 import { PeriodosService } from '../periodos.service';
 
@@ -19,6 +20,9 @@ export class IndicePeriodosComponent implements OnInit {
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
 
+  isLoading = false;
+  errores: string[] = [];
+
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
       this.paginaActual,
@@ -27,6 +31,7 @@ export class IndicePeriodosComponent implements OnInit {
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
+    this.isLoading = true;
     this.periodosService
       .obtenerPaginado(pagina, cantidadElementosAMostrar)
       .subscribe(
@@ -36,8 +41,12 @@ export class IndicePeriodosComponent implements OnInit {
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+          this.isLoading = false;
         },
-        (error) => console.log(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 

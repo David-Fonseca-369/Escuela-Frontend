@@ -1,0 +1,126 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
+<div>
+  <div class="title">
+    <h1>Reinscripciones</h1>
+  </div>
+  <div>
+    <form [formGroup]="form" *ngIf="encuestas">
+      <mat-form-field appearance="outline">
+        <mat-label>Buscar</mat-label>
+        <input
+          type="number"
+          formControlName="idEncuesta"
+          placeholder="Buscar por folio..."
+          matInput
+        />
+        <mat-icon matSuffix>search</mat-icon>
+      </mat-form-field>
+    </form>
+  </div>
+  <!-- Responsive lista registros -->
+  <div class="encuestas-responsive">
+    <div *ngFor="let encuesta of encuestas">
+      <div style="text-align: start">
+        <p>
+          <strong> {{ encuesta.nombreAlumno }}</strong>
+        </p>
+        <div style="display: flex; justify-content: space-between">
+          <p style="color: gray">Folio No.{{ encuesta.idEncuesta }}</p>
+
+          <div class="icons">
+            <a mat-icon-button (click)="eliminar(encuesta.idEncuesta)"
+              ><mat-icon>delete</mat-icon>
+            </a>
+
+            <a
+              mat-icon-button
+              href="{{ encuesta.rutaArchivo }}"
+              target="_blank"
+            >
+              <mat-icon>picture_as_pdf</mat-icon>
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <hr />
+    </div>
+    <mat-paginator
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
+      showFirstLastButtons
+      [length]="cantidadTotalRegistros"
+      [pageSize]="cantidadRegistrosAMostrar"
+      (page)="actualizarPaginacion($event)"
+    >
+    </mat-paginator>
+  </div>
+  <div>
+    <table
+      #table
+      mat-table
+      [dataSource]="encuestas"
+      class="mat-elevation-z8 tabla-encuestas"
+    >
+      <ng-container matColumnDef="opciones">
+        <th mat-header-cell *matHeaderCellDef>Opciones</th>
+        <td mat-cell *matCellDef="let encuesta" align="start">
+          <a
+            mat-icon-button
+            matTooltip="Eliminar"
+            (click)="eliminar(encuesta.idEncuesta)"
+          >
+            <mat-icon>delete</mat-icon>
+          </a>
+          <a
+            mat-icon-button
+            matTooltip="Documento"
+            href="{{ encuesta.rutaArchivo }}"
+            target="_blank"
+          >
+            <mat-icon>picture_as_pdf</mat-icon>
+          </a>
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="folio">
+        <th mat-header-cell *matHeaderCellDef>Folio</th>
+        <td mat-cell *matCellDef="let encuesta" align="start">
+          {{ encuesta.idEncuesta }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="nombre">
+        <th mat-header-cell *matHeaderCellDef>Nombre</th>
+        <td mat-cell *matCellDef="let encuesta" align="start">
+          {{ encuesta.nombreAlumno }}
+        </td>
+      </ng-container>
+
+      <ng-container matColumnDef="matricula">
+        <th mat-header-cell *matHeaderCellDef>Matricula</th>
+        <td mat-cell *matCellDef="let encuesta" align="start">
+          {{ encuesta.matricula }}
+        </td>
+      </ng-container>
+
+      <tr mat-header-row *matHeaderRowDef="columnasAMostrar; sticky: true"></tr>
+      <tr mat-row *matRowDef="let row; columns: columnasAMostrar"></tr>
+
+      <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" colspan="8" style="color: red">
+          No se encontró ningún resultado.
+        </td>
+      </tr>
+    </table>
+    <mat-paginator
+      class="mat-elevation-z8 paginator"
+      [pageSizeOptions]="[5, 10, 15, 20, 50]"
+      showFirstLastButtons
+      [length]="cantidadTotalRegistros"
+      [pageSize]="cantidadRegistrosAMostrar"
+      (page)="actualizarPaginacion($event)"
+    >
+    </mat-paginator>
+  </div>
+</div>

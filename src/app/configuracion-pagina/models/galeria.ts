@@ -3,3 +3,7 @@ export interface galeriaDTO {
   nombre: string;
   ruta: string;
 }
+
+export interface imagenesGaleriaDTO {
+  ruta: string;
+}

@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MensajeExistoso } from 'src/app/helpers/helpers';
+import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
 import Swal from 'sweetalert2';
 import { GruposService } from '../grupos.service';
 import { grupoDTO } from './grupo';
@@ -21,6 +21,8 @@ export class IndiceGruposComponent implements OnInit {
   cantidadTotalRegistros;
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
+  isLoading = false;
+  errores: string[] = [];
 
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
@@ -31,6 +33,7 @@ export class IndiceGruposComponent implements OnInit {
 
   //Todos paginacion
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
+    this.isLoading = true;
     this.gruposService
       .obtenerPaginado(pagina, cantidadElementosAMostrar)
       .subscribe(
@@ -40,8 +43,13 @@ export class IndiceGruposComponent implements OnInit {
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+
+          this.isLoading = false;
         },
-        (error) => console.log(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 

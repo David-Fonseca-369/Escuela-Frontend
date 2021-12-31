@@ -1,7 +1,7 @@
 import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { PageEvent } from '@angular/material/paginator';
-import { MensajeExistoso } from 'src/app/helpers/helpers';
+import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
 import Swal from 'sweetalert2';
 import { usuarioDTO } from '../usuario';
 import { UsuariosService } from '../usuarios.service';
@@ -20,6 +20,8 @@ export class IndiceAdministradoresComponent implements OnInit {
   paginaActual = 1;
   cantidadRegistrosAMostrar = 10;
 
+  isLoading = false;
+  errores: string[] = [];
   constructor(private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
@@ -30,6 +32,7 @@ export class IndiceAdministradoresComponent implements OnInit {
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
+    this.isLoading = true;
     this.usuariosService
       .obtenerPaginadoAdministradores(pagina, cantidadElementosAMostrar)
       .subscribe(
@@ -39,8 +42,12 @@ export class IndiceAdministradoresComponent implements OnInit {
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+          this.isLoading = false;
         },
-        (error) => console.error(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
   actualizarPaginacion(datos: PageEvent) {

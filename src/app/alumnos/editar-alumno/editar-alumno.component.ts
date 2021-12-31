@@ -34,6 +34,7 @@ export class EditarAlumnoComponent implements OnInit {
     { id: 3, nombre: 'Indefinido' },
   ];
   selectedGrupoId: number;
+  isLoading = false;
 
   ngOnInit(): void {
     this.form = this.formBuilder.group({
@@ -79,15 +80,21 @@ export class EditarAlumnoComponent implements OnInit {
   }
 
   obtenerGrupos() {
+    this.isLoading = true;
     this.gruposService.obtenerTodos().subscribe(
       (grupos) => {
         this.grupos = grupos;
+        this.isLoading = false;
       },
-      (error) => console.log(error)
+      (error) => {
+        this.errores = parsearErroresAPI(error);
+        this.isLoading = false;
+      }
     );
   }
 
   obtenerAlumno() {
+    this.isLoading = true;
     this.activatedRoute.params.subscribe((params) => {
       this.alumnosService.obtenerPorId(params.id).subscribe(
         (alumno) => {
@@ -96,6 +103,7 @@ export class EditarAlumnoComponent implements OnInit {
         },
         () => this.router.navigate(['/alumnos'])
       );
+      this.isLoading = false;
     });
   }
 

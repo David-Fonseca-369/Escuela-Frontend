@@ -1,7 +1,8 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { galeriaDTO } from '../models/galeria';
+import { galeriaDTO, imagenesGaleriaDTO } from '../models/galeria';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,10 @@ export class GaleriasService {
 
   public obtenerTodos() {
     return this.http.get<galeriaDTO[]>(`${this.apiURL}/todos`);
+  }
+
+  public obtenerImagenesTodas(): Observable<imagenesGaleriaDTO[]> {
+    return this.http.get<imagenesGaleriaDTO[]>(`${this.apiURL}/imagenesTodas`);
   }
 
   public crear(archivo: File) {

@@ -16,6 +16,7 @@ export class MateriasDocentesComponent implements OnInit {
   docentes: usuarioDTO[];
 
   errores: string[] = [];
+  isLoading = false;
 
   materiasDisponibles: materiaDTO[];
   materiasAsignadas: materiaDTO[];
@@ -57,6 +58,7 @@ export class MateriasDocentesComponent implements OnInit {
     pagina: number,
     cantidadElementosAMostrar
   ) {
+    this.isLoading = true;
     this.materiasService
       .materiasDisponiblesPaginacion(pagina, cantidadElementosAMostrar)
       .subscribe(
@@ -66,8 +68,12 @@ export class MateriasDocentesComponent implements OnInit {
           this.cantidadTotalRegistrosDisponibles = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+          this.isLoading = false;
         },
-        (error) => (this.errores = parsearErroresAPI(error))
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 
@@ -76,6 +82,7 @@ export class MateriasDocentesComponent implements OnInit {
     cantidadElementosAMostrar,
     idDocente: number
   ) {
+    this.isLoading = true;
     this.materiasService
       .materiasAsignadasPaginacion(pagina, cantidadElementosAMostrar, idDocente)
       .subscribe(
@@ -85,8 +92,12 @@ export class MateriasDocentesComponent implements OnInit {
           this.cantidadTotalRegistrosAsignadas = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+          this.isLoading = false;
         },
-        (error) => (this.errores = parsearErroresAPI(error))
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 

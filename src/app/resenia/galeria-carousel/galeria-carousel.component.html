@@ -3,7 +3,7 @@
     <img
       [@slide-in]="animState"
       (@slide-in.done)="animDone()"
-      [src]="images[animImage].url"
+      [src]="images[animImage].ruta"
     />
     <div class="carousel-button">
       <span tabindex="1" (keyup.enter)="previous()" (click)="previous()"

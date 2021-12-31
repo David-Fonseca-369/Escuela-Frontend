@@ -2,7 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup } from '@angular/forms';
 import { PageEvent } from '@angular/material/paginator';
-import { MensajeExistoso } from 'src/app/helpers/helpers';
+import { MensajeExistoso, parsearErroresAPI } from 'src/app/helpers/helpers';
 import { usuarioDTO } from 'src/app/usuarios/usuario';
 import Swal from 'sweetalert2';
 import { alumnoDTO } from '../alumno';
@@ -41,6 +41,9 @@ export class IndiceAlumnosComponent implements OnInit {
     nombreAlumno: '',
   };
 
+  isLoading = false;
+  errores: string[] = [];
+
   ngOnInit(): void {
     this.cargarRegistrosPaginacion(
       this.paginaActual,
@@ -55,6 +58,8 @@ export class IndiceAlumnosComponent implements OnInit {
   }
 
   cargarRegistrosPaginacion(pagina: number, cantidadElementosAMostrar) {
+    this.isLoading = true;
+
     this.alumnosService
       .obtenerPaginado(pagina, cantidadElementosAMostrar)
       .subscribe(
@@ -64,8 +69,13 @@ export class IndiceAlumnosComponent implements OnInit {
           this.cantidadTotalRegistros = respuesta.headers.get(
             'cantidadTotalRegistros'
           );
+
+          this.isLoading = false;
         },
-        (error) => console.log(error)
+        (error) => {
+          this.errores = parsearErroresAPI(error);
+          this.isLoading = false;
+        }
       );
   }
 
@@ -131,6 +141,7 @@ export class IndiceAlumnosComponent implements OnInit {
   }
 
   buscarAlumnos(valores: any) {
+    this.isLoading = true;
     valores.pagina = this.paginaActual;
     valores.recordsPorPagina = this.cantidadRegistrosAMostrar;
 
@@ -140,6 +151,7 @@ export class IndiceAlumnosComponent implements OnInit {
       this.cantidadTotalRegistros = response.headers.get(
         'cantidadTotalRegistros'
       );
+      this.isLoading = false;
     });
   }
 }

@@ -1,3 +1,5 @@
+<app-spinner *ngIf="isLoading"></app-spinner>
+<app-mostrar-errores [errores]="errores"></app-mostrar-errores>
 <div class="container">
   <div class="title">
     <h1>CBT No.3 San Felipe del Progreso</h1>
@@ -5,7 +7,7 @@
 
   <div class="carousel">
     <carousel
-      [images]="imagesForSlider"
+      [images]="imagenesCarousel"
       [autoplay]="true"
       [autoplayInterval]="2000"
       [loop]="true"
