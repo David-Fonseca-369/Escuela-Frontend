@@ -4,8 +4,8 @@
 
 export const environment = {
   production: false,
-  // apiURL: 'https://localhost:44340/api/',
-  apiURL: 'https://fonsecasoundcruz-001-site1.itempurl.com/api/',
+  apiURL: 'https://localhost:44340/api/',
+  // apiURL: 'https://fonsecasoundcruz-001-site1.itempurl.com/api/',
 };
 
 /*

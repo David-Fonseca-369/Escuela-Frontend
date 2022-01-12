@@ -44,7 +44,10 @@ export class LoginAlumnoComponent implements OnInit {
         //mandar a landingPage alumno
         this.router.navigate(['landingPage-alumno']);
       },
-      (errores) => (this.errores = parsearErroresAPI(errores))
+      (errores) => {
+        this.errores = parsearErroresAPI(errores);
+        this.isLoading = false;
+      }
     );
   }
 }

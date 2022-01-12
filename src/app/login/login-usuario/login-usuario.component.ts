@@ -26,7 +26,7 @@ export class LoginUsuarioComponent implements OnInit {
       correo: ['', { validators: [Validators.required, Validators.email] }],
       password: [
         '',
-        { validators: [Validators.required, Validators.minLength(3)] },
+        { validators: [Validators.required, Validators.minLength(8)] },
       ],
     });
   }
