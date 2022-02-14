@@ -44,6 +44,20 @@ body {
   margin-right: 3rem;
 }
 
+.button {
+  margin: 1rem 0;
+  text-align: center;
+}
+.button a {
+  background-color: #527580;
+  color: white;
+}
+
+.class-video {
+  margin-top: 3rem;
+  width: 80%;
+  height: auto;
+}
 @media screen and (max-width: 600px) {
   .informacion {
     display: block;

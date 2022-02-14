@@ -22,6 +22,10 @@ table {
   width: 60%;
   margin: 1rem 0;
 }
+.image-table {
+  width: 3rem;
+  max-height: 2rem;
+}
 
 .imagen-planta-docente img {
   width: 15rem;

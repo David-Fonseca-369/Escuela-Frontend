@@ -48,7 +48,9 @@ export class BoletaDialogoComponent implements OnInit {
       suma += element.calificacion;
     });
 
-    return suma / this.calificacionesBoleta.length;
+    let promedio = (suma / this.calificacionesBoleta.length).toFixed(1);
+
+    return Number(promedio);
   }
 
   downloadPDF() {
