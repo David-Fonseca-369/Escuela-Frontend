@@ -88,6 +88,13 @@ export class ReporteCalificacionesComponent implements OnInit {
   visibleTitle = false;
   //
 
+  //Para reporte
+  nombreMateria = null;
+  nombreGrupo = null;
+  nombrePeriodo = null;
+  nombreDocente = null;
+  fecha = null;
+
   ngOnInit(): void {
     this.obtenerMateriasAsignadas();
     this.obtenerPeriodoActual();
@@ -153,6 +160,8 @@ export class ReporteCalificacionesComponent implements OnInit {
           }
 
           this.isLoading = false;
+
+        
         },
         (error) => {
           this.errores = parsearErroresAPI(error);
@@ -287,6 +296,8 @@ export class ReporteCalificacionesComponent implements OnInit {
           } else {
             this.calificacionesMateria = [];
           }
+
+          this.getDataReports();
         },
         (error) => {
           this.errores = parsearErroresAPI(error);
@@ -334,5 +345,13 @@ export class ReporteCalificacionesComponent implements OnInit {
 
         this.visibleTitle = false;
       });
+  }
+
+  getDataReports(){
+    this.nombreMateria = this.form.value.materia.nombre;
+    this.nombreGrupo = this.form.value.materia.nombreGrupo;
+    this.nombrePeriodo = this.periodo.nombre;
+    this.nombreDocente = this.seguridadService.obtenerNombreCompleto();
+    this.fecha = new Date().toLocaleString();
   }
 }
