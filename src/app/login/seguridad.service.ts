@@ -145,6 +145,10 @@ export class SeguridadService {
     return localStorage.getItem(this.llaveApellidoMaterno);
   }
 
+  obtenerNombreCompleto(){
+    return `${this.obtenerNombre()} ${this.obtenerApellidoPaterno()} ${this.obtenerApellidoMaterno()}`
+  }
+
   obtenerDatosUsario(
     idUsuario: number,
     rol: string

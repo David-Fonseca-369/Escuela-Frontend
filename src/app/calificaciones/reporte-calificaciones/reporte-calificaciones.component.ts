@@ -12,6 +12,8 @@ import { periodoDTO } from 'src/app/periodos/periodo';
 import { PeriodosService } from 'src/app/periodos/periodos.service';
 import { calificacionDTO, calificacionesMateriaDTO } from '../calificacion';
 import { CalificacionesService } from '../calificaciones.service';
+import { image } from 'html2canvas/dist/types/css/types/image';
+import { fontWeight } from 'html2canvas/dist/types/css/property-descriptors/font-weight';
 
 @Component({
   selector: 'app-reporte-calificaciones',
@@ -172,25 +174,55 @@ export class ReporteCalificacionesComponent implements OnInit {
     var img = new Image();
     img.src = './assets/images/logo_prepa.png';
 
-    //
+
+    //Imagen estado de méxico
+    var imgEstadoMexico = new Image();
+    imgEstadoMexico.src = './assets/images/boleta/logo-estado.jpg';    
+    
+
+    //Imagen edomex
+    var imgEdomex = new Image();
+    imgEdomex.src = './assets/images/boleta/logo_edomex.png';
+
     this.convertirArreglo();
 
     var pdf = new jsPDF();
 
-    pdf.addImage(img, 'png', 6, 1, 14, 10);
-    pdf.setFontSize(12);
-    pdf.text('Calificaciones', 24, 8);
-    pdf.setFontSize(10);
-    pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
-    pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
-    // pdf.addImage()
+    pdf.addImage(imgEstadoMexico, 'jpg', 6, 6, 18, 12);
+    pdf.addImage(img, 'png', 26, 6.2, 14, 10);
+    pdf.addImage(imgEdomex, 'png', 174, 6.2, 30, 12);
+    
+    // x y w h
 
-    pdf.setFontSize(12);
-    pdf.setTextColor(99);
-    pdf.text('dd', 24,12);
-    pdf.text('dd', 40,20);
-    pdf.text('dd', 60,40);
-    pdf.text('dd', 80,60);
+    
+    pdf.setFontSize(10).text('"2022. Año del Quincentenario de la Fundación de Toluca de Lerdo, Capital dle Estado de México"', 24, 26);
+  
+    pdf.setFontSize(14).setFont(undefined, 'bold').text('Reporte de Calificaciones', 74,40);
+
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Materia:',12,50);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.form.value.materia.nombre,28,50);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Grupo:',12,55);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.form.value.materia.nombreGrupo,25,55);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Periodo:',12,60);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.periodo.nombre,28,60);
+  
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Docente:',12,65);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.seguridadService.obtenerNombreCompleto(),28,65);
+
+
+    // pdf.setFontSize(10);
+    // pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
+    // pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 60, 8);
+
+    // pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
+    // // pdf.setFontSize(12);
+    // // pdf.setTextColor(99);
+    // pdf.text('dd', 40,20);
+    // pdf.text('dd', 60,40);
+    // pdf.text('dd', 80,60);
 
 
     
@@ -199,10 +231,13 @@ export class ReporteCalificacionesComponent implements OnInit {
     (pdf as any).autoTable({
      
       headStyles: { halign: 'left', fillColor: [0, 0, 0], padding: {top:200}},
-      
+
+      startY: 70, //La altura de donde aparecerá la autable
+
       head: this.header,
 
       body: this.contenidoPDF,
+     
 
       theme: 'grid',
       didDrawCell: (data) => {
