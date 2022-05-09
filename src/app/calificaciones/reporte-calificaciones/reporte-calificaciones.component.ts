@@ -212,27 +212,14 @@ export class ReporteCalificacionesComponent implements OnInit {
     pdf.setFontSize(10).setFont(undefined, 'bold').text('Docente:',12,65);
     pdf.setFontSize(10).setFont(undefined, 'normal').text(this.seguridadService.obtenerNombreCompleto(),28,65);
 
-
-    // pdf.setFontSize(10);
-    // pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
-    // pdf.text(`Grupo: ${this.form.value.materia.nombreGrupo}`, 60, 8);
-
-    // pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
-    // // pdf.setFontSize(12);
-    // // pdf.setTextColor(99);
-    // pdf.text('dd', 40,20);
-    // pdf.text('dd', 60,40);
-    // pdf.text('dd', 80,60);
-
-
-    
-    
-    
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Fecha:',12,70);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(`${new Date().toLocaleString()}`,25,70);
+            
     (pdf as any).autoTable({
      
       headStyles: { halign: 'left', fillColor: [0, 0, 0], padding: {top:200}},
 
-      startY: 70, //La altura de donde aparecerá la autable
+      startY: 80, //La altura de donde aparecerá la autable
 
       head: this.header,
 
