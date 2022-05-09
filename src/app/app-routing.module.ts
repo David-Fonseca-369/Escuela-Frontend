@@ -91,7 +91,8 @@ const routes: Routes = [
   {
     path: 'grupos/crear',
     component: CrearGrupoComponent,
-    canActivate: [EsAdminGuard],
+    canActivate: [EsAdminGuard]
+    ,
   },
   {
     path: 'grupos/editar/:id',

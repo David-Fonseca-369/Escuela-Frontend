@@ -105,7 +105,7 @@
 
 <ng-container *ngIf="calificaciones">
   <div class="tabla-calificaciones" *ngIf="calificaciones.length > 0">
-    <table border="1">
+    <table border="1" id="my-table">
       <tr>
         <th align="center">Nombre</th>
         <th align="center">Matricula</th>
@@ -142,22 +142,74 @@
 
 <ng-container *ngIf="calificacionesMateria">
   <div class="contenido-grafica" *ngIf="calificacionesMateria.length > 0">
-    <div class="grafica" id="htmlData">
-      <ngx-charts-bar-vertical
-        [view]="[700, 600]"
-        [scheme]="colorScheme"
-        [results]="calificacionesMateria"
-        [gradient]="gradient"
-        [xAxis]="showXAxis"
-        [yAxis]="showYAxis"
-        [legend]="showLegend"
-        [showXAxisLabel]="showXAxisLabel"
-        [showYAxisLabel]="showYAxisLabel"
-        [xAxisLabel]="xAxisLabel"
-        [yAxisLabel]="yAxisLabel"
-        (select)="onSelect($event)"
-      >
-      </ngx-charts-bar-vertical>
+
+
+    <div style="display: flex; justify-content: center;">
+
+      <div class="grafica" id="htmlData">      
+        <div style="width: 100%;">
+          <div>  
+              <div style="display: flex; width: 98%;"> 
+                <img src="./assets/images/boleta/logo-estado.jpg" alt="Logo Estado de México" style="width: 6rem;" />
+                <img src="./assets/images/logo_prepa.png" alt="Logo CBT" style="width: 6rem; height: 3.8rem;" />
+                
+                <div style="flex: 1 1 auto;"></div>
+
+                <img src="./assets/images/boleta/logo_edomex.png" alt="Logo Edomex" style="width: 12rem; margin-right: 3rem;" />                                                                       
+              </div>
+
+              <div>
+                <p style="text-align: center; font-size: large; margin: 3rem 0;">"2020. Año del Quincentenario de la Fundación de Toluca de Lerdo, Capital del Estado de México."</p>
+              </div> 
+
+              <div>
+                <h1 style="text-align:center; margin: 3rem 0;">Reporte de Calificaciones</h1>
+              </div>
+
+              <div style="margin: 2rem 20rem; display: flex;">
+
+                <div>
+                   <p><strong>Semestre: </strong> 1</p>
+                <p><strong>Grupo: </strong> A</p>
+                <p><strong>Materia: </strong> Biología</p>
+                </div>
+
+                <div style="flex: 1 1 auto;"></div>
+
+                <div>
+                  <p><strong>Periodo: </strong> Feb - Jun</p>
+               <p><strong>Docente: </strong> Juan Francisco Gómez</p>
+               <p><strong>Fecha: </strong> 08/03/20200 10:29 PM</p>
+               </div>
+               
+              </div>
+
+
+          </div>
+          <div style="display: flex; justify-content: center;">
+             <div>
+            <ngx-charts-bar-vertical
+            [view]="[800, 700]"
+            [scheme]="colorScheme"
+            [results]="calificacionesMateria"
+            [gradient]="gradient"
+            [xAxis]="showXAxis"
+            [yAxis]="showYAxis"
+            [legend]="showLegend"
+            [showXAxisLabel]="showXAxisLabel"
+            [showYAxisLabel]="showYAxisLabel"
+            [xAxisLabel]="xAxisLabel"
+            [yAxisLabel]="yAxisLabel"
+            (select)="onSelect($event)"
+          >
+          </ngx-charts-bar-vertical>
+          </div>
+        </div>  
+
+     
+          </div>
+          
+      </div>
     </div>
 
     <div class="buttonPDF buttonGrafica">

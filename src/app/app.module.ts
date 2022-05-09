@@ -26,6 +26,7 @@ import { MarkdownModule } from 'ngx-markdown';
 
 //modulo dropzone
 import { NgxDropzoneModule } from 'ngx-dropzone';
+//Para instalar modulos npm install @swimlane/ngx-charts@17.0.1 --save --force
 
 //Modulo ngx-chart
 import { NgxChartsModule } from '@swimlane/ngx-charts';

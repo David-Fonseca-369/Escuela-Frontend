@@ -82,6 +82,8 @@ export class ReporteCalificacionesComponent implements OnInit {
     domain: ['#AA0000', '#D47800', '#FFCD42', '#FFDD81', '#55AF83', '#387457'],
   };
 
+
+  visibleTitle = false;
   //
 
   ngOnInit(): void {
@@ -182,18 +184,32 @@ export class ReporteCalificacionesComponent implements OnInit {
     pdf.text(`Materia: ${this.form.value.materia.nombre}`, 60, 8);
     pdf.text(`Periodo: ${this.periodo.nombre}`, 130, 8);
     // pdf.addImage()
+
     pdf.setFontSize(12);
     pdf.setTextColor(99);
+    pdf.text('dd', 24,12);
+    pdf.text('dd', 40,20);
+    pdf.text('dd', 60,40);
+    pdf.text('dd', 80,60);
 
+
+    
+    
+    
     (pdf as any).autoTable({
-      headStyles: { halign: 'left', fillColor: [0, 0, 0] },
+     
+      headStyles: { halign: 'left', fillColor: [0, 0, 0], padding: {top:200}},
+      
       head: this.header,
+
       body: this.contenidoPDF,
 
       theme: 'grid',
       didDrawCell: (data) => {
         console.log(data.column.index);
       },
+
+      // html :'#my-table'
     });
 
     // Open PDF document in browser's new tab
@@ -223,7 +239,7 @@ export class ReporteCalificacionesComponent implements OnInit {
       arrTemp.push(element.primerParcial);
       arrTemp.push(element.segundoParcial);
       arrTemp.push(element.tercerParcial);
-      arrTemp.push(promedio.toFixed(2));
+      arrTemp.push(promedio.toFixed(1));
 
       this.contenidoPDF.push(arrTemp);
     });
@@ -257,13 +273,14 @@ export class ReporteCalificacionesComponent implements OnInit {
   }
 
   downloadGrafica() {
+    this.visibleTitle = true;
     // Extraemos el
     const DATA: any = document.getElementById('htmlData'); //tomtamos todo lo que esta en el htmldata
     const doc = new jsPDF('p', 'pt', 'a4'); //configuración del pdf parametros = orientacion |unidades | formato
 
     const options = {
       background: 'white', //color fondo
-      scale: 3, //escala
+      scale: 1, //escala
     };
     html2canvas(DATA, options)
       .then((canvas) => {
@@ -292,6 +309,8 @@ export class ReporteCalificacionesComponent implements OnInit {
         docResult.save(
           `${new Date().toISOString().slice(0, 10)}_Calificaciones.pdf`
         ); //nombre del pdf
+
+        this.visibleTitle = false;
       });
   }
 }
