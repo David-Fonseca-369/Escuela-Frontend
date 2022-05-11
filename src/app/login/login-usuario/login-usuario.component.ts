@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { throwToolbarMixedModesError } from '@angular/material/toolbar';
 import { Router } from '@angular/router';
 import { parsearErroresAPI } from 'src/app/helpers/helpers';
 import { SeguridadService } from '../seguridad.service';
@@ -66,6 +67,39 @@ export class LoginUsuarioComponent implements OnInit {
       }
     );
   }
+
+  loginGeneral(){
+    this.isLoading = true;
+
+    this.seguridadSerive.loginGeneral(this.form.value).subscribe(
+      (response) => {
+        this.isLoading = false;
+        this.seguridadSerive.guardarToken(response);
+
+        //Definir que tipo de usuario por medio del rol
+        if(response.rol === "Administrador"){
+          this.router.navigate(['/landingPage-administrador']);
+        }
+
+        if(response.rol === "Docente"){
+          this.router.navigate(['/landingPage-docente']);
+        }
+
+        if(response.rol === "Alumno"){
+          this.router.navigate(['landingPage-alumno']);
+        }
+
+      },
+      (errores) => {
+        this.errores = parsearErroresAPI(errores);
+        this.isLoading = false;
+
+      }
+    )
+  }
+
+
+
 
   prueba() {
     console.log(this.seguridadSerive.obtenerRol());

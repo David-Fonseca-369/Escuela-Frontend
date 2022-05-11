@@ -48,6 +48,12 @@ export class SeguridadService {
     );
   }
 
+  loginGeneral(loginGeneral:loginUsuarioDTO): Observable<respuestaAutenticacion>{
+    return this.httpClient.post<respuestaAutenticacion>(
+      this.apiURL + '/general', loginGeneral
+    )
+  }
+
   //Guardar informacion en localStorage
   guardarToken(respuestaAutenticacion: respuestaAutenticacion) {
     localStorage.setItem(this.llaveToken, respuestaAutenticacion.token);

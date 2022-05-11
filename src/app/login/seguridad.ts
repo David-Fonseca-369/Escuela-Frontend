@@ -12,6 +12,7 @@ export interface respuestaAutenticacion {
   nombre: string;
   apellidoPaterno: string;
   apellidoMaterno: string;
+  rol : string;
   token: string;
   expiracion: string;
 }

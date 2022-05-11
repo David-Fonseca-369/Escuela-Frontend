@@ -301,17 +301,18 @@
     </ng-container>
     <ng-container noAutorizado>
       <div>
-        <a mat-button [matMenuTriggerFor]="logins">
+        <!-- <a mat-button [matMenuTriggerFor]="logins"> -->
+        <a mat-button routerLink="login-usuario">
           Iniciar Sesión
           <mat-icon>login</mat-icon>
         </a>
 
-        <mat-menu #logins="matMenu">
+        <!-- <mat-menu #logins="matMenu">
           <button mat-menu-item routerLink="login-alumno">Alumno</button>
           <button mat-menu-item routerLink="login-usuario">
             Docente / Administrador
           </button>
-        </mat-menu>
+        </mat-menu> -->
       </div>
     </ng-container>
   </app-autorizado>
