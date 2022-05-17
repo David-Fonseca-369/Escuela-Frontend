@@ -123,10 +123,19 @@ export class ReporteAsistenciaComponent implements OnInit {
   }
 
   generatePDF() {
-    //imagen
-    var img = new Image();
-    img.src = './assets/images/logo_prepa.png';
+   //imagen
+   var img = new Image();
+   img.src = './assets/images/logo_prepa.png';
 
+
+   //Imagen estado de méxico
+   var imgEstadoMexico = new Image();
+   imgEstadoMexico.src = './assets/images/boleta/logo-estado.jpg';    
+   
+
+   //Imagen edomex
+   var imgEdomex = new Image();
+   imgEdomex.src = './assets/images/boleta/logo_edomex.png';
     //
     this.convertirArreglo();
 
@@ -143,22 +152,53 @@ export class ReporteAsistenciaComponent implements OnInit {
 
     var pdf = new jsPDF();
 
-    pdf.addImage(img, 'png', 6, 1, 14, 10);
-    pdf.setFontSize(12);
-    pdf.text('Asistencias', 22, 8);
-    pdf.setFontSize(10);
-    pdf.text(`Materia: ${this.form.value.materia.nombre}`, 50, 8);
-    pdf.text(`Periodo: ${strDesde} al ${strHasta}`, 100, 8);
-    pdf.text(
-      `Asistencias registradas: ${this.asistenciasTabla.totalAsistenciasFila}`,
-      160,
-      8
-    );
-    pdf.setFontSize(12);
-    pdf.setTextColor(99);
+    pdf.addImage(imgEstadoMexico, 'jpg', 6, 6, 18, 12);
+    pdf.addImage(img, 'png', 26, 6.2, 14, 10);
+    pdf.addImage(imgEdomex, 'png', 174, 6.2, 30, 12);
+    // pdf.addImage(img, 'png', 6, 1, 14, 10);
+    // pdf.setFontSize(12);
+    // pdf.text('Asistencias', 22, 8);
+    // pdf.setFontSize(10);
+    // pdf.text(`Materia: ${this.form.value.materia.nombre}`, 50, 8);
+    // pdf.text(`Periodo: ${strDesde} al ${strHasta}`, 100, 8);
+    // pdf.text(
+    //   `Asistencias registradas: ${this.asistenciasTabla.totalAsistenciasFila}`,
+    //   160,
+    //   8
+    // );
+    // pdf.setFontSize(12);
+    // pdf.setTextColor(99);
+    pdf.setFontSize(10).text('"2022. Año del Quincentenario de la Fundación de Toluca de Lerdo, Capital dle Estado de México"', 24, 26);
+  
+    pdf.setFontSize(14).setFont(undefined, 'bold').text('Reporte de Asistencias', 74,40);
+
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Materia:',12,50);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.form.value.materia.nombre,28,50);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Grupo:',12,55);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.form.value.materia.nombreGrupo,25,55);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Periodo:',12,60);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.periodo.nombre,28,60);
+  
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Docente:',12,65);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(this.seguridadService.obtenerNombreCompleto(),28,65);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Fecha:',12,70);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(`${new Date().toLocaleString()}`,25,70);
+
+    pdf.setFontSize(10).setFont(undefined, 'bold').text('Asistencias registradas:',12,75);
+    pdf.setFontSize(10).setFont(undefined, 'normal').text(`${this.asistenciasTabla.totalAsistenciasFila}`,53.5,75);
+
+
+
 
     (pdf as any).autoTable({
+
       headStyles: { halign: 'left', fillColor: [0, 0, 0] },
+
+      startY:90,
       head: this.header,
       body: this.contenidoPDF,
 
